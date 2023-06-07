@@ -15,12 +15,12 @@
   <mat-card-content class="flex-column">
     <mat-form-field>
       <mat-label>Email</mat-label>
-      <input matInput type="email" />
+      <input matInput #userEmail type="email" />
       <mat-icon class="input-icon">email</mat-icon>
     </mat-form-field>
     <mat-form-field>
       <mat-label>Password</mat-label>
-      <input matInput [type]="hide ? 'password' : 'text'" />
+      <input matInput #userPassword [type]="hide ? 'password' : 'text'" />
       <button
         mat-icon-button
         matSuffix
@@ -38,7 +38,7 @@
       <a [routerLink]="'forgotPassword'" href="#">Forgot my password</a>
     </div>
     <mat-card-actions class="btn-container">
-      <button mat-raised-button class="main-btn">Log in</button>
+      <button mat-raised-button class="main-btn" (click)="authService.SignIn(userEmail.value, userPassword.value)">Log in</button>
       <button mat-raised-button>Guest Log in</button>
     </mat-card-actions>
   </mat-card-content>

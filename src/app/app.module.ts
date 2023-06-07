@@ -25,12 +25,17 @@ import { SignInComponent } from './components/sign-in/sign-in.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 
+//Services
+import { AuthService } from './shared/services/auth.service';
+import { SummaryComponent } from './components/summary/summary.component';
+
 @NgModule({
   declarations: [
     AppComponent,
     SignInComponent,
     SignUpComponent,
     ForgotPasswordComponent,
+    SummaryComponent,
   ],
   imports: [
     BrowserModule,
@@ -49,7 +54,7 @@ import { ForgotPasswordComponent } from './components/forgot-password/forgot-pas
     MatCheckboxModule,
     FormsModule
   ],
-  providers: [],
+  providers: [AuthService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

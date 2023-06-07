@@ -3,7 +3,11 @@
 </div>
 
 <mat-card class="login-card justify-align-center">
-    <img [routerLink]="'/'" class="blue-left-arrow" src="assets/img/left-arrow.png">
+  <img
+    [routerLink]="'/'"
+    class="blue-left-arrow"
+    src="assets/img/left-arrow.png"
+  />
   <mat-card-header class="flex-column login-component-header">
     <h1>Sign up</h1>
     <div class="blue-line"></div>
@@ -11,17 +15,17 @@
   <mat-card-content class="flex-column">
     <mat-form-field>
       <mat-label>Name</mat-label>
-      <input matInput type="email" />
+      <input matInput #userName type="email" />
       <mat-icon class="input-icon">person</mat-icon>
     </mat-form-field>
     <mat-form-field>
       <mat-label>Email</mat-label>
-      <input matInput type="email" />
+      <input matInput #userEmail type="email" />
       <mat-icon class="input-icon">email</mat-icon>
     </mat-form-field>
     <mat-form-field>
       <mat-label>Password</mat-label>
-      <input matInput [type]="hide ? 'password' : 'text'" />
+      <input matInput #userPassword [type]="hide ? 'password' : 'text'" />
       <button
         mat-icon-button
         matSuffix
@@ -33,7 +37,13 @@
       </button>
     </mat-form-field>
     <mat-card-actions class="btn-container">
-      <button mat-raised-button class="main-btn font-21">Sign up</button>
+      <button
+        (click)="authService.SignUp(userEmail.value, userPassword.value, userName.value)"
+        mat-raised-button
+        class="main-btn font-21"
+      >
+        Sign up
+      </button>
     </mat-card-actions>
   </mat-card-content>
 </mat-card>
