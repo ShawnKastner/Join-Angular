@@ -59,6 +59,19 @@ mat-form-field {
   bottom: 16px;
 }
 
+.logo-container {
+  position: absolute;
+  top: 80px;
+  left: 77px;
+}
+
+.blue-left-arrow {
+    position: absolute;
+    top: 40px;
+    left: 37px;
+    cursor: pointer;
+}
+
 .main-btn {
   color: #ffff !important;
   background-color: #2a3647 !important;
@@ -72,15 +85,10 @@ mat-form-field {
   font-size: 21px;
 }
 
-.logo-container {
-  position: absolute;
-  top: 80px;
-  left: 77px;
+.text-center {
+  text-align: center;
 }
 
-.blue-left-arrow {
-    position: absolute;
-    top: 40px;
-    left: 37px;
-    cursor: pointer;
+.mb-35 {
+  margin-bottom: 35px;
 }

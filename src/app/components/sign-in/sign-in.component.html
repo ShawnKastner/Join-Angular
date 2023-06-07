@@ -35,7 +35,7 @@
       <section>
         <mat-checkbox [(ngModel)]="rememberMe">Remember me</mat-checkbox>
       </section>
-      <a href="#">Forgot my password</a>
+      <a [routerLink]="'forgotPassword'" href="#">Forgot my password</a>
     </div>
     <mat-card-actions class="btn-container">
       <button mat-raised-button class="main-btn">Log in</button>
