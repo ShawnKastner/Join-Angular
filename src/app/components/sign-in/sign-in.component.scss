@@ -1,0 +1,76 @@
+.login-card {
+  width: 650px;
+  height: 513px;
+  background-color: #ffff;
+}
+
+mat-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+mat-card-header {
+  position: absolute;
+  top: 35px;
+  gap: 24px;
+  align-items: center;
+
+  h1 {
+    font-size: 61px;
+    font-weight: 500;
+  }
+}
+
+mat-card-content {
+  position: relative;
+  top: 70px;
+}
+
+mat-form-field {
+  width: 422px;
+}
+
+.remember-container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 35px;
+
+  a {
+    color: #29abe2;
+    text-decoration: none;
+  }
+}
+
+.btn-container {
+  display: flex;
+  gap: 51px;
+
+  button {
+    width: 173px;
+    height: 51px;
+    font-size: 21px;
+  }
+}
+
+.sign-up-container {
+    display: flex;
+    align-items: center;
+    gap: 51px;
+    position: absolute;
+    right: 114px;
+    top: 67px;
+
+    button {
+        height: 51px;
+        width: auto;
+    }
+}
+
+.mat-mdc-checkbox.mat-accent {
+    --mdc-checkbox-selected-focus-icon-color: #29abe2;
+    --mdc-checkbox-selected-hover-icon-color: #29abe2;
+    --mdc-checkbox-selected-icon-color: #29abe2;
+    --mdc-checkbox-selected-pressed-icon-color: #29abe2;
+}

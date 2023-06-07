@@ -1,0 +1,46 @@
+<div class="logo-container">
+  <img src="assets/icons/join-logo.png">
+</div>
+
+<div class="sign-up-container font-21">
+  <span>Not a Join user?</span>
+  <button mat-raised-button class="main-btn font-16">Sign up</button>
+</div>
+
+<mat-card class="login-card">
+  <mat-card-header class="flex-column">
+    <h1>Log in</h1>
+    <div class="blue-line"></div>
+  </mat-card-header>
+  <mat-card-content class="flex-column">
+    <mat-form-field>
+      <mat-label>Email</mat-label>
+      <input matInput type="email" />
+      <mat-icon class="email-icon">email</mat-icon>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Password</mat-label>
+      <input matInput [type]="hide ? 'password' : 'text'" />
+      <button
+        mat-icon-button
+        matSuffix
+        (click)="hide = !hide"
+        [attr.aria-label]="'Hide password'"
+        [attr.aria-pressed]="hide"
+      >
+        <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+      </button>
+    </mat-form-field>
+    <div class="remember-container">
+      <section>
+        <mat-checkbox [(ngModel)]="rememberMe">Remember me</mat-checkbox>
+      </section>
+      <a href="#">Forgot my password</a>
+    </div>
+    <mat-card-actions class="btn-container">
+      <button mat-raised-button class="main-btn">Log in</button>
+      <button mat-raised-button>Guest Log in</button>
+    </mat-card-actions>
+  </mat-card-content>
+
+</mat-card>

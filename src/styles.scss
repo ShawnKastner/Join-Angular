@@ -1,1 +1,45 @@
-/* You can add global styles to this file, and also import other style files */
+body {
+  height: 100vh;
+  background-color: #f6f7f8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.flex-column {
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.blue-line {
+  border: 3px solid #29abe2;
+  width: 150px;
+  height: 0px;
+  border-radius: 8px;
+}
+
+.email-icon {
+  position: absolute;
+  right: 0;
+  bottom: 16px;
+}
+
+.main-btn {
+  color: #ffff !important;
+  background-color: #2a3647 !important;
+}
+
+.font-16 {
+  font-size: 16px;
+}
+
+.font-21 {
+    font-size: 21px;
+}
+
+.logo-container {
+    position: absolute;
+    top: 80px;
+    left: 77px;
+}
