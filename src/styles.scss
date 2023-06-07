@@ -7,6 +7,40 @@ body {
   overflow: hidden;
 }
 
+.login-component-header {
+  position: absolute;
+  top: 35px;
+  gap: 24px;
+  align-items: center;
+
+  h1 {
+    font-size: 61px;
+    font-weight: 500;
+  }
+}
+
+.login-card {
+  width: 650px;
+  height: 513px;
+  border-radius: 30px !important;
+  background-color: #ffff;
+}
+
+.justify-align-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+mat-card-content {
+  position: relative;
+  top: 70px;
+}
+
+mat-form-field {
+  width: 422px;
+}
+
 .flex-column {
   display: flex !important;
   flex-direction: column !important;
@@ -19,7 +53,7 @@ body {
   border-radius: 8px;
 }
 
-.email-icon {
+.input-icon {
   position: absolute;
   right: 0;
   bottom: 16px;
@@ -35,11 +69,18 @@ body {
 }
 
 .font-21 {
-    font-size: 21px;
+  font-size: 21px;
 }
 
 .logo-container {
+  position: absolute;
+  top: 80px;
+  left: 77px;
+}
+
+.blue-left-arrow {
     position: absolute;
-    top: 80px;
-    left: 77px;
+    top: 40px;
+    left: 37px;
+    cursor: pointer;
 }

@@ -1,36 +1,3 @@
-.login-card {
-  width: 650px;
-  height: 513px;
-  background-color: #ffff;
-}
-
-mat-card {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-mat-card-header {
-  position: absolute;
-  top: 35px;
-  gap: 24px;
-  align-items: center;
-
-  h1 {
-    font-size: 61px;
-    font-weight: 500;
-  }
-}
-
-mat-card-content {
-  position: relative;
-  top: 70px;
-}
-
-mat-form-field {
-  width: 422px;
-}
-
 .remember-container{
   display: flex;
   align-items: center;
