@@ -11,6 +11,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { FormsModule } from '@angular/forms';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 //AngularFire
 import { AngularFireModule } from '@angular/fire/compat';
@@ -27,6 +29,7 @@ import { ForgotPasswordComponent } from './components/forgot-password/forgot-pas
 
 //Services
 import { AuthService } from './shared/services/auth.service';
+import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { SummaryComponent } from './components/summary/summary.component';
 
 @NgModule({
@@ -35,6 +38,7 @@ import { SummaryComponent } from './components/summary/summary.component';
     SignInComponent,
     SignUpComponent,
     ForgotPasswordComponent,
+    SidenavComponent,
     SummaryComponent,
   ],
   imports: [
@@ -52,7 +56,9 @@ import { SummaryComponent } from './components/summary/summary.component';
     MatButtonModule,
     MatInputModule,
     MatCheckboxModule,
-    FormsModule
+    FormsModule,
+    MatSidenavModule,
+    MatToolbarModule,
   ],
   providers: [AuthService],
   bootstrap: [AppComponent],

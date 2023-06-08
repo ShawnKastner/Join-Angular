@@ -5,6 +5,7 @@ import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 import { SummaryComponent } from './components/summary/summary.component';
 
+
 const routes: Routes = [
   { path: '', component: SignInComponent },
   { path: 'register', component: SignUpComponent },

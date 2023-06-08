@@ -1,0 +1,20 @@
+<mat-drawer-container class="mat-drawer-container" autosize>
+  <mat-drawer #drawer class="sidenav" [opened]="true" mode="side">
+    <div class="logo-sidenav">
+      <img src="assets/img/logo-sidenav.png" />
+    </div>
+
+    <ul class="menu-items font-16">
+      <li routerLink="summary"><mat-icon>dashboard</mat-icon>Summary</li>
+      <li routerLink="board"><mat-icon>event_note</mat-icon>Board</li>
+      <li routerLink="addTask"><mat-icon>add_task</mat-icon>Add Task</li>
+      <li routerLink="contacts"><mat-icon>contacts</mat-icon>Contacts</li>
+    </ul>
+  </mat-drawer>
+
+  <div class="example-sidenav-content">
+    <div class="router-container">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</mat-drawer-container>
