@@ -5,16 +5,21 @@
     </div>
 
     <ul class="menu-items font-16">
-      <li routerLink="summary"><mat-icon>dashboard</mat-icon>Summary</li>
-      <li routerLink="board"><mat-icon>event_note</mat-icon>Board</li>
-      <li routerLink="addTask"><mat-icon>add_task</mat-icon>Add Task</li>
-      <li routerLink="contacts"><mat-icon>contacts</mat-icon>Contacts</li>
+      <li class="mb-12" routerLink="summary"><mat-icon>dashboard</mat-icon>Summary</li>
+      <li class="mt-12" routerLink="board"><mat-icon>event_note</mat-icon>Board</li>
+      <li class="mt-12" routerLink="addTask"><mat-icon>add_task</mat-icon>Add Task</li>
+      <li class="mt-12" routerLink="contacts"><mat-icon>contacts</mat-icon>Contacts</li>
     </ul>
   </mat-drawer>
 
-  <div class="example-sidenav-content">
-    <div class="router-container">
-      <router-outlet></router-outlet>
+  <mat-toolbar class="header">
+    <span>Kanban Project Management Tool</span>
+  
+    <div class="img-container">
+      <img src="assets/img/help.png">
+      <img class="profile-picture" src="assets/img/blank-profile-img.png">
     </div>
-  </div>
+  </mat-toolbar>
 </mat-drawer-container>
+
+
