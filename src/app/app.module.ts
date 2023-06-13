@@ -20,17 +20,19 @@ import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
+import { getFirestore, provideFirestore } from '@angular/fire/firestore';
+import { provideAuth, getAuth } from '@angular/fire/auth';
 import { environment } from '../environments/environment';
 
 //components
 import { SignInComponent } from './components/sign-in/sign-in.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
+import { SidenavComponent } from './components/sidenav/sidenav.component';
+import { SummaryComponent } from './components/summary/summary.component';
 
 //Services
 import { AuthService } from './shared/services/auth.service';
-import { SidenavComponent } from './components/sidenav/sidenav.component';
-import { SummaryComponent } from './components/summary/summary.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +48,8 @@ import { SummaryComponent } from './components/summary/summary.component';
     BrowserAnimationsModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
+    provideFirestore(() => getFirestore()),
+    provideAuth(() => getAuth()),
     AngularFireAuthModule,
     AngularFirestoreModule,
     AngularFireStorageModule,

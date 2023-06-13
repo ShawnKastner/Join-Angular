@@ -40,7 +40,7 @@ export class AuthService {
         this.SetUserData(result.user);
         this.afAuth.authState.subscribe((user) => {
           if (user) {
-            this.router.navigate(['summary']);
+            this.router.navigateByUrl('/sidenav/(main:summary)');
           }
         });
       })
@@ -105,7 +105,7 @@ export class AuthService {
   SignOut() {
     return this.afAuth.signOut().then(() => {
       localStorage.removeItem('user');
-      this.router.navigate(['sign-in']);
+      this.router.navigate(['']);
     });
   }
 }
