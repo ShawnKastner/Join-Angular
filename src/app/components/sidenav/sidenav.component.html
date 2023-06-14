@@ -5,10 +5,10 @@
     </div>
 
     <ul class="menu-items font-16">
-      <li class="mb-12" [routerLink]="[{ outlets: { main: ['summary'] } }]"><mat-icon>dashboard</mat-icon>Summary</li>
-      <li (click)="authService.SignOut()" class="mt-12" [routerLink]="[{ outlets: { main: ['board'] } }]"><mat-icon>event_note</mat-icon>Board</li>
-      <li class="mt-12" [routerLink]="[{ outlets: { main: ['addTask'] } }]"><mat-icon>add_task</mat-icon>Add Task</li>
-      <li class="mt-12" [routerLink]="[{ outlets: { main: ['contacts'] } }]"><mat-icon>contacts</mat-icon>Contacts</li>
+      <li class="mb-12" [routerLink]="[{ outlets: { main: ['summary'] } }]" routerLinkActive="active-link"><mat-icon>dashboard</mat-icon>Summary</li>
+      <li class="mt-12" [routerLink]="[{ outlets: { main: ['board'] } }]" routerLinkActive="active-link"><mat-icon>event_note</mat-icon>Board</li>
+      <li class="mt-12" [routerLink]="[{ outlets: { main: ['addTask'] } }]" routerLinkActive="active-link"><mat-icon>add_task</mat-icon>Add Task</li>
+      <li class="mt-12" [routerLink]="[{ outlets: { main: ['contacts'] } }]" routerLinkActive="active-link"><mat-icon>contacts</mat-icon>Contacts</li>
     </ul>
   </mat-drawer>
 

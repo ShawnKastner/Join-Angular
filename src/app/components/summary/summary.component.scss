@@ -3,13 +3,8 @@
   align-items: center;
   gap: 30px;
 
-  h1 {
-    font-size: 61px;
-    font-weight: 700;
-  }
-
   span {
-    font-size: 27px;
+    font-size: 1.688rem;
   }
 
   .blue-line {
@@ -25,7 +20,7 @@
   gap: 35px;
 
   mat-card-title {
-    font-size: 64px;
+    font-size: 4rem;
     font-weight: 600;
   }
 
@@ -62,7 +57,7 @@
     position: absolute;
     left: 75px;
     top: 45px;
-    font-size: 47px;
+    font-size: 2.9rem;
     gap: 19px;
   }
 
@@ -97,7 +92,7 @@
     border-radius: 30px;
 
     mat-card-title {
-      font-size: 64px;
+      font-size: 4rem;
       font-weight: 600;
     }
 
@@ -123,11 +118,11 @@ mat-card {
   margin-left: 67px;
 
   h2 {
-    font-size: 47px;
+    font-size: 2.9rem;
   }
 
   span {
-    font-size: 64px;
+    font-size: 4rem;
     font-weight: 700;
     color: #29abe2;
   }

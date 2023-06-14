@@ -10,7 +10,7 @@ export class SidenavComponent {
 
   constructor(
     public authService: AuthService
-  ) {
+  ) {}
 
-  }
+  
 }

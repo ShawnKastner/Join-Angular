@@ -13,6 +13,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { FormsModule } from '@angular/forms';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 //AngularFire
 import { AngularFireModule } from '@angular/fire/compat';
@@ -24,15 +25,16 @@ import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { provideAuth, getAuth } from '@angular/fire/auth';
 import { environment } from '../environments/environment';
 
+//Services
+import { AuthService } from './shared/services/auth.service';
+
 //components
 import { SignInComponent } from './components/sign-in/sign-in.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { SummaryComponent } from './components/summary/summary.component';
-
-//Services
-import { AuthService } from './shared/services/auth.service';
+import { BoardComponent } from './components/board/board.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +44,7 @@ import { AuthService } from './shared/services/auth.service';
     ForgotPasswordComponent,
     SidenavComponent,
     SummaryComponent,
+    BoardComponent,
   ],
   imports: [
     BrowserModule,
@@ -63,6 +66,7 @@ import { AuthService } from './shared/services/auth.service';
     FormsModule,
     MatSidenavModule,
     MatToolbarModule,
+    MatProgressBarModule
   ],
   providers: [AuthService],
   bootstrap: [AppComponent],

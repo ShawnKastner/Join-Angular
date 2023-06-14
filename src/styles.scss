@@ -14,7 +14,7 @@ body {
   align-items: center;
 
   h1 {
-    font-size: 61px;
+    font-size: 3.8px;
     font-weight: 500;
   }
 }
@@ -78,11 +78,11 @@ mat-form-field {
 }
 
 .font-16 {
-  font-size: 16px;
+  font-size: 1rem;
 }
 
 .font-21 {
-  font-size: 21px;
+  font-size: 1.3rem;
 }
 
 .text-center {
@@ -116,4 +116,9 @@ mat-form-field {
 
 .gap-18 {
   gap: 18px;
+}
+
+h1 {
+  font-size: 3.8rem !important;
+  font-weight: 700 !important;
 }
