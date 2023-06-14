@@ -1,0 +1,63 @@
+<div class="add-task-container">
+  <h1>Add Task</h1>
+
+  <div class="add-task">
+    <div class="flex-column">
+      <mat-form-field>
+        <mat-label>Enter a title</mat-label>
+        <input required matInput />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Enter a Description</mat-label>
+        <textarea required matInput></textarea>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Select task category</mat-label>
+        <mat-select required>
+          <mat-option value="one">First option</mat-option>
+          <mat-option value="two">Second option</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Select contacts to assign</mat-label>
+        <mat-select>
+          <mat-option value="one">First option</mat-option>
+          <mat-option value="two">Second option</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="middle-line"></div>
+    <div class="left-side">
+      <mat-form-field>
+        <mat-label>Due date</mat-label>
+        <input matInput [matDatepicker]="picker" />
+        <mat-hint>DD/MM/YYYY</mat-hint>
+        <mat-datepicker-toggle
+          matIconSuffix
+          [for]="picker"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+      <div class="prio-btn-container flex-column">
+        <span class="font-21 mb-12">Prio</span>
+        <!-- <div class="gap-10"> -->
+          <!-- <button class="font-21 justify-align-center">Urgent<img src="assets/img/prio-urgent.png" /></button
+          ><button class="font-21 justify-align-center">Medium<img src="assets/img/prio-medium.png" /></button
+          ><button class="font-21 justify-align-center">Low <img src="assets/img/prio-low.png" /></button> -->
+          <mat-button-toggle-group class="gap-10 justify-align-center" name="prio" [(ngModel)]="selectedPriority">
+            <mat-button-toggle [ngClass]="{ 'urgent-color': selectedPriority === 'urgent' }" class="font-21 justify-align-center" value="urgent">Urgent<img src="assets/img/prio-urgent.png" /></mat-button-toggle>
+            <mat-button-toggle [ngClass]="{ 'medium-color': selectedPriority === 'medium' }" class="font-21 justify-align-center" value="medium">Medium<img src="assets/img/prio-medium.png" /></mat-button-toggle>
+            <mat-button-toggle [ngClass]="{ 'low-color': selectedPriority === 'low' }" class="font-21 justify-align-center" value="low">Low<img src="assets/img/prio-low.png" /></mat-button-toggle>
+          </mat-button-toggle-group>
+        <!-- </div> -->
+      </div>
+      <mat-form-field class="example-form-field">
+        <mat-label>Add new subtask</mat-label>
+        <input matInput type="text">
+        <button matSuffix mat-icon-button>
+          <mat-icon>add</mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
+  </div>
+</div>

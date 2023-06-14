@@ -14,6 +14,10 @@ import { FormsModule } from '@angular/forms';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatSelectModule } from '@angular/material/select';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 
 //AngularFire
 import { AngularFireModule } from '@angular/fire/compat';
@@ -35,6 +39,7 @@ import { ForgotPasswordComponent } from './components/forgot-password/forgot-pas
 import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { SummaryComponent } from './components/summary/summary.component';
 import { BoardComponent } from './components/board/board.component';
+import { AddTaskComponent } from './components/add-task/add-task.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +50,7 @@ import { BoardComponent } from './components/board/board.component';
     SidenavComponent,
     SummaryComponent,
     BoardComponent,
+    AddTaskComponent,
   ],
   imports: [
     BrowserModule,
@@ -66,7 +72,11 @@ import { BoardComponent } from './components/board/board.component';
     FormsModule,
     MatSidenavModule,
     MatToolbarModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatSelectModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatButtonToggleModule,
   ],
   providers: [AuthService],
   bootstrap: [AppComponent],
