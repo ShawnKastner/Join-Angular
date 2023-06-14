@@ -40,6 +40,7 @@ import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { SummaryComponent } from './components/summary/summary.component';
 import { BoardComponent } from './components/board/board.component';
 import { AddTaskComponent } from './components/add-task/add-task.component';
+import { ContactsComponent } from './components/contacts/contacts.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import { AddTaskComponent } from './components/add-task/add-task.component';
     SummaryComponent,
     BoardComponent,
     AddTaskComponent,
+    ContactsComponent,
   ],
   imports: [
     BrowserModule,
