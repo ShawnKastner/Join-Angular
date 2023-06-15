@@ -1,0 +1,17 @@
+mat-form-field {
+  width: 200px;
+}
+
+.color-container {
+  display: flex;
+}
+
+.color-chip {
+  margin-right: 8px;
+  cursor: pointer;
+}
+
+.selected {
+    border: 2px solid #000;
+    border-radius: 50%;
+  }

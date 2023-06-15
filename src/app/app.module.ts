@@ -20,6 +20,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatListModule } from '@angular/material/list';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatChipsModule } from '@angular/material/chips';
 
 //AngularFire
 import { AngularFireModule } from '@angular/fire/compat';
@@ -29,6 +30,7 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { provideAuth, getAuth } from '@angular/fire/auth';
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
 
 //Services
@@ -44,6 +46,7 @@ import { BoardComponent } from './components/board/board.component';
 import { AddTaskComponent } from './components/add-task/add-task.component';
 import { ContactsComponent } from './components/contacts/contacts.component';
 import { LogoutDialogComponent } from './components/sidenav/logout-dialog/logout-dialog.component';
+import { NewCategoryDialogComponent } from './components/add-task/new-category-dialog/new-category-dialog.component';
 
 @NgModule({
   declarations: [
@@ -57,12 +60,14 @@ import { LogoutDialogComponent } from './components/sidenav/logout-dialog/logout
     AddTaskComponent,
     ContactsComponent,
     LogoutDialogComponent,
+    NewCategoryDialogComponent,
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideFirestore(() => getFirestore()),
     provideAuth(() => getAuth()),
     AngularFireAuthModule,
@@ -84,7 +89,8 @@ import { LogoutDialogComponent } from './components/sidenav/logout-dialog/logout
     MatNativeDateModule,
     MatButtonToggleModule,
     MatListModule,
-    MatDialogModule
+    MatDialogModule,
+    MatChipsModule,
   ],
   providers: [AuthService],
   bootstrap: [AppComponent],

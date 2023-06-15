@@ -5,22 +5,31 @@
     <div class="flex-column">
       <mat-form-field>
         <mat-label>Enter a title</mat-label>
-        <input required matInput />
+        <input [(ngModel)]="title" required matInput />
       </mat-form-field>
       <mat-form-field>
         <mat-label>Enter a Description</mat-label>
-        <textarea required matInput></textarea>
+        <textarea [(ngModel)]="description" required matInput></textarea>
       </mat-form-field>
       <mat-form-field>
         <mat-label>Select task category</mat-label>
-        <mat-select required>
-          <mat-option value="one">First option</mat-option>
-          <mat-option value="two">Second option</mat-option>
+        <mat-select [(ngModel)]="category" required>
+          <mat-option (click)="openAddCategoryDialog()"
+            >New Category</mat-option
+          >
+          <mat-option
+            *ngFor="let category of categories"
+            [value]="category.name"
+          >
+            <mat-icon class="color-circle" [style.color]="category.color"
+              >circle</mat-icon
+            >{{ category.name }}</mat-option
+          >
         </mat-select>
       </mat-form-field>
       <mat-form-field>
         <mat-label>Select contacts to assign</mat-label>
-        <mat-select>
+        <mat-select [(ngModel)]="selectedContact">
           <mat-option value="one">First option</mat-option>
           <mat-option value="two">Second option</mat-option>
         </mat-select>
@@ -30,7 +39,12 @@
     <div class="left-side">
       <mat-form-field>
         <mat-label>Due date</mat-label>
-        <input matInput [matDatepicker]="picker" />
+        <input
+          [(ngModel)]="date"
+          [min]="minDate"
+          matInput
+          [matDatepicker]="picker"
+        />
         <mat-hint>DD/MM/YYYY</mat-hint>
         <mat-datepicker-toggle
           matIconSuffix
@@ -72,7 +86,7 @@
       </div>
       <mat-form-field class="example-form-field">
         <mat-label>Add new subtask</mat-label>
-        <input matInput type="text" />
+        <input [(ngModel)]="subtask" matInput type="text" />
         <button matSuffix mat-icon-button>
           <mat-icon>add</mat-icon>
         </button>
@@ -80,10 +94,14 @@
     </div>
   </div>
   <div class="btn-container">
-    <button mat-raised-button class="main-btn add-task-btn font-21">
+    <button
+      (click)="addTask()"
+      mat-raised-button
+      class="main-btn add-task-btn font-21"
+    >
       Create Task<mat-icon>add_task</mat-icon>
     </button>
-    <button mat-stroked-button class="clear-btn font-21">
+    <button (click)="clearInput()" mat-stroked-button class="clear-btn font-21">
       Clear<mat-icon>close</mat-icon>
     </button>
   </div>

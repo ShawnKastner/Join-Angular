@@ -1,0 +1,22 @@
+<span mat-dialog-title>Add new category</span>
+<div mat-dialog-content>
+  <mat-form-field>
+    <mat-label>New category</mat-label>
+    <input matInput [(ngModel)]="newCategory" />
+  </mat-form-field>
+  <div class="color-container">
+    <div *ngFor="let color of colors" class="color-chips">
+      <mat-icon
+        (click)="selectColor(color)"
+        [ngClass]="{ selected: selectedColor === color }"
+        class="color-chip"
+        [style.color]="color"
+        >circle</mat-icon
+      >
+    </div>
+  </div>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button (click)="addCategory()" cdkFocusInitial>Add</button>
+</div>
