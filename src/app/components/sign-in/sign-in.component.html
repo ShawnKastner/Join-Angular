@@ -39,7 +39,7 @@
     </div>
     <mat-card-actions class="btn-container">
       <button mat-raised-button class="main-btn" (click)="authService.SignIn(userEmail.value, userPassword.value)">Log in</button>
-      <button mat-raised-button>Guest Log in</button>
+      <button mat-raised-button (click)="authService.guestLogin()">Guest Log in</button>
     </mat-card-actions>
   </mat-card-content>
 

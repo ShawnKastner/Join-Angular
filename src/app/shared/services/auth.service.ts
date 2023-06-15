@@ -32,6 +32,22 @@ export class AuthService {
     });
   }
 
+  guestLogin() {
+		return this.afAuth
+			.signInAnonymously()
+			.then((result) => {
+				this.SetUserData(result.user);
+				this.afAuth.onAuthStateChanged((user) => {
+					if (user) {
+            this.router.navigateByUrl('/sidenav/(main:summary)');
+					}
+				});
+			})
+			.catch((error) => {
+				window.alert(error.message);
+			});
+	}
+
   // Sign in with email/password
   SignIn(email: string, password: string) {
     return this.afAuth
