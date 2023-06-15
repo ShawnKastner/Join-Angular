@@ -19,6 +19,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatListModule } from '@angular/material/list';
+import { MatDialogModule } from '@angular/material/dialog';
 
 //AngularFire
 import { AngularFireModule } from '@angular/fire/compat';
@@ -42,6 +43,7 @@ import { SummaryComponent } from './components/summary/summary.component';
 import { BoardComponent } from './components/board/board.component';
 import { AddTaskComponent } from './components/add-task/add-task.component';
 import { ContactsComponent } from './components/contacts/contacts.component';
+import { LogoutDialogComponent } from './components/sidenav/logout-dialog/logout-dialog.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +56,7 @@ import { ContactsComponent } from './components/contacts/contacts.component';
     BoardComponent,
     AddTaskComponent,
     ContactsComponent,
+    LogoutDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -80,7 +83,8 @@ import { ContactsComponent } from './components/contacts/contacts.component';
     MatDatepickerModule,
     MatNativeDateModule,
     MatButtonToggleModule,
-    MatListModule
+    MatListModule,
+    MatDialogModule
   ],
   providers: [AuthService],
   bootstrap: [AppComponent],

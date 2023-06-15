@@ -1,0 +1,15 @@
+.logout-dialog {
+  background-color: #2a3647;
+  color: #cdcdcd;
+  border-radius: 20px 0px 20px 20px;
+
+  span {
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
+
+::ng-deep .mat-mdc-dialog-container .mdc-dialog__surface {
+  border-radius: 20px 0px 20px 20px;
+}
