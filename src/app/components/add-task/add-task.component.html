@@ -41,23 +41,50 @@
       <div class="prio-btn-container flex-column">
         <span class="font-21 mb-12">Prio</span>
         <!-- <div class="gap-10"> -->
-          <!-- <button class="font-21 justify-align-center">Urgent<img src="assets/img/prio-urgent.png" /></button
+        <!-- <button class="font-21 justify-align-center">Urgent<img src="assets/img/prio-urgent.png" /></button
           ><button class="font-21 justify-align-center">Medium<img src="assets/img/prio-medium.png" /></button
           ><button class="font-21 justify-align-center">Low <img src="assets/img/prio-low.png" /></button> -->
-          <mat-button-toggle-group class="gap-10 justify-align-center" name="prio" [(ngModel)]="selectedPriority">
-            <mat-button-toggle [ngClass]="{ 'urgent-color': selectedPriority === 'urgent' }" class="font-21 justify-align-center" value="urgent">Urgent<img src="assets/img/prio-urgent.png" /></mat-button-toggle>
-            <mat-button-toggle [ngClass]="{ 'medium-color': selectedPriority === 'medium' }" class="font-21 justify-align-center" value="medium">Medium<img src="assets/img/prio-medium.png" /></mat-button-toggle>
-            <mat-button-toggle [ngClass]="{ 'low-color': selectedPriority === 'low' }" class="font-21 justify-align-center" value="low">Low<img src="assets/img/prio-low.png" /></mat-button-toggle>
-          </mat-button-toggle-group>
+        <mat-button-toggle-group
+          class="gap-10 justify-align-center"
+          name="prio"
+          [(ngModel)]="selectedPriority"
+        >
+          <mat-button-toggle
+            [ngClass]="{ 'urgent-color': selectedPriority === 'urgent' }"
+            class="font-21 justify-align-center"
+            value="urgent"
+            >Urgent<img src="assets/img/prio-urgent.png"
+          /></mat-button-toggle>
+          <mat-button-toggle
+            [ngClass]="{ 'medium-color': selectedPriority === 'medium' }"
+            class="font-21 justify-align-center"
+            value="medium"
+            >Medium<img src="assets/img/prio-medium.png"
+          /></mat-button-toggle>
+          <mat-button-toggle
+            [ngClass]="{ 'low-color': selectedPriority === 'low' }"
+            class="font-21 justify-align-center"
+            value="low"
+            >Low<img src="assets/img/prio-low.png"
+          /></mat-button-toggle>
+        </mat-button-toggle-group>
         <!-- </div> -->
       </div>
       <mat-form-field class="example-form-field">
         <mat-label>Add new subtask</mat-label>
-        <input matInput type="text">
+        <input matInput type="text" />
         <button matSuffix mat-icon-button>
           <mat-icon>add</mat-icon>
         </button>
       </mat-form-field>
     </div>
+  </div>
+  <div class="btn-container">
+    <button mat-raised-button class="main-btn add-task-btn font-21">
+      Create Task<mat-icon>add_task</mat-icon>
+    </button>
+    <button mat-stroked-button class="clear-btn font-21">
+      Clear<mat-icon>close</mat-icon>
+    </button>
   </div>
 </div>
