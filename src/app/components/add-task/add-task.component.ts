@@ -16,7 +16,7 @@ import { Observable } from 'rxjs';
   templateUrl: './add-task.component.html',
   styleUrls: ['./add-task.component.scss'],
 })
-export class AddTaskComponent implements OnInit{
+export class AddTaskComponent implements OnInit {
   taskCollection!: CollectionReference;
   minDate!: Date;
   title!: string;
@@ -39,8 +39,7 @@ export class AddTaskComponent implements OnInit{
     this.categories$.subscribe((data) => {
       this.categories = data;
       console.log(this.categories);
-    })
-    
+    });
   }
 
   addTask() {
@@ -79,4 +78,15 @@ export class AddTaskComponent implements OnInit{
       width: '250px',
     });
   }
+
+  getCategoryColor(category: string): string {
+    const selectedCategory = this.categories.find((item) => item.name === category);
+    return selectedCategory ? selectedCategory.color : '';
+  }
+  
+  getCategoryName(category: string): string {
+    const selectedCategory = this.categories.find((item) => item.name === category);
+    return selectedCategory ? selectedCategory.name : '';
+  }
+  
 }

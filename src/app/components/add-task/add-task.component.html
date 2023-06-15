@@ -14,15 +14,19 @@
       <mat-form-field>
         <mat-label>Select task category</mat-label>
         <mat-select [(ngModel)]="category" required>
+          <mat-select-trigger class="align-center">
+            <mat-icon class="color-circle" [style.color]="getCategoryColor(category)">fiber_manual_record</mat-icon>
+            {{ getCategoryName(category) }}
+          </mat-select-trigger>
           <mat-option (click)="openAddCategoryDialog()"
             >New Category</mat-option
           >
           <mat-option
             *ngFor="let category of categories"
-            [value]="category.name"
+            [value]="category.name" 
           >
-            <mat-icon class="color-circle" [style.color]="category.color"
-              >circle</mat-icon
+            <mat-icon [style.color]="category.color"
+              >fiber_manual_record</mat-icon
             >{{ category.name }}</mat-option
           >
         </mat-select>
