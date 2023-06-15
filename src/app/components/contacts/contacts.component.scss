@@ -1,0 +1,62 @@
+mat-list {
+  position: absolute;
+  left: 0;
+  top: 89px;
+  bottom: 0;
+  width: 453px;
+  background-color: #ffff;
+  box-shadow: 4px 0px 6px rgba(0, 0, 0, 0.08);
+}
+
+mat-list-item {
+  &:hover {
+    cursor: pointer;
+    border-radius: 10px;
+    background-color: #f6f7f8;
+  }
+}
+
+.contact-letter {
+  width: 42px !important;
+  height: 42px !important;
+  border-radius: 100%;
+  background-color: #ff7a00;
+  color: #ffff !important;
+}
+
+.email-style {
+  text-decoration: unset;
+  color: #29abe2;
+}
+
+.blue-line {
+  width: 0px;
+  height: 59px;
+  border: 3px solid #29abe2;
+}
+
+.contact-content {
+  position: absolute;
+  left: 453px;
+  padding-left: 53px;
+  gap: 30px;
+
+  span {
+    font-size: 1.7rem;
+  }
+}
+
+.add-c-btn {
+  height: 53px;
+  width: 197.77px;
+  border-radius: 10px;
+  position: absolute;
+  bottom: 67px;
+  right: 47px;
+  transition: ease-in-out 125ms;
+
+  &:hover {
+    transition: ease-in-out 125ms;
+    background-color: #29abe2 !important;
+  }
+}

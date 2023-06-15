@@ -1,1 +1,20 @@
-<p>contacts works!</p>
+<mat-list>
+  <div class="pr-48 pl-48">
+    <div mat-subheader class="font-21">A</div>
+    <mat-divider></mat-divider>
+    <mat-list-item *ngFor="let contact of contacts">
+      <div matListItemIcon class="contact-letter justify-align-center">
+        {{ contact.firstLetter }}
+      </div>
+      <div matListItemTitle>{{ contact.name }}</div>
+      <div class="email-style" matListItemLine>{{ contact.email }}</div>
+    </mat-list-item>
+  </div>
+</mat-list>
+<div class="contact-content align-center">
+  <h1>Contacts</h1>
+  <div class="blue-line"></div>
+  <span>Better with a team</span>
+</div>
+
+<button class="main-btn font-21 add-c-btn" mat-raised-button color="primary">New contact <mat-icon>person_add</mat-icon></button>

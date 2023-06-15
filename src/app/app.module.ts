@@ -18,6 +18,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatListModule } from '@angular/material/list';
 
 //AngularFire
 import { AngularFireModule } from '@angular/fire/compat';
@@ -79,6 +80,7 @@ import { ContactsComponent } from './components/contacts/contacts.component';
     MatDatepickerModule,
     MatNativeDateModule,
     MatButtonToggleModule,
+    MatListModule
   ],
   providers: [AuthService],
   bootstrap: [AppComponent],
