@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { AddContactDialogComponent } from './add-contact-dialog/add-contact-dialog.component';
 
 export interface Section {
   name: string;
@@ -24,4 +26,14 @@ export class ContactsComponent {
       firstLetter: 'AS',
     },
   ];
+
+  constructor(private dialog: MatDialog) {}
+
+  openAddContactDialog() {
+    this.dialog.open(AddContactDialogComponent, {
+      width: '1212px',
+      height: '594px',
+      panelClass: 'slide-in-dialog',
+    });
+  }
 }

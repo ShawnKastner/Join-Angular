@@ -137,3 +137,33 @@ h1 {
   --mdc-checkbox-selected-icon-color: #29abe2;
   --mdc-checkbox-selected-pressed-icon-color: #29abe2;
 }
+
+.slide-in-dialog {
+  animation-name: slideInRight;
+  animation-duration: 0.5s;
+  animation-timing-function: ease-in-out;
+}
+
+.slide-out-dialog {
+  animation-name: slideOutRight;
+  animation-duration: 0.5s;
+  animation-timing-function: ease-in-out;
+}
+
+@keyframes slideInRight {
+  0% {
+    transform: translateX(100vw);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideOutRight {
+ 100% {
+  transform: translateX(100vw);
+ }
+ 0% {
+  transform: translateX(0);
+ }
+}

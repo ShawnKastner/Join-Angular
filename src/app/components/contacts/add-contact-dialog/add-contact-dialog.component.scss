@@ -1,0 +1,84 @@
+.add-contact-container {
+  display: flex;
+  justify-content: space-between;
+  height: 100%;
+
+  .headline-with-subtitle {
+    background-color: #2a3647;
+    color: #ffff;
+    padding: 66px 46px;
+    justify-content: center;
+
+    h1 {
+      font-size: 3.8rem;
+    }
+
+    span {
+      font-size: 1.7rem;
+    }
+
+    img {
+      width: 55.12px;
+      height: 66.48px;
+    }
+  }
+
+  .form-field {
+    display: flex;
+    align-items: center;
+    padding-right: 53px;
+    gap: 84px;
+
+    .close-btn {
+      position: absolute;
+      top: 26px;
+      right: 55.4px;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+
+    .input-icon {
+      position: absolute;
+      right: 0;
+      top: 15px;
+    }
+  }
+
+  .btn-container {
+    display: flex;
+    gap: 25px;
+
+    .cancel-btn {
+      width: 136px;
+      height: 55px;
+      border-radius: 10px;
+      transition: ease-in-out 125ms;
+
+      &:hover {
+        cursor: pointer;
+        border: 1px solid #29abe2;
+        transition: ease-in-out 125ms;
+      }
+    }
+    .create-btn {
+      background-color: #2a3647;
+      border: unset;
+      width: 218px;
+      height: 55px;
+      border-radius: 10px;
+      transition: ease-in-out 125ms;
+
+      &:hover {
+        cursor: pointer;
+        background-color: #29abe2 !important;
+        transition: ease-in-out 125ms;
+      }
+    }
+  }
+}
+
+::ng-deep .mat-mdc-dialog-container .mdc-dialog__surface {
+  border-radius: 30px;
+}
