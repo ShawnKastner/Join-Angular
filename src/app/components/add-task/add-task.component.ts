@@ -12,6 +12,7 @@ import { Task } from 'src/app/models/tasks.model';
 import { NewCategoryDialogComponent } from './new-category-dialog/new-category-dialog.component';
 import { Observable } from 'rxjs';
 import { deleteDoc } from 'firebase/firestore';
+import { AddTaskService } from 'src/app/shared/services/add-task.service';
 
 @Component({
   selector: 'app-add-task',
@@ -19,16 +20,7 @@ import { deleteDoc } from 'firebase/firestore';
   styleUrls: ['./add-task.component.scss'],
 })
 export class AddTaskComponent implements OnInit {
-  taskCollection!: CollectionReference;
   minDate!: Date;
-  title!: string;
-  description!: string;
-  category!: string;
-  selectedContact!: string;
-  date!: string;
-  selectedPriority!: string;
-  subtask!: string;
-  selectedSubtasks: { [key: string]: boolean } = {};
 
   categories$!: Observable<any[]>;
   categories: any[] = [];
@@ -36,7 +28,11 @@ export class AddTaskComponent implements OnInit {
   subtasks$!: Observable<any[]>;
   subtasks: any[] = [];
 
-  constructor(private firestore: Firestore, private dialog: MatDialog) {
+  constructor(
+    private firestore: Firestore,
+    private dialog: MatDialog,
+    public addTaskService: AddTaskService
+  ) {
     this.minDate = new Date();
   }
 
@@ -61,44 +57,6 @@ export class AddTaskComponent implements OnInit {
     });
   }
 
-  getSelectedSubtasks(): string[] {
-    return Object.keys(this.selectedSubtasks).filter(
-      (key) => this.selectedSubtasks[key]
-    );
-  }
-
-  addTask() {
-    const collectionRef = collection(this.firestore, 'tasks');
-    const newTask = new Task(
-      this.title,
-      this.description,
-      this.category,
-      this.selectedContact,
-      new Date(this.date),
-      this.selectedPriority,
-      this.getSelectedSubtasks().join(',')
-    );
-    addDoc(collectionRef, { ...newTask })
-      .then(() => {
-        console.log('Add task is successful');
-        this.clearInput();
-      })
-      .catch((error) => {
-        console.error('Add task was failed:', error);
-      });
-  }
-
-  clearInput() {
-    this.title = '';
-    this.description = '';
-    this.category = '';
-    this.selectedContact = '';
-    this.date = '';
-    this.selectedPriority = '';
-    this.subtask = '';
-    this.selectedSubtasks = {};
-  }
-
   openAddCategoryDialog() {
     this.dialog.open(NewCategoryDialogComponent, {
       width: '250px',
@@ -117,25 +75,5 @@ export class AddTaskComponent implements OnInit {
       (item) => item.name === category
     );
     return selectedCategory ? selectedCategory.name : '';
-  }
-
-  addSubtask() {
-    const subTaskCollection = collection(this.firestore, 'subtasks');
-    addDoc(subTaskCollection, {
-      subtask: this.subtask,
-    }).then(() => {
-      this.subtask = '';
-    });
-  }
-
-  async deleteAllSubtasks() {
-    const subTaskCollectionRef = collection(this.firestore, 'subtasks');
-    const querySnapshot = await getDocs(subTaskCollectionRef);
-    
-    querySnapshot.forEach(async (doc) => {
-      await deleteDoc(doc.ref);
-      console.log('Subtask deleted successfully');
-    });
-    
   }
 }
