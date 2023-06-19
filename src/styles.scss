@@ -130,3 +130,10 @@ h1 {
 .pl-48 {
   padding-left: 48px;
 }
+
+.mat-mdc-checkbox.mat-accent {
+  --mdc-checkbox-selected-focus-icon-color: #29abe2;
+  --mdc-checkbox-selected-hover-icon-color: #29abe2;
+  --mdc-checkbox-selected-icon-color: #29abe2;
+  --mdc-checkbox-selected-pressed-icon-color: #29abe2;
+}

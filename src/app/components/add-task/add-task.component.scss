@@ -86,3 +86,34 @@ textarea {
     }
   }
 }
+
+.selectedSubtasks {
+  height: 175px;
+  overflow-y: auto;
+  position: relative;
+
+  li {
+    list-style: none;
+  }
+
+  .deleteSubtasks {
+    position: absolute;
+    right: 0;
+    cursor: pointer;
+  }
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
