@@ -1,6 +1,13 @@
 import { Injectable } from '@angular/core';
-import { Firestore, addDoc, collection, deleteDoc, getDocs } from '@angular/fire/firestore';
+import {
+  Firestore,
+  addDoc,
+  collection,
+  deleteDoc,
+  getDocs,
+} from '@angular/fire/firestore';
 import { Task } from 'src/app/models/tasks.model';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root',
@@ -15,11 +22,23 @@ export class AddTaskService {
   subtask!: string;
   selectedSubtasks: { [key: string]: boolean } = {};
   isAddingSubtask = false;
+  userId!: any;
 
-  constructor(private firestore: Firestore) {}
+  constructor(private firestore: Firestore, private authService: AuthService) {
+    this.getUid();
+  }
+
+  async getUid() {
+    this.userId = await this.authService.getCurrentUserUid();
+  }
 
   addTask() {
-    const collectionRef = collection(this.firestore, 'tasks');
+    const collectionRef = collection(
+      this.firestore,
+      'users',
+      this.userId,
+      'tasks'
+    );
     const newTask = new Task(
       this.title,
       this.description,
@@ -54,7 +73,12 @@ export class AddTaskService {
   }
 
   addSubtask() {
-    const subTaskCollection = collection(this.firestore, 'subtasks');
+    const subTaskCollection = collection(
+      this.firestore,
+      'users',
+      this.userId,
+      'subtasks'
+    );
     addDoc(subTaskCollection, {
       subtask: this.subtask,
     }).then(() => {
@@ -80,7 +104,12 @@ export class AddTaskService {
   }
 
   async deleteAllSubtasks() {
-    const subTaskCollectionRef = collection(this.firestore, 'subtasks');
+    const subTaskCollectionRef = collection(
+      this.firestore,
+      'users',
+      this.userId,
+      'subtasks'
+    );
     const querySnapshot = await getDocs(subTaskCollectionRef);
 
     querySnapshot.forEach(async (doc) => {

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Firestore } from '@angular/fire/firestore';
 import { MatDialogRef } from '@angular/material/dialog';
 import { addDoc, collection } from 'firebase/firestore';
+import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
   selector: 'app-new-category-dialog',
@@ -20,17 +21,25 @@ export class NewCategoryDialogComponent {
   ];
   selectedColor: string | null = null;
 
+  userId!: any;
+
   constructor(
     private firestore: Firestore,
-    public dialogRef: MatDialogRef<NewCategoryDialogComponent>
-  ) {}
+    public dialogRef: MatDialogRef<NewCategoryDialogComponent>,
+    private authService: AuthService
+  ) {
+    this.getUid();
+  }
 
+  async getUid() {
+    this.userId = await this.authService.getCurrentUserUid();
+  }
   onNoClick(): void {
     this.dialogRef.close();
   }
 
   addCategory() {
-    const categoryCollection = collection(this.firestore, 'categories');
+    const categoryCollection = collection(this.firestore,'users', this.userId, 'categories');
     addDoc(categoryCollection, {
       name: this.newCategory,
       color: this.selectedColor,

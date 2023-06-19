@@ -13,6 +13,7 @@ import { NewCategoryDialogComponent } from './new-category-dialog/new-category-d
 import { Observable } from 'rxjs';
 import { deleteDoc } from 'firebase/firestore';
 import { AddTaskService } from 'src/app/shared/services/add-task.service';
+import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
   selector: 'app-add-task',
@@ -28,21 +29,32 @@ export class AddTaskComponent implements OnInit {
   subtasks$!: Observable<any[]>;
   subtasks: any[] = [];
 
+  userId!: any;
+
   constructor(
     private firestore: Firestore,
     private dialog: MatDialog,
-    public addTaskService: AddTaskService
+    public addTaskService: AddTaskService,
+    private authService: AuthService
   ) {
     this.minDate = new Date();
   }
 
+  async getUid() {
+    this.userId = await this.authService.getCurrentUserUid();
+  }
+
   ngOnInit(): void {
-    this.getCategoriesFromFirestore();
-    this.getSubtasksFromFirestore();
+    this.getUid().then(() => {
+      this.getCategoriesFromFirestore();
+      this.getSubtasksFromFirestore();
+    });
   }
 
   getSubtasksFromFirestore() {
-    this.subtasks$ = collectionData(collection(this.firestore, 'subtasks'));
+    this.subtasks$ = collectionData(
+      collection(this.firestore, 'users', this.userId, 'subtasks')
+    );
     this.subtasks$.subscribe((data) => {
       this.subtasks = data;
       console.log(this.subtasks);
@@ -50,7 +62,9 @@ export class AddTaskComponent implements OnInit {
   }
 
   getCategoriesFromFirestore() {
-    this.categories$ = collectionData(collection(this.firestore, 'categories'));
+    this.categories$ = collectionData(
+      collection(this.firestore, 'users', this.userId, 'categories')
+    );
     this.categories$.subscribe((data) => {
       this.categories = data;
       console.log(this.categories);

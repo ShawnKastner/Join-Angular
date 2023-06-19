@@ -13,24 +13,24 @@
     <div class="flex-column">
       <mat-form-field>
         <mat-label>Name</mat-label>
-        <input matInput placeholder="Enter your name" />
+        <input [(ngModel)]="contactService.name" matInput placeholder="Enter your name" />
         <mat-icon class="input-icon">person</mat-icon>
       </mat-form-field>
       <mat-form-field>
         <mat-label>Email</mat-label>
-        <input matInput placeholder="Enter your email" />
+        <input [(ngModel)]="contactService.email" matInput placeholder="Enter your email" />
         <mat-icon class="input-icon">mail</mat-icon>
       </mat-form-field>
       <mat-form-field>
         <mat-label>Phone</mat-label>
-        <input matInput placeholder="Enter your phone number" />
+        <input [(ngModel)]="contactService.phone" matInput placeholder="Enter your phone number" />
         <mat-icon class="input-icon">call</mat-icon>
       </mat-form-field>
       <div class="btn-container">
-        <button class="cancel-btn font-21 justify-align-center">
+        <button (click)="closeDialog()" class="cancel-btn font-21 justify-align-center">
           Cancel <mat-icon>close</mat-icon>
         </button>
-        <button class="main-btn create-btn font-21 font-weight-700 justify-align-center">
+        <button (click)="addContact()" class="main-btn create-btn font-21 font-weight-700 justify-align-center">
           Create contact <mat-icon>done</mat-icon>
         </button>
       </div>

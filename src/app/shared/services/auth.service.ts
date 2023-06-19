@@ -32,6 +32,18 @@ export class AuthService {
     });
   }
 
+  getCurrentUserUid(): Promise<string | null> {
+    return new Promise((resolve, reject) => {
+      this.afAuth.authState.subscribe((user) => {
+        if (user && user.uid) {
+          resolve(user.uid);
+        } else {
+          resolve(null);
+        }
+      }, reject);
+    });
+  }
+
   guestLogin() {
 		return this.afAuth
 			.signInAnonymously()
