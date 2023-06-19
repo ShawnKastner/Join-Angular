@@ -103,6 +103,21 @@ textarea {
   }
 }
 
+.add-subtask {
+  ng-container {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: flex;
+  }
+}
+
+.confirm-subtask-container {
+  position: absolute;
+  top: 3px;
+  right: 0;
+}
+
 /* width */
 ::-webkit-scrollbar {
   width: 6px;

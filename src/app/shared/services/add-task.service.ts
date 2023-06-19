@@ -14,6 +14,7 @@ export class AddTaskService {
   selectedPriority!: string;
   subtask!: string;
   selectedSubtasks: { [key: string]: boolean } = {};
+  isAddingSubtask = false;
 
   constructor(private firestore: Firestore) {}
 
@@ -36,6 +37,20 @@ export class AddTaskService {
       .catch((error) => {
         console.error('Add task was failed:', error);
       });
+  }
+
+  startAddingSubtask() {
+    this.isAddingSubtask = true;
+  }
+
+  confirmSubtask() {
+    this.isAddingSubtask = false;
+    this.addSubtask();
+  }
+
+  cancelSubtask() {
+    this.isAddingSubtask = false;
+    this.subtask = '';
   }
 
   addSubtask() {

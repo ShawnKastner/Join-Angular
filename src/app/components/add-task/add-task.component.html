@@ -87,13 +87,25 @@
           /></mat-button-toggle>
         </mat-button-toggle-group>
       </div>
-      <mat-form-field class="example-form-field">
+      <mat-form-field>
         <mat-label>Add new subtask</mat-label>
         <input [(ngModel)]="addTaskService.subtask" matInput type="text" />
-        <button (click)="addTaskService.addSubtask()" matSuffix mat-icon-button>
-          <mat-icon>add</mat-icon>
-        </button>
-      </mat-form-field>
+        <div class="confirm-subtask-container">
+          <ng-container *ngIf="addTaskService.isAddingSubtask; else addButton">
+            <button mat-icon-button (click)="addTaskService.confirmSubtask()">
+              <mat-icon>done</mat-icon>
+            </button>
+            <button mat-icon-button (click)="addTaskService.cancelSubtask()">
+              <mat-icon>close</mat-icon>
+            </button>
+          </ng-container>
+          <ng-template #addButton>
+            <button mat-icon-button (click)="addTaskService.startAddingSubtask()">
+              <mat-icon>add</mat-icon>
+            </button>
+          </ng-template>
+        </div>
+      </mat-form-field>      
       <div class="selectedSubtasks">
         <mat-icon (click)="addTaskService.deleteAllSubtasks()" *ngIf="subtasks && subtasks.length > 0" class="deleteSubtasks">delete</mat-icon>
         <li *ngFor="let subtask of subtasks">
