@@ -9,7 +9,7 @@ import { AuthService } from './auth.service';
 export class AddContactService {
   name!: string;
   email!: string;
-  phone!: number;
+  phone!: string;
   userId!: any;
 
   constructor(private firestore: Firestore, private authService: AuthService) {
@@ -27,13 +27,30 @@ export class AddContactService {
       this.userId,
       'contacts'
     );
-    const contact = new Contact(this.name, this.email, this.phone);
+    const nameParts = this.name.split(' ');
+    const firstNameLetter = nameParts[0].charAt(0);
+    const lastNameLetter = nameParts[1].charAt(0);
+
+    const contact = new Contact(
+      this.name,
+      this.email,
+      this.phone,
+      `${firstNameLetter}${lastNameLetter}`
+    );
+
     addDoc(contactCollection, { ...contact })
       .then(() => {
         console.log('Contact added successfully');
+        this.clearInput();
       })
       .catch((error) => {
         console.log(error);
       });
+  }
+
+  clearInput() {
+    this.name = '';
+    this.email = '';
+    this.phone = '';
   }
 }

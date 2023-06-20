@@ -1,16 +1,19 @@
 <mat-list>
-  <div class="pr-48 pl-48">
-    <div mat-subheader class="font-21">A</div>
-    <mat-divider></mat-divider>
-    <mat-list-item *ngFor="let contact of contacts">
-      <div matListItemIcon class="contact-letter justify-align-center">
-        {{ contact.firstLetter }}
-      </div>
-      <div matListItemTitle>{{ contact.name }}</div>
-      <div class="email-style" matListItemLine>{{ contact.email }}</div>
-    </mat-list-item>
-  </div>
+  <ng-container *ngFor="let letter of getAlphabetLettersWithContacts(); let i = index">
+    <div class="pr-48 pl-48">
+      <div mat-subheader class="font-21">{{ letter.charAt(0) }}</div>
+      <mat-divider></mat-divider>
+      <mat-list-item *ngFor="let contact of getContactsByLetter(letter)">
+        <div matListItemIcon class="contact-letter justify-align-center" [style.background-color]="contact.color">
+          {{ contact.firstLetter }}
+        </div>
+        <div matListItemTitle>{{ contact.name }}</div>
+        <div class="email-style" matListItemLine>{{ contact.email }}</div>
+      </mat-list-item>
+    </div>
+  </ng-container>
 </mat-list>
+
 <div class="contact-content align-center">
   <h1>Contacts</h1>
   <div class="blue-line"></div>

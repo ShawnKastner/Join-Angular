@@ -1,17 +1,12 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
-  CollectionReference,
   Firestore,
-  addDoc,
   collection,
   collectionData,
-  getDocs,
 } from '@angular/fire/firestore';
 import { MatDialog } from '@angular/material/dialog';
-import { Task } from 'src/app/models/tasks.model';
 import { NewCategoryDialogComponent } from './new-category-dialog/new-category-dialog.component';
 import { Observable } from 'rxjs';
-import { deleteDoc } from 'firebase/firestore';
 import { AddTaskService } from 'src/app/shared/services/add-task.service';
 import { AuthService } from 'src/app/shared/services/auth.service';
 
