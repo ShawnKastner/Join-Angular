@@ -29,6 +29,8 @@ export class AddTaskComponent implements OnInit {
   subtasks$!: Observable<any[]>;
   subtasks: any[] = [];
 
+  contacts$!: Observable<any[]>;
+
   userId!: any;
 
   constructor(
@@ -48,7 +50,15 @@ export class AddTaskComponent implements OnInit {
     this.getUid().then(() => {
       this.getCategoriesFromFirestore();
       this.getSubtasksFromFirestore();
+      this.getContactsFromFirestore();
     });
+  }
+
+  getContactsFromFirestore() {
+    this.contacts$ = collectionData(
+      collection(this.firestore, 'users', this.userId, 'contacts')
+    );
+    this.contacts$.subscribe(() => {});
   }
 
   getSubtasksFromFirestore() {

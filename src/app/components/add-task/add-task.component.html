@@ -9,7 +9,11 @@
       </mat-form-field>
       <mat-form-field>
         <mat-label>Enter a Description</mat-label>
-        <textarea [(ngModel)]="addTaskService.description" required matInput></textarea>
+        <textarea
+          [(ngModel)]="addTaskService.description"
+          required
+          matInput
+        ></textarea>
       </mat-form-field>
       <mat-form-field>
         <mat-label>Select task category</mat-label>
@@ -26,7 +30,7 @@
             >New Category</mat-option
           >
           <mat-option
-            *ngFor="let category of categories"
+            *ngFor="let category of categories$ | async"
             [value]="category.name"
           >
             <mat-icon [style.color]="category.color"
@@ -38,8 +42,10 @@
       <mat-form-field>
         <mat-label>Select contacts to assign</mat-label>
         <mat-select [(ngModel)]="addTaskService.selectedContact">
-          <!-- <mat-option value="one">First option</mat-option>
-          <mat-option value="two">Second option</mat-option> -->
+          <mat-option
+            *ngFor="let contact of contacts$ | async"
+            [value]="contact.name"
+          >{{ contact.name }}</mat-option>
         </mat-select>
       </mat-form-field>
     </div>
@@ -68,19 +74,25 @@
           [(ngModel)]="addTaskService.selectedPriority"
         >
           <mat-button-toggle
-            [ngClass]="{ 'urgent-color': addTaskService.selectedPriority === 'urgent' }"
+            [ngClass]="{
+              'urgent-color': addTaskService.selectedPriority === 'urgent'
+            }"
             class="font-21 justify-align-center"
             value="urgent"
             >Urgent<img src="assets/img/prio-urgent.png"
           /></mat-button-toggle>
           <mat-button-toggle
-            [ngClass]="{ 'medium-color': addTaskService.selectedPriority === 'medium' }"
+            [ngClass]="{
+              'medium-color': addTaskService.selectedPriority === 'medium'
+            }"
             class="font-21 justify-align-center"
             value="medium"
             >Medium<img src="assets/img/prio-medium.png"
           /></mat-button-toggle>
           <mat-button-toggle
-            [ngClass]="{ 'low-color': addTaskService.selectedPriority === 'low' }"
+            [ngClass]="{
+              'low-color': addTaskService.selectedPriority === 'low'
+            }"
             class="font-21 justify-align-center"
             value="low"
             >Low<img src="assets/img/prio-low.png"
@@ -100,16 +112,26 @@
             </button>
           </ng-container>
           <ng-template #addButton>
-            <button mat-icon-button (click)="addTaskService.startAddingSubtask()">
+            <button
+              mat-icon-button
+              (click)="addTaskService.startAddingSubtask()"
+            >
               <mat-icon>add</mat-icon>
             </button>
           </ng-template>
         </div>
-      </mat-form-field>      
+      </mat-form-field>
       <div class="selectedSubtasks">
-        <mat-icon (click)="addTaskService.deleteAllSubtasks()" *ngIf="subtasks && subtasks.length > 0" class="deleteSubtasks">delete</mat-icon>
+        <mat-icon
+          (click)="addTaskService.deleteAllSubtasks()"
+          *ngIf="subtasks && subtasks.length > 0"
+          class="deleteSubtasks"
+          >delete</mat-icon
+        >
         <li *ngFor="let subtask of subtasks">
-          <mat-checkbox [(ngModel)]="addTaskService.selectedSubtasks[subtask.subtask]">
+          <mat-checkbox
+            [(ngModel)]="addTaskService.selectedSubtasks[subtask.subtask]"
+          >
             {{ subtask.subtask }}
           </mat-checkbox>
         </li>
@@ -124,7 +146,11 @@
     >
       Create Task<mat-icon>add_task</mat-icon>
     </button>
-    <button (click)="addTaskService.clearInput()" mat-stroked-button class="clear-btn font-21">
+    <button
+      (click)="addTaskService.clearInput()"
+      mat-stroked-button
+      class="clear-btn font-21"
+    >
       Clear<mat-icon>close</mat-icon>
     </button>
   </div>
