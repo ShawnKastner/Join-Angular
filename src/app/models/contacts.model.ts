@@ -21,6 +21,12 @@ export class Contact {
       '#FF8A00',
       '#E200BE',
       '#0038FF',
+      '#9327FF',
+      '#29ABE2',
+      '#FC71FF',
+      '#41DB63',
+      '#AF1616',
+      '#462F8A'
     ];
     const randomIndex = Math.floor(Math.random() * colors.length);
     return colors[randomIndex];
