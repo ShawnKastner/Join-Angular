@@ -20,6 +20,7 @@ export class ContactsComponent implements OnInit {
   contacts$!: Observable<any[]>;
   contacts: any[] = [];
   userId!: any;
+  selectedContact: any;
 
   constructor(
     private dialog: MatDialog,
@@ -67,5 +68,9 @@ export class ContactsComponent implements OnInit {
 
   getContactsByLetter(letter: string): any[] {
     return this.contacts.filter((contact) => contact.firstLetter === letter);
+  }
+
+  showContactDetails(contact: any) {
+    this.selectedContact = contact;
   }
 }

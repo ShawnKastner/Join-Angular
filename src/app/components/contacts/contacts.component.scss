@@ -6,6 +6,7 @@ mat-list {
   width: 453px;
   background-color: #ffff;
   box-shadow: 4px 0px 6px rgba(0, 0, 0, 0.08);
+  overflow-y: auto;
 }
 
 mat-list-item {
@@ -58,4 +59,62 @@ mat-list-item {
     transition: ease-in-out 125ms;
     background-color: #29abe2 !important;
   }
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+}
+
+.contact-details {
+  position: absolute;
+  top: 120px;
+
+  .contact-details-header {
+    gap: 54px;
+
+    h2 {
+      font-size: 2.9rem;
+    }
+
+    .firstLetter {
+      width: 120px;
+      height: 120px;
+      border-radius: 100%;
+      font-size: 2.9rem;
+      color: #ffff;
+    }
+  }
+
+  .contact-information-text {
+    margin-top: 21px;
+    margin-bottom: 21px;
+    display: flex;
+    gap: 59px;
+
+    .edit-contact {
+      &:hover {
+        cursor: pointer;
+        color: #29abe2;
+      }
+    }
+  }
+}
+
+.gap-22 {
+  gap: 22px;
+}
+
+.gap-15 {
+  gap: 15px;
 }
