@@ -9,6 +9,8 @@ import { NewCategoryDialogComponent } from './new-category-dialog/new-category-d
 import { Observable } from 'rxjs';
 import { AddTaskService } from 'src/app/shared/services/add-task.service';
 import { AuthService } from 'src/app/shared/services/auth.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { TaskAddedToBoardComponent } from './task-added-to-board/task-added-to-board.component';
 
 @Component({
   selector: 'app-add-task',
@@ -27,12 +29,14 @@ export class AddTaskComponent implements OnInit {
   contacts$!: Observable<any[]>;
 
   userId!: any;
+  durationInSeconds = 3;
 
   constructor(
     private firestore: Firestore,
     private dialog: MatDialog,
     public addTaskService: AddTaskService,
-    private authService: AuthService
+    private authService: AuthService,
+    private _snackBar: MatSnackBar
   ) {
     this.minDate = new Date();
   }
@@ -94,5 +98,17 @@ export class AddTaskComponent implements OnInit {
       (item) => item.name === category
     );
     return selectedCategory ? selectedCategory.name : '';
+  }
+
+  addTask() {
+    this.addTaskService.addTask();
+    this.openSnackBar();
+  }
+
+  openSnackBar() {
+    this._snackBar.openFromComponent(TaskAddedToBoardComponent, {
+      duration: this.durationInSeconds * 1000,
+      panelClass: ['blue-snackbar'],
+    });
   }
 }

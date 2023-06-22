@@ -66,10 +66,10 @@ mat-form-field {
 }
 
 .blue-left-arrow {
-    position: absolute;
-    top: 40px;
-    left: 37px;
-    cursor: pointer;
+  position: absolute;
+  top: 40px;
+  left: 37px;
+  cursor: pointer;
 }
 
 .main-btn {
@@ -160,10 +160,17 @@ h1 {
 }
 
 @keyframes slideOutRight {
- 100% {
-  transform: translateX(100vw);
- }
- 0% {
-  transform: translateX(0);
- }
+  100% {
+    transform: translateX(100vw);
+  }
+  0% {
+    transform: translateX(0);
+  }
 }
+
+.blue-snackbar {
+  --mdc-snackbar-container-color: #2a3647;
+
+}
+
+.cdk-overlay-pane { position: fixed !important; left: 50%; bottom: 0; }

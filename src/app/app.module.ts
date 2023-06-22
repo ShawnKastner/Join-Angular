@@ -21,6 +21,7 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatListModule } from '@angular/material/list';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatChipsModule } from '@angular/material/chips';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 //AngularFire
 import { AngularFireModule } from '@angular/fire/compat';
@@ -49,6 +50,8 @@ import { LogoutDialogComponent } from './components/sidenav/logout-dialog/logout
 import { NewCategoryDialogComponent } from './components/add-task/new-category-dialog/new-category-dialog.component';
 import { AddContactDialogComponent } from './components/contacts/add-contact-dialog/add-contact-dialog.component';
 import { EditContactDialogComponent } from './components/contacts/edit-contact-dialog/edit-contact-dialog.component';
+import { AddTaskDialogComponent } from './components/board/add-task-dialog/add-task-dialog.component';
+import { TaskAddedToBoardComponent } from './components/add-task/task-added-to-board/task-added-to-board.component';
 
 @NgModule({
   declarations: [
@@ -65,6 +68,8 @@ import { EditContactDialogComponent } from './components/contacts/edit-contact-d
     NewCategoryDialogComponent,
     AddContactDialogComponent,
     EditContactDialogComponent,
+    AddTaskDialogComponent,
+    TaskAddedToBoardComponent,
   ],
   imports: [
     BrowserModule,
@@ -95,6 +100,7 @@ import { EditContactDialogComponent } from './components/contacts/edit-contact-d
     MatListModule,
     MatDialogModule,
     MatChipsModule,
+    MatSnackBarModule,
   ],
   providers: [AuthService],
   bootstrap: [AppComponent],
