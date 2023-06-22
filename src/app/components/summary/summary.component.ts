@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
   selector: 'app-summary',
@@ -6,19 +7,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./summary.component.scss'],
 })
 export class SummaryComponent implements OnInit {
-  displayName!: string;
+  displayName!: any;
 
-  constructor() {}
+  constructor(public authService: AuthService) {}
 
   ngOnInit(): void {
-    this.getUserFromLocalStorage();
-  }
-
-  getUserFromLocalStorage() {
-    let user = localStorage.getItem('user');
-    if (user) {
-      let userObj = JSON.parse(user);
-      this.displayName = userObj.displayName;
-    } 
+   this.displayName = this.authService.getUserData()?.displayName;
   }
 }
