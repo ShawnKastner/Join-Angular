@@ -5,12 +5,12 @@ export class Contact {
   firstLetter!: string;
   color: string;
 
-  constructor(name: string, email: string, phone: string, firstLetter: string) {
+  constructor(name: string, email: string, phone: string, firstLetter: string, color: string) {
     this.name = name;
     this.email = email;
     this.phone = phone;
     this.firstLetter = firstLetter.toUpperCase();
-    this.color = this.getRandomColor();
+    this.color = color;
   }
 
   private getRandomColor(): string {

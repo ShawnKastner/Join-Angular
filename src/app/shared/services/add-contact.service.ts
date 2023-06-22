@@ -1,7 +1,15 @@
 import { Injectable } from '@angular/core';
-import { Firestore, addDoc, collection } from '@angular/fire/firestore';
+import {
+  Firestore,
+  addDoc,
+  collection,
+  doc,
+  setDoc,
+  updateDoc,
+} from '@angular/fire/firestore';
 import { Contact } from 'src/app/models/contacts.model';
 import { AuthService } from './auth.service';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 @Injectable({
   providedIn: 'root',
@@ -10,9 +18,10 @@ export class AddContactService {
   name!: string;
   email!: string;
   phone!: string;
+  color!: string;
   userId!: any;
 
-  constructor(private firestore: Firestore, private authService: AuthService) {
+  constructor(private firestore: Firestore, private authService: AuthService, private afs: AngularFirestore) {
     this.getUid();
   }
 
@@ -30,15 +39,18 @@ export class AddContactService {
     const nameParts = this.name.split(' ');
     const firstNameLetter = nameParts[0].charAt(0);
     const lastNameLetter = nameParts[1].charAt(0);
+    const contactId = this.afs.createId();
+    const contactDocRef = doc(contactCollection, contactId);
 
     const contact = new Contact(
       this.name,
       this.email,
       this.phone,
-      `${firstNameLetter}${lastNameLetter}`
+      `${firstNameLetter}${lastNameLetter}`,
+      this.color
     );
 
-    addDoc(contactCollection, { ...contact })
+    setDoc(contactDocRef, { ...contact, contactId: contactId })
       .then(() => {
         console.log('Contact added successfully');
         this.clearInput();
@@ -53,4 +65,22 @@ export class AddContactService {
     this.email = '';
     this.phone = '';
   }
+
+  editContact(contactId: string, contact: Contact): Promise<void> {
+    const contactDocRef = doc(
+      this.firestore,
+      'users',
+      this.userId,
+      'contacts',
+      contactId
+    );
+  
+    return updateDoc(contactDocRef, {
+      name: contact.name,
+      email: contact.email,
+      phone: contact.phone,
+      firstLetter: contact.firstLetter
+    });
+  }
+  
 }

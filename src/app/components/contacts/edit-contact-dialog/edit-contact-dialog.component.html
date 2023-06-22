@@ -1,0 +1,39 @@
+<div class="add-contact-container">
+    <div class="headline-with-subtitle gap-18 flex-column">
+      <img class="mb-12" src="assets/img/logo-sidenav.png" />
+      <h1>Edit contact</h1>
+      <div>
+        <div class="blue-line"></div>
+      </div>
+    </div>
+    <div class="form-field">
+      <mat-icon (click)="closeDialog()" class="close-btn">close</mat-icon>
+      <div><img src="assets/img/add-contact.png" /></div>
+      <div class="flex-column">
+        <mat-form-field>
+          <mat-label>Name</mat-label>
+          <input [(ngModel)]="contact.name" matInput placeholder="Enter your name" />
+          <mat-icon class="input-icon">person</mat-icon>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Email</mat-label>
+          <input [(ngModel)]="contact.email" matInput placeholder="Enter your email" />
+          <mat-icon class="input-icon">mail</mat-icon>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Phone</mat-label>
+          <input [(ngModel)]="contact.phone" matInput placeholder="Enter your phone number" />
+          <mat-icon class="input-icon">call</mat-icon>
+        </mat-form-field>
+        <div class="btn-container">
+          <button (click)="deleteContact()" class="cancel-btn font-21 justify-align-center">
+            Delete
+          </button>
+          <button (click)="editContact()" class="main-btn create-btn font-21 font-weight-700 justify-align-center">
+            Save
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  

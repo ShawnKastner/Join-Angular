@@ -48,6 +48,7 @@ import { ContactsComponent } from './components/contacts/contacts.component';
 import { LogoutDialogComponent } from './components/sidenav/logout-dialog/logout-dialog.component';
 import { NewCategoryDialogComponent } from './components/add-task/new-category-dialog/new-category-dialog.component';
 import { AddContactDialogComponent } from './components/contacts/add-contact-dialog/add-contact-dialog.component';
+import { EditContactDialogComponent } from './components/contacts/edit-contact-dialog/edit-contact-dialog.component';
 
 @NgModule({
   declarations: [
@@ -63,6 +64,7 @@ import { AddContactDialogComponent } from './components/contacts/add-contact-dia
     LogoutDialogComponent,
     NewCategoryDialogComponent,
     AddContactDialogComponent,
+    EditContactDialogComponent,
   ],
   imports: [
     BrowserModule,

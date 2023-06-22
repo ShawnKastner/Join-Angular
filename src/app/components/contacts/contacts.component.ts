@@ -4,12 +4,8 @@ import { AddContactDialogComponent } from './add-contact-dialog/add-contact-dial
 import { Observable } from 'rxjs';
 import { Firestore, collection, collectionData } from '@angular/fire/firestore';
 import { AuthService } from 'src/app/shared/services/auth.service';
-
-export interface Section {
-  name: string;
-  email: string;
-  firstLetter: string;
-}
+import { EditContactDialogComponent } from './edit-contact-dialog/edit-contact-dialog.component';
+import { Contact } from 'src/app/models/contacts.model';
 
 @Component({
   selector: 'app-contacts',
@@ -72,5 +68,23 @@ export class ContactsComponent implements OnInit {
 
   showContactDetails(contact: any) {
     this.selectedContact = contact;
+  }
+
+  openEditContact() {
+    if (this.selectedContact) {
+      const dialogRef = this.dialog.open(EditContactDialogComponent, {
+        width: '1212px',
+        height: '594px',
+        data: { contact: this.selectedContact },
+      });
+      dialogRef
+        .afterClosed()
+        .subscribe((updatedContact: Contact | undefined) => {
+          if (updatedContact) {
+            console.log('Updated contact:', updatedContact);
+            this.selectedContact = updatedContact;
+          }
+        });
+    }
   }
 }
