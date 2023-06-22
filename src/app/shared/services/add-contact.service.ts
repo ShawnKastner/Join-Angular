@@ -3,6 +3,7 @@ import {
   Firestore,
   addDoc,
   collection,
+  collectionData,
   doc,
   setDoc,
   updateDoc,
@@ -10,6 +11,7 @@ import {
 import { Contact } from 'src/app/models/contacts.model';
 import { AuthService } from './auth.service';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -20,6 +22,7 @@ export class AddContactService {
   phone!: string;
   color!: string;
   userId!: any;
+  contacts$!: Observable<any[]>;
 
   constructor(private firestore: Firestore, private authService: AuthService, private afs: AngularFirestore) {
     this.getUid();
@@ -83,4 +86,11 @@ export class AddContactService {
     });
   }
   
+  getContactsFromFirestore() {
+    this.contacts$ = collectionData(
+      collection(this.firestore, 'users', this.userId, 'contacts')
+    );
+    this.contacts$.subscribe(() => {});
+  }
+
 }

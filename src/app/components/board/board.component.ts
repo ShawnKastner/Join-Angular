@@ -12,8 +12,8 @@ export class BoardComponent {
 
   openAddTaskDialog() {
     this.dialog.open(AddTaskDialogComponent, {
-      width: '1212px',
-      height: '594px',
+      width: '1116px',
+      height: '914px',
     });
   }
 }

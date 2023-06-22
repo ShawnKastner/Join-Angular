@@ -3,11 +3,13 @@ import {
   Firestore,
   addDoc,
   collection,
+  collectionData,
   deleteDoc,
   getDocs,
 } from '@angular/fire/firestore';
 import { Task } from 'src/app/models/tasks.model';
 import { AuthService } from './auth.service';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -23,6 +25,11 @@ export class AddTaskService {
   selectedSubtasks: { [key: string]: boolean } = {};
   isAddingSubtask = false;
   userId!: any;
+  categories$!: Observable<any[]>;
+  categories: any[] = [];
+
+  subtasks$!: Observable<any[]>;
+  subtasks: any[] = [];
 
   constructor(private firestore: Firestore, private authService: AuthService) {
     this.getUid();
@@ -116,5 +123,39 @@ export class AddTaskService {
       await deleteDoc(doc.ref);
       console.log('Subtask deleted successfully');
     });
+  }
+
+  getSubtasksFromFirestore() {
+    this.subtasks$ = collectionData(
+      collection(this.firestore, 'users', this.userId, 'subtasks')
+    );
+    this.subtasks$.subscribe((data) => {
+      this.subtasks = data;
+      console.log(this.subtasks);
+    });
+  }
+
+  getCategoriesFromFirestore() {
+    this.categories$ = collectionData(
+      collection(this.firestore, 'users', this.userId, 'categories')
+    );
+    this.categories$.subscribe((data) => {
+      this.categories = data;
+      console.log(this.categories);
+    });
+  }
+
+  getCategoryColor(category: string): string {
+    const selectedCategory = this.categories.find(
+      (item) => item.name === category
+    );
+    return selectedCategory ? selectedCategory.color : '';
+  }
+
+  getCategoryName(category: string): string {
+    const selectedCategory = this.categories.find(
+      (item) => item.name === category
+    );
+    return selectedCategory ? selectedCategory.name : '';
   }
 }

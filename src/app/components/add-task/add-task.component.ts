@@ -11,6 +11,7 @@ import { AddTaskService } from 'src/app/shared/services/add-task.service';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { TaskAddedToBoardComponent } from './task-added-to-board/task-added-to-board.component';
+import { AddContactService } from 'src/app/shared/services/add-contact.service';
 
 @Component({
   selector: 'app-add-task',
@@ -20,23 +21,15 @@ import { TaskAddedToBoardComponent } from './task-added-to-board/task-added-to-b
 export class AddTaskComponent implements OnInit {
   minDate!: Date;
 
-  categories$!: Observable<any[]>;
-  categories: any[] = [];
-
-  subtasks$!: Observable<any[]>;
-  subtasks: any[] = [];
-
-  contacts$!: Observable<any[]>;
-
   userId!: any;
   durationInSeconds = 3;
 
   constructor(
-    private firestore: Firestore,
     private dialog: MatDialog,
     public addTaskService: AddTaskService,
     private authService: AuthService,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    public addContactService: AddContactService
   ) {
     this.minDate = new Date();
   }
@@ -47,36 +40,9 @@ export class AddTaskComponent implements OnInit {
 
   ngOnInit(): void {
     this.getUid().then(() => {
-      this.getCategoriesFromFirestore();
-      this.getSubtasksFromFirestore();
-      this.getContactsFromFirestore();
-    });
-  }
-
-  getContactsFromFirestore() {
-    this.contacts$ = collectionData(
-      collection(this.firestore, 'users', this.userId, 'contacts')
-    );
-    this.contacts$.subscribe(() => {});
-  }
-
-  getSubtasksFromFirestore() {
-    this.subtasks$ = collectionData(
-      collection(this.firestore, 'users', this.userId, 'subtasks')
-    );
-    this.subtasks$.subscribe((data) => {
-      this.subtasks = data;
-      console.log(this.subtasks);
-    });
-  }
-
-  getCategoriesFromFirestore() {
-    this.categories$ = collectionData(
-      collection(this.firestore, 'users', this.userId, 'categories')
-    );
-    this.categories$.subscribe((data) => {
-      this.categories = data;
-      console.log(this.categories);
+      this.addTaskService.getCategoriesFromFirestore();
+      this.addTaskService.getSubtasksFromFirestore();
+      this.addContactService.getContactsFromFirestore();
     });
   }
 
@@ -84,20 +50,6 @@ export class AddTaskComponent implements OnInit {
     this.dialog.open(NewCategoryDialogComponent, {
       width: '250px',
     });
-  }
-
-  getCategoryColor(category: string): string {
-    const selectedCategory = this.categories.find(
-      (item) => item.name === category
-    );
-    return selectedCategory ? selectedCategory.color : '';
-  }
-
-  getCategoryName(category: string): string {
-    const selectedCategory = this.categories.find(
-      (item) => item.name === category
-    );
-    return selectedCategory ? selectedCategory.name : '';
   }
 
   addTask() {

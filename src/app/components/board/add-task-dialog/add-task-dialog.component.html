@@ -1,1 +1,160 @@
-<p>add-task-dialog works!</p>
+<div class="add-task-container">
+  <h1>Add Task</h1>
+
+  <div class="add-task">
+    <div class="flex-column">
+      <mat-form-field>
+        <mat-label>Enter a title</mat-label>
+        <input [(ngModel)]="addTaskService.title" required matInput />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Enter a Description</mat-label>
+        <textarea
+          [(ngModel)]="addTaskService.description"
+          required
+          matInput
+        ></textarea>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Select task category</mat-label>
+        <mat-select [(ngModel)]="addTaskService.category" required>
+          <mat-select-trigger class="align-center">
+            <mat-icon
+              class="color-circle"
+              [style.color]="
+                addTaskService.getCategoryColor(addTaskService.category)
+              "
+              >fiber_manual_record</mat-icon
+            >
+            {{ addTaskService.getCategoryName(addTaskService.category) }}
+          </mat-select-trigger>
+          <mat-option (click)="openAddCategoryDialog()"
+            >New Category</mat-option
+          >
+          <mat-option
+            *ngFor="let category of addTaskService.categories$ | async"
+            [value]="category.name"
+          >
+            <mat-icon [style.color]="category.color"
+              >fiber_manual_record</mat-icon
+            >{{ category.name }}</mat-option
+          >
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Select contacts to assign</mat-label>
+        <mat-select [(ngModel)]="addTaskService.selectedContact">
+          <mat-option
+            *ngFor="let contact of addContactService.contacts$ | async"
+            [value]="contact.name"
+            >{{ contact.name }}</mat-option
+          >
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="middle-line"></div>
+    <div class="right-side">
+      <mat-form-field>
+        <mat-label>Due date</mat-label>
+        <input
+          [(ngModel)]="addTaskService.date"
+          [min]="minDate"
+          matInput
+          [matDatepicker]="picker"
+        />
+        <mat-hint>DD/MM/YYYY</mat-hint>
+        <mat-datepicker-toggle
+          matIconSuffix
+          [for]="picker"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+      <div class="prio-btn-container flex-column">
+        <span class="font-21 mb-12">Prio</span>
+        <mat-button-toggle-group
+          class="gap-10 justify-align-center"
+          name="prio"
+          [(ngModel)]="addTaskService.selectedPriority"
+        >
+          <mat-button-toggle
+            [ngClass]="{
+              'urgent-color': addTaskService.selectedPriority === 'urgent'
+            }"
+            class="font-21 justify-align-center"
+            value="urgent"
+            >Urgent<img src="assets/img/prio-urgent.png"
+          /></mat-button-toggle>
+          <mat-button-toggle
+            [ngClass]="{
+              'medium-color': addTaskService.selectedPriority === 'medium'
+            }"
+            class="font-21 justify-align-center"
+            value="medium"
+            >Medium<img src="assets/img/prio-medium.png"
+          /></mat-button-toggle>
+          <mat-button-toggle
+            [ngClass]="{
+              'low-color': addTaskService.selectedPriority === 'low'
+            }"
+            class="font-21 justify-align-center"
+            value="low"
+            >Low<img src="assets/img/prio-low.png"
+          /></mat-button-toggle>
+        </mat-button-toggle-group>
+      </div>
+      <mat-form-field>
+        <mat-label>Add new subtask</mat-label>
+        <input [(ngModel)]="addTaskService.subtask" matInput type="text" />
+        <div class="confirm-subtask-container">
+          <ng-container *ngIf="addTaskService.isAddingSubtask; else addButton">
+            <button mat-icon-button (click)="addTaskService.confirmSubtask()">
+              <mat-icon>done</mat-icon>
+            </button>
+            <button mat-icon-button (click)="addTaskService.cancelSubtask()">
+              <mat-icon>close</mat-icon>
+            </button>
+          </ng-container>
+          <ng-template #addButton>
+            <button
+              mat-icon-button
+              (click)="addTaskService.startAddingSubtask()"
+            >
+              <mat-icon>add</mat-icon>
+            </button>
+          </ng-template>
+        </div>
+      </mat-form-field>
+      <div class="selectedSubtasks">
+        <mat-icon
+          (click)="addTaskService.deleteAllSubtasks()"
+          *ngIf="addTaskService.subtasks && addTaskService.subtasks.length > 0"
+          class="deleteSubtasks"
+          >delete</mat-icon
+        >
+        <li *ngFor="let subtask of addTaskService.subtasks">
+          <mat-checkbox
+            [(ngModel)]="addTaskService.selectedSubtasks[subtask.subtask]"
+          >
+            {{ subtask.subtask }}
+          </mat-checkbox>
+        </li>
+      </div>
+    </div>
+  </div>
+  <div class="btn-container">
+    <button
+      (click)="addTask()"
+      mat-raised-button
+      class="main-btn add-task-btn font-21"
+    >
+      Create Task<mat-icon>add_task</mat-icon>
+    </button>
+    <button
+      (click)="addTaskService.clearInput()"
+      mat-stroked-button
+      class="clear-btn font-21"
+    >
+      Clear<mat-icon>close</mat-icon>
+    </button>
+  </div>
+</div>

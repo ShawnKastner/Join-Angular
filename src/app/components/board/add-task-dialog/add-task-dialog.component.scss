@@ -1,0 +1,142 @@
+.add-task-container {
+  padding: 60px;
+}
+
+.add-task {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 74px;
+}
+
+mat-form-field {
+  margin-bottom: 34px;
+}
+
+.prio-btn-container {
+  display: flex;
+  margin-bottom: 34px;
+
+  .mat-button-toggle {
+    width: 136px;
+    height: 51px;
+    border-radius: 10px;
+    border: unset;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  mat-button-toggle-group {
+    border: unset;
+    height: 51px;
+  }
+}
+
+textarea {
+  resize: none;
+}
+
+.gap-10 {
+  display: flex;
+  gap: 10px;
+}
+
+.urgent-color {
+  background-color: #ff3d00;
+  color: #ffff;
+}
+
+.medium-color {
+  background-color: #ffa800;
+  color: #ffff;
+}
+
+.low-color {
+  background-color: #7ae229;
+  color: #ffff;
+}
+
+.middle-line {
+  height: 551px;
+  width: 0px;
+  border: 1px solid #d1d1d1;
+}
+
+.btn-container {
+  display: flex;
+  justify-content: flex-end;
+  gap: 25px;
+
+  .add-task-btn {
+    width: 187px;
+    height: 55px;
+    border-radius: 10px;
+    transition: ease-in-out 125ms;
+
+    &:hover {
+      transition: ease-in-out 125ms;
+      background-color: #29abe2 !important;
+    }
+  }
+
+  .clear-btn {
+    border: 1px solid #2a3647;
+    border-radius: 10px;
+    width: 136px;
+    height: 55px;
+    transition: ease-in-out 125ms;
+
+    &:hover {
+      transition: ease-in-out 125ms;
+      border: 1px solid #29abe2;
+    }
+  }
+}
+
+.selectedSubtasks {
+  height: 175px;
+  overflow-y: auto;
+  position: relative;
+
+  li {
+    list-style: none;
+  }
+
+  .deleteSubtasks {
+    position: absolute;
+    right: 0;
+    cursor: pointer;
+  }
+}
+
+.add-subtask {
+  ng-container {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: flex;
+  }
+}
+
+.confirm-subtask-container {
+  position: absolute;
+  top: 3px;
+  right: 0;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+::ng-deep .mat-mdc-dialog-container .mdc-dialog__surface {
+  border-radius: 30px;
+}

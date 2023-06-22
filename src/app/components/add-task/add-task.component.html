@@ -21,16 +21,16 @@
           <mat-select-trigger class="align-center">
             <mat-icon
               class="color-circle"
-              [style.color]="getCategoryColor(addTaskService.category)"
+              [style.color]="addTaskService.getCategoryColor(addTaskService.category)"
               >fiber_manual_record</mat-icon
             >
-            {{ getCategoryName(addTaskService.category) }}
+            {{ addTaskService.getCategoryName(addTaskService.category) }}
           </mat-select-trigger>
           <mat-option (click)="openAddCategoryDialog()"
             >New Category</mat-option
           >
           <mat-option
-            *ngFor="let category of categories$ | async"
+            *ngFor="let category of addTaskService.categories$ | async"
             [value]="category.name"
           >
             <mat-icon [style.color]="category.color"
@@ -43,7 +43,7 @@
         <mat-label>Select contacts to assign</mat-label>
         <mat-select [(ngModel)]="addTaskService.selectedContact">
           <mat-option
-            *ngFor="let contact of contacts$ | async"
+            *ngFor="let contact of addContactService.contacts$ | async"
             [value]="contact.name"
           >{{ contact.name }}</mat-option>
         </mat-select>
@@ -124,11 +124,11 @@
       <div class="selectedSubtasks">
         <mat-icon
           (click)="addTaskService.deleteAllSubtasks()"
-          *ngIf="subtasks && subtasks.length > 0"
+          *ngIf="addTaskService.subtasks && addTaskService.subtasks.length > 0"
           class="deleteSubtasks"
           >delete</mat-icon
         >
-        <li *ngFor="let subtask of subtasks">
+        <li *ngFor="let subtask of addTaskService.subtasks">
           <mat-checkbox
             [(ngModel)]="addTaskService.selectedSubtasks[subtask.subtask]"
           >
