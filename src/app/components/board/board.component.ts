@@ -4,7 +4,7 @@ import { AddTaskDialogComponent } from './add-task-dialog/add-task-dialog.compon
 import { Observable } from 'rxjs';
 import { Firestore, collection, collectionData } from '@angular/fire/firestore';
 import { AuthService } from 'src/app/shared/services/auth.service';
-import { AddTaskService } from 'src/app/shared/services/add-task.service';
+import { TaskService } from 'src/app/shared/services/task.service';
 import { TaskDetailsDialogComponent } from './task-details-dialog/task-details-dialog.component';
 
 @Component({
@@ -21,7 +21,7 @@ export class BoardComponent {
     private dialog: MatDialog,
     private firestore: Firestore,
     private authService: AuthService,
-    public addTaskService: AddTaskService
+    public taskService: TaskService
   ) {}
 
   ngOnInit() {

@@ -2,7 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { Timestamp } from '@angular/fire/firestore';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Task } from 'src/app/models/tasks.model';
-import { AddContactService } from 'src/app/shared/services/add-contact.service';
+import { ContactService } from 'src/app/shared/services/contact.service';
 
 @Component({
   selector: 'app-task-details-dialog',
@@ -24,12 +24,12 @@ export class TaskDetailsDialogComponent implements OnInit {
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     private dialogRef: MatDialogRef<TaskDetailsDialogComponent>,
-    public addContactService: AddContactService
+    public contactService: ContactService
   ) {}
 
   ngOnInit(): void {
-    this.addContactService.getUid().then(() => {
-      this.addContactService.getContactsFromFirestore();
+    this.contactService.getUid().then(() => {
+      this.contactService.getContactsFromFirestore();
     });
     this.formattedDate();
   }

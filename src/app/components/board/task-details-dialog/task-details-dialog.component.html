@@ -22,7 +22,7 @@
   <div class="assigned-to flex-column">
     <span class="font-weight-700">Assigned To:</span>
     <div class="contact-container">
-      <div [style.background-color]="addContactService.getContactColor(task.contacts)"class="first-letters font-16 justify-align-center">
+      <div [style.background-color]="contactService.getContactColor(task.contacts)"class="first-letters font-16 justify-align-center">
         {{ getContactInitials(task.contacts) }}
       </div>
       <span>{{ task.contacts }}</span>

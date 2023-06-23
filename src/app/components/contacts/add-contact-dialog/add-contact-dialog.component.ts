@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
-import { AddContactService } from 'src/app/shared/services/add-contact.service';
+import { ContactService } from 'src/app/shared/services/contact.service';
 
 @Component({
   selector: 'app-add-contact-dialog',
@@ -10,7 +10,7 @@ import { AddContactService } from 'src/app/shared/services/add-contact.service';
 export class AddContactDialogComponent {
   constructor(
     private dialogRef: MatDialogRef<AddContactDialogComponent>,
-    public contactService: AddContactService
+    public contactService: ContactService
   ) {}
 
   closeDialog() {

@@ -14,7 +14,7 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
-export class AddTaskService {
+export class TaskService {
   title!: string;
   description!: string;
   category!: string;

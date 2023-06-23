@@ -6,7 +6,7 @@ import { Firestore, collection, collectionData } from '@angular/fire/firestore';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { EditContactDialogComponent } from './edit-contact-dialog/edit-contact-dialog.component';
 import { Contact } from 'src/app/models/contacts.model';
-import { AddContactService } from 'src/app/shared/services/add-contact.service';
+import { ContactService } from 'src/app/shared/services/contact.service';
 
 @Component({
   selector: 'app-contacts',
@@ -18,7 +18,7 @@ export class ContactsComponent implements OnInit {
 
   constructor(
     private dialog: MatDialog,
-    public contactService: AddContactService
+    public contactService: ContactService
   ) {}
 
   ngOnInit() {

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { AddContactService } from 'src/app/shared/services/add-contact.service';
-import { AddTaskService } from 'src/app/shared/services/add-task.service';
+import { ContactService } from 'src/app/shared/services/contact.service';
+import { TaskService } from 'src/app/shared/services/task.service';
 import { NewCategoryDialogComponent } from '../../add-task/new-category-dialog/new-category-dialog.component';
 import { AuthService } from 'src/app/shared/services/auth.service';
 
@@ -15,8 +15,8 @@ export class AddTaskDialogComponent {
   userId!: any;
 
   constructor(
-    public addTaskService: AddTaskService,
-    public addContactService: AddContactService,
+    public taskService: TaskService,
+    public contactService: ContactService,
     private authService: AuthService,
     private dialog: MatDialog,
     private dialogRef: MatDialogRef<AddTaskDialogComponent>
@@ -30,9 +30,9 @@ export class AddTaskDialogComponent {
 
   ngOnInit(): void {
     this.getUid().then(() => {
-      this.addTaskService.getCategoriesFromFirestore();
-      this.addTaskService.getSubtasksFromFirestore();
-      this.addContactService.getContactsFromFirestore();
+      this.taskService.getCategoriesFromFirestore();
+      this.taskService.getSubtasksFromFirestore();
+      this.contactService.getContactsFromFirestore();
     });
   }
 
@@ -43,7 +43,7 @@ export class AddTaskDialogComponent {
   }
 
   addTask() {
-    this.addTaskService.addTask();
+    this.taskService.addTask();
     this.dialogRef.close();
   }
 }

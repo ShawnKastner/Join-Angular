@@ -7,11 +7,11 @@ import {
 import { MatDialog } from '@angular/material/dialog';
 import { NewCategoryDialogComponent } from './new-category-dialog/new-category-dialog.component';
 import { Observable } from 'rxjs';
-import { AddTaskService } from 'src/app/shared/services/add-task.service';
+import { TaskService } from 'src/app/shared/services/task.service';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { TaskAddedToBoardComponent } from './task-added-to-board/task-added-to-board.component';
-import { AddContactService } from 'src/app/shared/services/add-contact.service';
+import { ContactService } from 'src/app/shared/services/contact.service';
 
 @Component({
   selector: 'app-add-task',
@@ -26,10 +26,10 @@ export class AddTaskComponent implements OnInit {
 
   constructor(
     private dialog: MatDialog,
-    public addTaskService: AddTaskService,
+    public taskService: TaskService,
     private authService: AuthService,
     private _snackBar: MatSnackBar,
-    public addContactService: AddContactService
+    public contactService: ContactService
   ) {
     this.minDate = new Date();
   }
@@ -40,9 +40,9 @@ export class AddTaskComponent implements OnInit {
 
   ngOnInit(): void {
     this.getUid().then(() => {
-      this.addTaskService.getCategoriesFromFirestore();
-      this.addTaskService.getSubtasksFromFirestore();
-      this.addContactService.getContactsFromFirestore();
+      this.taskService.getCategoriesFromFirestore();
+      this.taskService.getSubtasksFromFirestore();
+      this.contactService.getContactsFromFirestore();
     });
   }
 
@@ -53,7 +53,7 @@ export class AddTaskComponent implements OnInit {
   }
 
   addTask() {
-    this.addTaskService.addTask();
+    this.taskService.addTask();
     this.openSnackBar();
   }
 

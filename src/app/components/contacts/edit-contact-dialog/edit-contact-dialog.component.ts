@@ -1,7 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Contact } from 'src/app/models/contacts.model';
-import { AddContactService } from 'src/app/shared/services/add-contact.service';
+import { ContactService } from 'src/app/shared/services/contact.service';
 
 @Component({
   selector: 'app-edit-contact-dialog',
@@ -20,7 +20,7 @@ export class EditContactDialogComponent {
   constructor(
     private dialogRef: MatDialogRef<EditContactDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    public contactService: AddContactService
+    public contactService: ContactService
   ) {}
 
   closeDialog() {

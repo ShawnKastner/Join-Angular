@@ -5,34 +5,34 @@
     <div class="flex-column">
       <mat-form-field>
         <mat-label>Enter a title</mat-label>
-        <input [(ngModel)]="addTaskService.title" required matInput />
+        <input [(ngModel)]="taskService.title" required matInput />
       </mat-form-field>
       <mat-form-field>
         <mat-label>Enter a Description</mat-label>
         <textarea
-          [(ngModel)]="addTaskService.description"
+          [(ngModel)]="taskService.description"
           required
           matInput
         ></textarea>
       </mat-form-field>
       <mat-form-field>
         <mat-label>Select task category</mat-label>
-        <mat-select [(ngModel)]="addTaskService.category" required>
+        <mat-select [(ngModel)]="taskService.category" required>
           <mat-select-trigger class="align-center">
             <mat-icon
               class="color-circle"
               [style.color]="
-                addTaskService.getCategoryColor(addTaskService.category)
+                taskService.getCategoryColor(taskService.category)
               "
               >fiber_manual_record</mat-icon
             >
-            {{ addTaskService.getCategoryName(addTaskService.category) }}
+            {{ taskService.getCategoryName(taskService.category) }}
           </mat-select-trigger>
           <mat-option (click)="openAddCategoryDialog()"
             >New Category</mat-option
           >
           <mat-option
-            *ngFor="let category of addTaskService.categories$ | async"
+            *ngFor="let category of taskService.categories$ | async"
             [value]="category.name"
           >
             <mat-icon [style.color]="category.color"
@@ -43,9 +43,9 @@
       </mat-form-field>
       <mat-form-field>
         <mat-label>Select contacts to assign</mat-label>
-        <mat-select [(ngModel)]="addTaskService.selectedContact">
+        <mat-select [(ngModel)]="taskService.selectedContact">
           <mat-option
-            *ngFor="let contact of addContactService.contacts$ | async"
+            *ngFor="let contact of contactService.contacts$ | async"
             [value]="contact.name"
             >{{ contact.name }}</mat-option
           >
@@ -57,7 +57,7 @@
       <mat-form-field>
         <mat-label>Due date</mat-label>
         <input
-          [(ngModel)]="addTaskService.date"
+          [(ngModel)]="taskService.date"
           [min]="minDate"
           matInput
           [matDatepicker]="picker"
@@ -74,11 +74,11 @@
         <mat-button-toggle-group
           class="gap-10 justify-align-center"
           name="prio"
-          [(ngModel)]="addTaskService.selectedPriority"
+          [(ngModel)]="taskService.selectedPriority"
         >
           <mat-button-toggle
             [ngClass]="{
-              'urgent-color': addTaskService.selectedPriority === 'urgent'
+              'urgent-color': taskService.selectedPriority === 'urgent'
             }"
             class="font-21 justify-align-center"
             value="urgent"
@@ -86,7 +86,7 @@
           /></mat-button-toggle>
           <mat-button-toggle
             [ngClass]="{
-              'medium-color': addTaskService.selectedPriority === 'medium'
+              'medium-color': taskService.selectedPriority === 'medium'
             }"
             class="font-21 justify-align-center"
             value="medium"
@@ -94,7 +94,7 @@
           /></mat-button-toggle>
           <mat-button-toggle
             [ngClass]="{
-              'low-color': addTaskService.selectedPriority === 'low'
+              'low-color': taskService.selectedPriority === 'low'
             }"
             class="font-21 justify-align-center"
             value="low"
@@ -104,20 +104,20 @@
       </div>
       <mat-form-field>
         <mat-label>Add new subtask</mat-label>
-        <input [(ngModel)]="addTaskService.subtask" matInput type="text" />
+        <input [(ngModel)]="taskService.subtask" matInput type="text" />
         <div class="confirm-subtask-container">
-          <ng-container *ngIf="addTaskService.isAddingSubtask; else addButton">
-            <button mat-icon-button (click)="addTaskService.confirmSubtask()">
+          <ng-container *ngIf="taskService.isAddingSubtask; else addButton">
+            <button mat-icon-button (click)="taskService.confirmSubtask()">
               <mat-icon>done</mat-icon>
             </button>
-            <button mat-icon-button (click)="addTaskService.cancelSubtask()">
+            <button mat-icon-button (click)="taskService.cancelSubtask()">
               <mat-icon>close</mat-icon>
             </button>
           </ng-container>
           <ng-template #addButton>
             <button
               mat-icon-button
-              (click)="addTaskService.startAddingSubtask()"
+              (click)="taskService.startAddingSubtask()"
             >
               <mat-icon>add</mat-icon>
             </button>
@@ -126,14 +126,14 @@
       </mat-form-field>
       <div class="selectedSubtasks">
         <mat-icon
-          (click)="addTaskService.deleteAllSubtasks()"
-          *ngIf="addTaskService.subtasks && addTaskService.subtasks.length > 0"
+          (click)="taskService.deleteAllSubtasks()"
+          *ngIf="taskService.subtasks && taskService.subtasks.length > 0"
           class="deleteSubtasks"
           >delete</mat-icon
         >
-        <li *ngFor="let subtask of addTaskService.subtasks">
+        <li *ngFor="let subtask of taskService.subtasks">
           <mat-checkbox
-            [(ngModel)]="addTaskService.selectedSubtasks[subtask.subtask]"
+            [(ngModel)]="taskService.selectedSubtasks[subtask.subtask]"
           >
             {{ subtask.subtask }}
           </mat-checkbox>
@@ -150,7 +150,7 @@
       Create Task<mat-icon>add_task</mat-icon>
     </button>
     <button
-      (click)="addTaskService.clearInput()"
+      (click)="taskService.clearInput()"
       mat-stroked-button
       class="clear-btn font-21"
     >

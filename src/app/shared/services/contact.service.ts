@@ -16,7 +16,7 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
-export class AddContactService {
+export class ContactService {
   name!: string;
   email!: string;
   phone!: string;
