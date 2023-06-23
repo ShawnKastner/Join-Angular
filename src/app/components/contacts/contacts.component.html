@@ -1,12 +1,12 @@
 <mat-list>
   <ng-container
-    *ngFor="let letter of getAlphabetLettersWithContacts(); let i = index"
+    *ngFor="let letter of contactService.getAlphabetLettersWithContacts(); let i = index"
   >
     <div class="pr-48 pl-48">
       <div mat-subheader class="font-21">{{ letter.charAt(0) }}</div>
       <mat-divider></mat-divider>
       <mat-list-item
-        *ngFor="let contact of getContactsByLetter(letter)"
+        *ngFor="let contact of contactService.getContactsByLetter(letter)"
         (click)="showContactDetails(contact)"
       >
         <div

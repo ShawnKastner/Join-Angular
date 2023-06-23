@@ -6,6 +6,7 @@ import { Firestore, collection, collectionData } from '@angular/fire/firestore';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { EditContactDialogComponent } from './edit-contact-dialog/edit-contact-dialog.component';
 import { Contact } from 'src/app/models/contacts.model';
+import { AddContactService } from 'src/app/shared/services/add-contact.service';
 
 @Component({
   selector: 'app-contacts',
@@ -13,25 +14,17 @@ import { Contact } from 'src/app/models/contacts.model';
   styleUrls: ['./contacts.component.scss'],
 })
 export class ContactsComponent implements OnInit {
-  contacts$!: Observable<any[]>;
-  contacts: any[] = [];
-  userId!: any;
   selectedContact: any;
 
   constructor(
     private dialog: MatDialog,
-    private firestore: Firestore,
-    private authService: AuthService
+    public contactService: AddContactService
   ) {}
 
   ngOnInit() {
-    this.getUid().then(() => {
-      this.getContactsFromFirestore();
+    this.contactService.getUid().then(() => {
+      this.contactService.getContactsFromFirestore();
     });
-  }
-
-  async getUid() {
-    this.userId = await this.authService.getCurrentUserUid();
   }
 
   openAddContactDialog() {
@@ -40,30 +33,6 @@ export class ContactsComponent implements OnInit {
       height: '594px',
       panelClass: 'slide-in-dialog',
     });
-  }
-
-  getContactsFromFirestore() {
-    this.contacts$ = collectionData(
-      collection(this.firestore, 'users', this.userId, 'contacts')
-    );
-    this.contacts$.subscribe((data) => {
-      this.contacts = data;
-    });
-  }
-
-  getAlphabetLettersWithContacts(): string[] {
-    const letters: string[] = [];
-    this.contacts.forEach((contact) => {
-      const firstLetter = contact.firstLetter.toUpperCase();
-      if (!letters.includes(firstLetter)) {
-        letters.push(firstLetter);
-      }
-    });
-    return letters;
-  }
-
-  getContactsByLetter(letter: string): any[] {
-    return this.contacts.filter((contact) => contact.firstLetter === letter);
   }
 
   showContactDetails(contact: any) {

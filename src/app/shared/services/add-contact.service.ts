@@ -31,7 +31,7 @@ export class AddContactService {
     private afs: AngularFirestore
   ) {
     this.getUid();
-    console.log('Contacts:',this.contacts);
+    console.log('Contacts:', this.contacts);
   }
 
   async getUid() {
@@ -106,5 +106,20 @@ export class AddContactService {
       (item: { name: string }) => item.name === contact
     );
     return selectedContact ? selectedContact.color : '';
+  }
+
+  getAlphabetLettersWithContacts(): string[] {
+    const letters: string[] = [];
+    this.contacts.forEach((contact) => {
+      const firstLetter = contact.firstLetter.toUpperCase();
+      if (!letters.includes(firstLetter)) {
+        letters.push(firstLetter);
+      }
+    });
+    return letters;
+  }
+
+  getContactsByLetter(letter: string): any[] {
+    return this.contacts.filter((contact) => contact.firstLetter === letter);
   }
 }
