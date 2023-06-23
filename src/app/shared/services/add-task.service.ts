@@ -46,6 +46,7 @@ export class AddTaskService {
       this.userId,
       'tasks'
     );
+    const categoryColor = this.getCategoryColor(this.category);
     const newTask = new Task(
       this.title,
       this.description,
@@ -53,7 +54,8 @@ export class AddTaskService {
       this.selectedContact,
       new Date(this.date),
       this.selectedPriority,
-      this.getSelectedSubtasks().join(',')
+      this.getSelectedSubtasks(),
+      categoryColor
     );
     addDoc(collectionRef, { ...newTask })
       .then(() => {

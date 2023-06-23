@@ -11,19 +11,19 @@
     <h2 class="space-between font-21">
       To do <img src="assets/img/plus-button-v1.png" />
     </h2>
-    <mat-card>
+    <mat-card class="mb-12" *ngFor="let task of allTasks$ | async">
       <mat-card-header>
-        <mat-card-subtitle class="category text-center font-16"
-          >Design</mat-card-subtitle
+        <mat-card-subtitle [style.background-color]="task.categoryColor" class="category text-center font-16"
+          >{{ task.category }}</mat-card-subtitle
         >
-        <mat-card-title>Website redesign</mat-card-title>
+        <mat-card-title>{{ task.title }}</mat-card-title>
         <mat-card-subtitle class="description font-16"
-          >Modify the contents of the main website...</mat-card-subtitle
+          >{{ task.description }}</mat-card-subtitle
         >
       </mat-card-header>
-      <div class="progress">
+      <div class="progress" *ngIf="task.subtasks.length">
         <mat-progress-bar mode="determinate" value="50"></mat-progress-bar
-        ><span>1/2 Done</span>
+        ><span>1/{{ task.subtasks.length }} Done</span>
       </div>
     </mat-card>
   </div>

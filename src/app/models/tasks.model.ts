@@ -5,9 +5,19 @@ export class Task {
   contacts!: string;
   dueDate!: Date;
   prio!: string;
-  subtasks!: string;
+  subtasks: string[] | undefined;
+  categoryColor!: string;
 
-  constructor(title: string, description: string, category: string, contacts: string, dueDate: Date, prio: string, subtasks: string) {
+  constructor(
+    title: string,
+    description: string,
+    category: string,
+    contacts: string,
+    dueDate: Date,
+    prio: string,
+    subtasks: string[] | undefined,
+    categoryColor: string
+  ) {
     this.title = title;
     this.description = description;
     this.category = category;
@@ -15,5 +25,6 @@ export class Task {
     this.dueDate = dueDate;
     this.prio = prio;
     this.subtasks = subtasks;
+    this.categoryColor = categoryColor;
   }
 }
