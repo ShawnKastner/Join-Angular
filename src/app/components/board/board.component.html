@@ -11,7 +11,7 @@
     <h2 class="space-between font-21">
       To do <img src="assets/img/plus-button-v1.png" />
     </h2>
-    <mat-card class="mb-12" *ngFor="let task of allTasks$ | async">
+    <mat-card (click)="openTaskDetails(task)" class="mb-12" *ngFor="let task of allTasks$ | async">
       <mat-card-header>
         <mat-card-subtitle [style.background-color]="task.categoryColor" class="category text-center font-16"
           >{{ task.category }}</mat-card-subtitle

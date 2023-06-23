@@ -1,0 +1,69 @@
+.tasks-detail-container {
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+
+  .category {
+    width: 142px;
+    height: 40px;
+    border-radius: 8px;
+    font-size: 1.6rem;
+    color: #ffff;
+  }
+
+  .title-with-description {
+    h2 {
+      font-size: 1.6rem;
+      font-weight: 700;
+    }
+  }
+
+  .priority,
+  .date,
+  .assigned-to {
+    gap: 25px;
+
+    .prio {
+      width: 131px;
+      height: 33px;
+      border-radius: 10px;
+    }
+  }
+
+  .contact-container {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+
+    .first-letters {
+      width: 45px;
+      height: 45px;
+      border-radius: 58px;
+      color: #ffff
+    }
+  }
+
+  span {
+    font-size: 1.3rem;
+  }
+}
+
+::ng-deep .mat-mdc-dialog-container .mdc-dialog__surface {
+  border-radius: 30px;
+}
+
+.urgent {
+  background-color: #ff3d00;
+  color: #ffff;
+}
+
+.medium {
+  background-color: #ffa800;
+  color: #ffff;
+}
+
+.low {
+  background-color: #7ae229;
+  color: #ffff;
+}

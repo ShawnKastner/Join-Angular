@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { Firestore, collection, collectionData } from '@angular/fire/firestore';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { AddTaskService } from 'src/app/shared/services/add-task.service';
+import { TaskDetailsDialogComponent } from './task-details-dialog/task-details-dialog.component';
 
 @Component({
   selector: 'app-board',
@@ -14,6 +15,7 @@ import { AddTaskService } from 'src/app/shared/services/add-task.service';
 export class BoardComponent {
   allTasks$!: Observable<any>;
   userId!: any;
+  selectedTask: any;
 
   constructor(
     private dialog: MatDialog,
@@ -46,5 +48,15 @@ export class BoardComponent {
 
   async getUid() {
     this.userId = await this.authService.getCurrentUserUid();
+  }
+
+  openTaskDetails(task: any) {
+    this.selectedTask = task;
+    this.dialog.open(TaskDetailsDialogComponent, {
+      width: '623px',
+      height: '824px',
+      data: { task: this.selectedTask },
+    });
+    console.log(this.selectedTask);
   }
 }

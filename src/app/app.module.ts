@@ -52,6 +52,7 @@ import { AddContactDialogComponent } from './components/contacts/add-contact-dia
 import { EditContactDialogComponent } from './components/contacts/edit-contact-dialog/edit-contact-dialog.component';
 import { AddTaskDialogComponent } from './components/board/add-task-dialog/add-task-dialog.component';
 import { TaskAddedToBoardComponent } from './components/add-task/task-added-to-board/task-added-to-board.component';
+import { TaskDetailsDialogComponent } from './components/board/task-details-dialog/task-details-dialog.component';
 
 @NgModule({
   declarations: [
@@ -70,6 +71,7 @@ import { TaskAddedToBoardComponent } from './components/add-task/task-added-to-b
     EditContactDialogComponent,
     AddTaskDialogComponent,
     TaskAddedToBoardComponent,
+    TaskDetailsDialogComponent,
   ],
   imports: [
     BrowserModule,

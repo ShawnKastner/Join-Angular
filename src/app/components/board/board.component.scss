@@ -51,7 +51,7 @@
   }
 
   .description {
-    color: #A8A8A8;;
+    color: #a8a8a8;
   }
 
   img {
@@ -73,19 +73,26 @@
 }
 
 mat-card {
-    border-radius: 30px;
-    min-height: 200px;
+  border-radius: 30px;
+  min-height: 200px;
+  transition: ease-in-out 125ms;
+
+  &:hover {
+    cursor: pointer;
+    transform: rotate(2deg);
+    transition: ease-in-out 125ms;
+  }
 }
 
 .progress {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    margin-top: 23px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-top: 23px;
 }
 
 mat-progress-bar {
-    padding-left: 16px;
-    width: 138px;
-    border-radius: 2px;
+  padding-left: 16px;
+  width: 138px;
+  border-radius: 2px;
 }

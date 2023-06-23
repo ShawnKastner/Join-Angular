@@ -23,9 +23,15 @@ export class AddContactService {
   color!: string;
   userId!: any;
   contacts$!: Observable<any[]>;
+  contacts: any[] = [];
 
-  constructor(private firestore: Firestore, private authService: AuthService, private afs: AngularFirestore) {
+  constructor(
+    private firestore: Firestore,
+    private authService: AuthService,
+    private afs: AngularFirestore
+  ) {
     this.getUid();
+    console.log('Contacts:',this.contacts);
   }
 
   async getUid() {
@@ -77,20 +83,28 @@ export class AddContactService {
       'contacts',
       contactId
     );
-  
+
     return updateDoc(contactDocRef, {
       name: contact.name,
       email: contact.email,
       phone: contact.phone,
-      firstLetter: contact.firstLetter
+      firstLetter: contact.firstLetter,
     });
   }
-  
+
   getContactsFromFirestore() {
     this.contacts$ = collectionData(
       collection(this.firestore, 'users', this.userId, 'contacts')
     );
-    this.contacts$.subscribe(() => {});
+    this.contacts$.subscribe((data) => {
+      this.contacts = data; // Aktualisiere die contacts-Eigenschaft
+    });
   }
 
+  getContactColor(contact: string): string {
+    const selectedContact = this.contacts.find(
+      (item: { name: string }) => item.name === contact
+    );
+    return selectedContact ? selectedContact.color : '';
+  }
 }
