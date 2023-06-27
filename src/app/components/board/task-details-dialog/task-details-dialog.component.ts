@@ -55,4 +55,9 @@ export class TaskDetailsDialogComponent implements OnInit {
     const initials = nameParts.map((namePart) => namePart.charAt(0));
     return initials.join('');
   }
+
+  deleteSelectedTask() {
+    this.taskService.deleteTask(this.task.taskId);
+    this.dialogRef.close();
+  }
 }

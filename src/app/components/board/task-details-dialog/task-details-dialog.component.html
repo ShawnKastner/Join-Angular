@@ -24,7 +24,12 @@
       <span class="font-weight-700">Subtasks:</span>
       <div class="subtasks">
         <li *ngFor="let subtask of task.subtasks">
-          <mat-checkbox [(ngModel)]="taskService.checkedSubtasks[subtask]" (change)="taskService.checkedSubtask(subtask, $event.checked, task.taskId)">
+          <mat-checkbox
+            [(ngModel)]="taskService.checkedSubtasks[subtask]"
+            (change)="
+              taskService.checkedSubtask(subtask, $event.checked, task.taskId)
+            "
+          >
             {{ subtask }}
           </mat-checkbox>
         </li>
@@ -42,5 +47,13 @@
       </div>
       <span>{{ task.contacts }}</span>
     </div>
+  </div>
+  <div class="delete-edit-btn">
+    <button (click)="deleteSelectedTask()" class="delete-btn">
+      <mat-icon >delete</mat-icon>
+    </button>
+    <button class="edit-btn">
+      <mat-icon>edit</mat-icon>
+    </button>
   </div>
 </div>

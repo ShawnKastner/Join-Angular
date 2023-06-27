@@ -214,4 +214,9 @@ export class TaskService {
       return 0;
     }
   }
+
+  async deleteTask(taskId: string) {
+    const taskRef = doc(this.firestore, 'users', this.userId, 'tasks', taskId);
+    await deleteDoc(taskRef);
+  }
 }
