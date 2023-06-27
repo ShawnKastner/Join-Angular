@@ -19,10 +19,25 @@
       <span>{{ task.prio }}</span>
     </div>
   </div>
+  <div class="flex-column" *ngIf="task.subtasks && task.subtasks.length > 0">
+    <div>
+      <span class="font-weight-700">Subtasks:</span>
+      <div class="subtasks">
+        <li *ngFor="let subtask of task.subtasks">
+          <mat-checkbox [(ngModel)]="taskService.checkedSubtasks[subtask]" (change)="taskService.checkedSubtask(subtask, $event.checked, task.taskId)">
+            {{ subtask }}
+          </mat-checkbox>
+        </li>
+      </div>
+    </div>
+  </div>
   <div class="assigned-to flex-column">
     <span class="font-weight-700">Assigned To:</span>
     <div class="contact-container">
-      <div [style.background-color]="contactService.getContactColor(task.contacts)"class="first-letters font-16 justify-align-center">
+      <div
+        [style.background-color]="contactService.getContactColor(task.contacts)"
+        class="first-letters font-16 justify-align-center"
+      >
         {{ getContactInitials(task.contacts) }}
       </div>
       <span>{{ task.contacts }}</span>

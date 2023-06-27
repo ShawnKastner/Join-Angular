@@ -40,12 +40,18 @@
       width: 45px;
       height: 45px;
       border-radius: 58px;
-      color: #ffff
+      color: #ffff;
     }
   }
 
   span {
     font-size: 1.3rem;
+  }
+
+  .subtasks {
+    li {
+      list-style: none;
+    }
   }
 }
 

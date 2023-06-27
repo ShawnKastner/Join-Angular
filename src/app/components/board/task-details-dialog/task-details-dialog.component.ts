@@ -3,6 +3,7 @@ import { Timestamp } from '@angular/fire/firestore';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Task } from 'src/app/models/tasks.model';
 import { ContactService } from 'src/app/shared/services/contact.service';
+import { TaskService } from 'src/app/shared/services/task.service';
 
 @Component({
   selector: 'app-task-details-dialog',
@@ -18,13 +19,15 @@ export class TaskDetailsDialogComponent implements OnInit {
     this.data.task.dueDate,
     this.data.task.prio,
     this.data.task.subtasks,
-    this.data.task.categoryColor
+    this.data.task.categoryColor,
+    this.data.task.taskId
   );
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     private dialogRef: MatDialogRef<TaskDetailsDialogComponent>,
-    public contactService: ContactService
+    public contactService: ContactService,
+    public taskService: TaskService
   ) {}
 
   ngOnInit(): void {

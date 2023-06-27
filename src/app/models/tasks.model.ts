@@ -7,6 +7,7 @@ export class Task {
   prio!: string;
   subtasks: string[] | undefined;
   categoryColor!: string;
+  taskId!: string;
 
   constructor(
     title: string,
@@ -16,7 +17,8 @@ export class Task {
     dueDate: Date,
     prio: string,
     subtasks: string[] | undefined,
-    categoryColor: string
+    categoryColor: string,
+    taskId: string
   ) {
     this.title = title;
     this.description = description;
@@ -26,5 +28,6 @@ export class Task {
     this.prio = prio;
     this.subtasks = subtasks;
     this.categoryColor = categoryColor;
+    this.taskId = taskId;
   }
 }

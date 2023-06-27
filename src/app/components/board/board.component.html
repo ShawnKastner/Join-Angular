@@ -22,8 +22,8 @@
         >
       </mat-card-header>
       <div class="progress" *ngIf="task.subtasks.length">
-        <mat-progress-bar mode="determinate" value="50"></mat-progress-bar
-        ><span>1/{{ task.subtasks.length }} Done</span>
+        <mat-progress-bar [value]="(task.checkedSubtasks / task.subtasks.length) * 100"></mat-progress-bar
+        ><span>{{ task.checkedSubtasks }}/{{ task.subtasks.length }} Done</span>
       </div>
     </mat-card>
   </div>

@@ -5,11 +5,17 @@ import {
   collection,
   collectionData,
   deleteDoc,
+  doc,
+  docData,
+  getDoc,
   getDocs,
+  setDoc,
+  updateDoc,
 } from '@angular/fire/firestore';
 import { Task } from 'src/app/models/tasks.model';
 import { AuthService } from './auth.service';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 @Injectable({
   providedIn: 'root',
@@ -27,12 +33,17 @@ export class TaskService {
   userId!: any;
   categories$!: Observable<any[]>;
   categories: any[] = [];
-
   subtasks$!: Observable<any[]>;
   subtasks: any[] = [];
+  checkedSubtasks: { [taskId: string]: { [subtask: string]: number } } = {};
 
-  constructor(private firestore: Firestore, private authService: AuthService) {
+  constructor(
+    private firestore: Firestore,
+    private authService: AuthService,
+    private afs: AngularFirestore
+  ) {
     this.getUid();
+    this.loadCheckedSubtasks();
   }
 
   async getUid() {
@@ -47,6 +58,8 @@ export class TaskService {
       'tasks'
     );
     const categoryColor = this.getCategoryColor(this.category);
+    const taskId = this.afs.createId();
+    const taskDocRef = doc(collectionRef, taskId);
     const newTask = new Task(
       this.title,
       this.description,
@@ -55,9 +68,10 @@ export class TaskService {
       new Date(this.date),
       this.selectedPriority,
       this.getSelectedSubtasks(),
-      categoryColor
+      categoryColor,
+      taskId
     );
-    addDoc(collectionRef, { ...newTask })
+    setDoc(taskDocRef, { ...newTask, taskId: taskId })
       .then(() => {
         console.log('Add task is successful');
         this.clearInput();
@@ -159,5 +173,45 @@ export class TaskService {
       (item) => item.name === category
     );
     return selectedCategory ? selectedCategory.name : '';
+  }
+
+  async updateCheckedSubtasksInFirestore(taskId: string) {
+    const taskRef = doc(this.firestore, 'users', this.userId, 'tasks', taskId);
+
+    const checkedSubtasksCount = this.getTotalSubtaskCount(taskId);
+
+    await updateDoc(taskRef, {
+      checkedSubtasks: checkedSubtasksCount,
+    });
+  }
+
+  checkedSubtask(subtask: string, isChecked: boolean, taskId: string) {
+    // Update the checked status
+    this.checkedSubtasks[taskId] = {
+      ...this.checkedSubtasks[taskId],
+      [subtask]: isChecked ? 1 : 0,
+    };
+
+    this.updateCheckedSubtasksInFirestore(taskId); // Update checkedSubtasks in Firestore
+    localStorage.setItem('checkedSubtasks', JSON.stringify(this.checkedSubtasks));
+  }
+
+  loadCheckedSubtasks() {
+    const savedCheckedSubtasks = localStorage.getItem('checkedSubtasks');
+    if (savedCheckedSubtasks) {
+      this.checkedSubtasks = JSON.parse(savedCheckedSubtasks);
+    }
+  }
+
+  getTotalSubtaskCount(taskId: string): number {
+    const checkedSubtasks = this.checkedSubtasks[taskId];
+    if (checkedSubtasks) {
+      return Object.values(checkedSubtasks).reduce(
+        (sum, value) => sum + value,
+        0
+      );
+    } else {
+      return 0;
+    }
   }
 }

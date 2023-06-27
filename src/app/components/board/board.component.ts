@@ -14,18 +14,16 @@ import { TaskDetailsDialogComponent } from './task-details-dialog/task-details-d
 })
 export class BoardComponent {
   allTasks$!: Observable<any>;
-  userId!: any;
   selectedTask: any;
 
   constructor(
     private dialog: MatDialog,
     private firestore: Firestore,
-    private authService: AuthService,
     public taskService: TaskService
   ) {}
 
   ngOnInit() {
-    this.getUid().then(() => {
+    this.taskService.getUid().then(() => {
       this.getTasks();
     });
   }
@@ -39,15 +37,11 @@ export class BoardComponent {
 
   getTasks() {
     this.allTasks$ = collectionData(
-      collection(this.firestore, 'users', this.userId, 'tasks')
+      collection(this.firestore, 'users', this.taskService.userId, 'tasks')
     );
     this.allTasks$.subscribe((data) => {
       console.log('Tasks:', data);
     });
-  }
-
-  async getUid() {
-    this.userId = await this.authService.getCurrentUserUid();
   }
 
   openTaskDetails(task: any) {
