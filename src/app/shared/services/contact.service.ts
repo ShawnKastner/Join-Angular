@@ -122,4 +122,10 @@ export class ContactService {
   getContactsByLetter(letter: string): any[] {
     return this.contacts.filter((contact) => contact.firstLetter === letter);
   }
+
+  getContactInitials(contact: string): string {
+    const nameParts = contact.split(' ');
+    const initials = nameParts.map((namePart) => namePart.charAt(0));
+    return initials.join('');
+  }
 }

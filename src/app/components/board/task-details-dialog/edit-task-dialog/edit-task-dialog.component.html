@@ -1,0 +1,82 @@
+<div class="edit-task-container flex-column">
+  <mat-icon (click)="closeEditDialog()" class="close-btn">close</mat-icon>
+  <div class="edit-task">
+    <mat-form-field class="mb-34">
+      <mat-label>Enter a title</mat-label>
+      <input [(ngModel)]="task.title" required matInput />
+    </mat-form-field>
+    <mat-form-field class="mb-34">
+      <mat-label>Enter a Description</mat-label>
+      <textarea [(ngModel)]="task.description" required matInput></textarea>
+    </mat-form-field>
+    <mat-form-field class="mb-34">
+      <mat-label>Due date</mat-label>
+      <input
+        [(ngModel)]="task.dueDate"
+        [min]="minDate"
+        matInput
+        [matDatepicker]="picker"
+      />
+      <mat-hint>DD/MM/YYYY</mat-hint>
+      <mat-datepicker-toggle
+        matIconSuffix
+        [for]="picker"
+      ></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <div class="prio-btn-container flex-column">
+      <span class="font-21 mb-12">Prio</span>
+      <mat-button-toggle-group
+        class="gap-10 justify-align-center"
+        name="prio"
+        [(ngModel)]="task.prio"
+      >
+        <mat-button-toggle
+          [ngClass]="{
+            'urgent-color': task.prio === 'urgent'
+          }"
+          class="font-21 justify-align-center"
+          value="urgent"
+          >Urgent<img src="assets/img/prio-urgent.png"
+        /></mat-button-toggle>
+        <mat-button-toggle
+          [ngClass]="{
+            'medium-color': task.prio === 'medium'
+          }"
+          class="font-21 justify-align-center"
+          value="medium"
+          >Medium<img src="assets/img/prio-medium.png"
+        /></mat-button-toggle>
+        <mat-button-toggle
+          [ngClass]="{
+            'low-color': task.prio === 'low'
+          }"
+          class="font-21 justify-align-center"
+          value="low"
+          >Low<img src="assets/img/prio-low.png"
+        /></mat-button-toggle>
+      </mat-button-toggle-group>
+    </div>
+    <mat-form-field>
+      <mat-label>Select contacts to assign</mat-label>
+      <mat-select [(ngModel)]="task.contacts">
+        <mat-option
+          *ngFor="let contact of contactService.contacts$ | async"
+          [value]="contact.name"
+          >{{ contact.name }}</mat-option
+        >
+      </mat-select>
+    </mat-form-field>
+    <div class="contact-container">
+      <div
+        [style.background-color]="contactService.getContactColor(task.contacts)"
+        class="first-letters font-16 justify-align-center"
+      >
+        {{ contactService.getContactInitials(task.contacts) }}
+      </div>
+    </div>
+  </div>
+  <button (click)="editTask()" class="edit-btn font-21 font-weight-700">
+    Ok <mat-icon>done</mat-icon>
+  </button>
+</div>

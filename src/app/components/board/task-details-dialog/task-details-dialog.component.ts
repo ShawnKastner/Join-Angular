@@ -1,9 +1,10 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { Timestamp } from '@angular/fire/firestore';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Task } from 'src/app/models/tasks.model';
 import { ContactService } from 'src/app/shared/services/contact.service';
 import { TaskService } from 'src/app/shared/services/task.service';
+import { EditTaskDialogComponent } from './edit-task-dialog/edit-task-dialog.component';
 
 @Component({
   selector: 'app-task-details-dialog',
@@ -27,7 +28,8 @@ export class TaskDetailsDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any,
     private dialogRef: MatDialogRef<TaskDetailsDialogComponent>,
     public contactService: ContactService,
-    public taskService: TaskService
+    public taskService: TaskService,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -50,14 +52,21 @@ export class TaskDetailsDialogComponent implements OnInit {
     };
   }
 
-  getContactInitials(contact: string): string {
-    const nameParts = contact.split(' ');
-    const initials = nameParts.map((namePart) => namePart.charAt(0));
-    return initials.join('');
-  }
-
   deleteSelectedTask() {
     this.taskService.deleteTask(this.task.taskId);
+    this.dialogRef.close();
+  }
+
+  closeDetailsDialog() {
+    this.dialogRef.close();
+  }
+
+  openEditTaskDialog() {
+    this.dialog.open(EditTaskDialogComponent, {
+      width: '623px',
+      height: '824px',
+      data: { task: this.task },
+    })
     this.dialogRef.close();
   }
 }

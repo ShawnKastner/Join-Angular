@@ -1,4 +1,5 @@
 <div class="tasks-detail-container">
+  <mat-icon (click)="closeDetailsDialog()" class="close-btn">close</mat-icon>
   <div
     class="category justify-align-center"
     [style.background-color]="task.categoryColor"
@@ -43,7 +44,7 @@
         [style.background-color]="contactService.getContactColor(task.contacts)"
         class="first-letters font-16 justify-align-center"
       >
-        {{ getContactInitials(task.contacts) }}
+        {{ contactService.getContactInitials(task.contacts) }}
       </div>
       <span>{{ task.contacts }}</span>
     </div>
@@ -52,7 +53,7 @@
     <button (click)="deleteSelectedTask()" class="delete-btn">
       <mat-icon >delete</mat-icon>
     </button>
-    <button class="edit-btn">
+    <button (click)="openEditTaskDialog()" class="edit-btn">
       <mat-icon>edit</mat-icon>
     </button>
   </div>

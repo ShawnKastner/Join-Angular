@@ -118,3 +118,13 @@
     }
   }
 }
+
+.close-btn {
+  position: absolute;
+  top: 30px;
+  right: 35px;
+
+  &:hover {
+    cursor: pointer;
+  }
+}

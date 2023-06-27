@@ -193,7 +193,10 @@ export class TaskService {
     };
 
     this.updateCheckedSubtasksInFirestore(taskId); // Update checkedSubtasks in Firestore
-    localStorage.setItem('checkedSubtasks', JSON.stringify(this.checkedSubtasks));
+    localStorage.setItem(
+      'checkedSubtasks',
+      JSON.stringify(this.checkedSubtasks)
+    );
   }
 
   loadCheckedSubtasks() {
@@ -218,5 +221,23 @@ export class TaskService {
   async deleteTask(taskId: string) {
     const taskRef = doc(this.firestore, 'users', this.userId, 'tasks', taskId);
     await deleteDoc(taskRef);
+  }
+
+  editTask(taskId: string, task: Task): Promise<void> {
+    const taskDocRef = doc(
+      this.firestore,
+      'users',
+      this.userId,
+      'tasks',
+      taskId
+    );
+
+    return updateDoc(taskDocRef, {
+      title: task.title,
+      description: task.description,
+      dueDate: task.dueDate,
+      prio: task.prio,
+      contacts: task.contacts,
+    });
   }
 }
