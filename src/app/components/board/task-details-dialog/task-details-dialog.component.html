@@ -30,6 +30,9 @@
             (change)="
               taskService.checkedSubtask(subtask, $event.checked, task.taskId)
             "
+            [style.text-decoration]="
+              taskService.checkedSubtasks[subtask] ? 'line-through' : 'none'
+            "
           >
             {{ subtask }}
           </mat-checkbox>
@@ -51,7 +54,7 @@
   </div>
   <div class="delete-edit-btn">
     <button (click)="deleteSelectedTask()" class="delete-btn">
-      <mat-icon >delete</mat-icon>
+      <mat-icon>delete</mat-icon>
     </button>
     <button (click)="openEditTaskDialog()" class="edit-btn">
       <mat-icon>edit</mat-icon>
