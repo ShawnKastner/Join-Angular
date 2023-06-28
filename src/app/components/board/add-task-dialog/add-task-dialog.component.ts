@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { Component, Inject } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ContactService } from 'src/app/shared/services/contact.service';
 import { TaskService } from 'src/app/shared/services/task.service';
 import { NewCategoryDialogComponent } from '../../add-task/new-category-dialog/new-category-dialog.component';
@@ -13,15 +13,18 @@ import { AuthService } from 'src/app/shared/services/auth.service';
 export class AddTaskDialogComponent {
   minDate!: Date;
   userId!: any;
+  taskCategory!: string;
 
   constructor(
     public taskService: TaskService,
     public contactService: ContactService,
     private authService: AuthService,
     private dialog: MatDialog,
-    private dialogRef: MatDialogRef<AddTaskDialogComponent>
+    private dialogRef: MatDialogRef<AddTaskDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: { taskCategory: string }
   ) {
     this.minDate = new Date();
+    this.taskCategory = data.taskCategory;
   }
 
   async getUid() {
@@ -43,7 +46,8 @@ export class AddTaskDialogComponent {
   }
 
   addTask() {
-    this.taskService.addTask();
+    const taskCategory = this.taskCategory;
+    this.taskService.addTask(taskCategory);
     this.dialogRef.close();
   }
 }

@@ -28,7 +28,7 @@
           <mat-checkbox
             [(ngModel)]="taskService.checkedSubtasks[subtask]"
             (change)="
-              taskService.checkedSubtask(subtask, $event.checked, task.taskId)
+              taskService.checkedSubtask(subtask, $event.checked, task.taskId, taskCategory)
             "
             [style.text-decoration]="
               taskService.checkedSubtasks[subtask] ? 'line-through' : 'none'

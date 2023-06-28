@@ -53,7 +53,7 @@ export class AddTaskComponent implements OnInit {
   }
 
   addTask() {
-    this.taskService.addTask();
+    this.taskService.addTask('To Do');
     this.openSnackBar();
   }
 

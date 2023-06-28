@@ -1,6 +1,10 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { Timestamp } from '@angular/fire/firestore';
-import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
+import {
+  MAT_DIALOG_DATA,
+  MatDialog,
+  MatDialogRef,
+} from '@angular/material/dialog';
 import { Task } from 'src/app/models/tasks.model';
 import { ContactService } from 'src/app/shared/services/contact.service';
 import { TaskService } from 'src/app/shared/services/task.service';
@@ -23,14 +27,18 @@ export class TaskDetailsDialogComponent implements OnInit {
     this.data.task.categoryColor,
     this.data.task.taskId
   );
+  taskCategory!: string;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
+    @Inject(MAT_DIALOG_DATA) public category: { taskCategory: string },
     private dialogRef: MatDialogRef<TaskDetailsDialogComponent>,
     public contactService: ContactService,
     public taskService: TaskService,
     private dialog: MatDialog
-  ) {}
+  ) {
+    this.taskCategory = data.taskCategory;
+  }
 
   ngOnInit(): void {
     this.contactService.getUid().then(() => {
@@ -53,7 +61,8 @@ export class TaskDetailsDialogComponent implements OnInit {
   }
 
   deleteSelectedTask() {
-    this.taskService.deleteTask(this.task.taskId);
+    const taskCategory = this.taskCategory;
+    this.taskService.deleteTask(this.task.taskId, taskCategory);
     this.dialogRef.close();
   }
 
@@ -65,8 +74,8 @@ export class TaskDetailsDialogComponent implements OnInit {
     this.dialog.open(EditTaskDialogComponent, {
       width: '623px',
       height: '824px',
-      data: { task: this.task },
-    })
+      data: { task: this.task, taskCategory: this.taskCategory },
+    });
     this.dialogRef.close();
   }
 }

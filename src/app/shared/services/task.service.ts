@@ -50,12 +50,12 @@ export class TaskService {
     this.userId = await this.authService.getCurrentUserUid();
   }
 
-  addTask() {
+  addTask(taskCategory: string) {
     const collectionRef = collection(
       this.firestore,
       'users',
       this.userId,
-      'tasks'
+      this.getCategoryCollectionName(taskCategory)
     );
     const categoryColor = this.getCategoryColor(this.category);
     const taskId = this.afs.createId();
@@ -78,6 +78,40 @@ export class TaskService {
       })
       .catch((error) => {
         console.error('Add task was failed:', error);
+      });
+  }
+
+  getCategoryCollectionName(taskCategory: string): string {
+    // Funktion, um den Namen der Kategorie-basierten Collection basierend auf der übergebenen Kategorie zu erhalten
+    if (taskCategory === 'In Progress') {
+      return 'tasksInProgress';
+    } else if (taskCategory === 'To Do') {
+      return 'tasksToDo';
+    } else if (taskCategory === 'Awaiting Feedback') {
+      return 'tasksAwaitingFeedback';
+    } else if (taskCategory === 'Done') {
+      return 'tasksDone';
+    } else {
+      return '';
+    }
+  }
+
+  updateTaskCategoryInFirestore(task: Task) {
+    const collectionRef = collection(
+      this.firestore,
+      'users',
+      this.userId,
+      this.getCategoryCollectionName(task.category) // Funktion, um den Namen der Kategorie-basierten Collection zu erhalten
+    );
+
+    const taskDocRef = doc(collectionRef, task.taskId);
+
+    updateDoc(taskDocRef, { category: task.category })
+      .then(() => {
+        console.log('Task category updated successfully');
+      })
+      .catch((error) => {
+        console.error('Failed to update task category:', error);
       });
   }
 
@@ -175,8 +209,14 @@ export class TaskService {
     return selectedCategory ? selectedCategory.name : '';
   }
 
-  async updateCheckedSubtasksInFirestore(taskId: string) {
-    const taskRef = doc(this.firestore, 'users', this.userId, 'tasks', taskId);
+  async updateCheckedSubtasksInFirestore(taskId: string, taskCategory: string) {
+    const taskRef = doc(
+      this.firestore,
+      'users',
+      this.userId,
+      this.getCategoryCollectionName(taskCategory),
+      taskId
+    );
 
     const checkedSubtasksCount = this.getTotalSubtaskCount(taskId);
 
@@ -185,14 +225,19 @@ export class TaskService {
     });
   }
 
-  checkedSubtask(subtask: string, isChecked: boolean, taskId: string) {
+  checkedSubtask(
+    subtask: string,
+    isChecked: boolean,
+    taskId: string,
+    taskCategory: string
+  ) {
     // Update the checked status
     this.checkedSubtasks[taskId] = {
       ...this.checkedSubtasks[taskId],
       [subtask]: isChecked ? 1 : 0,
     };
 
-    this.updateCheckedSubtasksInFirestore(taskId); // Update checkedSubtasks in Firestore
+    this.updateCheckedSubtasksInFirestore(taskId, taskCategory); // Update checkedSubtasks in Firestore
     localStorage.setItem(
       'checkedSubtasks',
       JSON.stringify(this.checkedSubtasks)
@@ -218,17 +263,23 @@ export class TaskService {
     }
   }
 
-  async deleteTask(taskId: string) {
-    const taskRef = doc(this.firestore, 'users', this.userId, 'tasks', taskId);
+  async deleteTask(taskId: string, taskCategory: string) {
+    const taskRef = doc(
+      this.firestore,
+      'users',
+      this.userId,
+      this.getCategoryCollectionName(taskCategory),
+      taskId
+    );
     await deleteDoc(taskRef);
   }
 
-  editTask(taskId: string, task: Task): Promise<void> {
+  editTask(taskId: string, task: Task, taskCategory: string): Promise<void> {
     const taskDocRef = doc(
       this.firestore,
       'users',
       this.userId,
-      'tasks',
+      this.getCategoryCollectionName(taskCategory),
       taskId
     );
 

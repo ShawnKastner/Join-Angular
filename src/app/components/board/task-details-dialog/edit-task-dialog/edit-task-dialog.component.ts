@@ -22,14 +22,17 @@ export class EditTaskDialogComponent implements OnInit {
     this.data.task.taskId
   );
   minDate!: Date;
+  taskCategory!: string;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
+    @Inject(MAT_DIALOG_DATA) public category: { taskCategory: string },
     public taskService: TaskService,
     public contactService: ContactService,
     private dialogRef: MatDialogRef<EditTaskDialogComponent>
   ) {
     this.minDate = new Date();
+    this.taskCategory = data.taskCategory;
   }
 
   ngOnInit() {}
@@ -39,7 +42,8 @@ export class EditTaskDialogComponent implements OnInit {
   }
 
   editTask() {
-    this.taskService.editTask(this.data.task.taskId, this.task);
+    const taskCategory = this.taskCategory;
+    this.taskService.editTask(this.data.task.taskId, this.task, taskCategory);
     this.closeEditDialog();
   }
 }

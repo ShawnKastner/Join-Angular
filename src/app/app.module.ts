@@ -22,6 +22,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 //AngularFire
 import { AngularFireModule } from '@angular/fire/compat';
@@ -105,6 +106,7 @@ import { EditTaskDialogComponent } from './components/board/task-details-dialog/
     MatDialogModule,
     MatChipsModule,
     MatSnackBarModule,
+    DragDropModule
   ],
   providers: [AuthService],
   bootstrap: [AppComponent],
