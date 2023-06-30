@@ -20,16 +20,29 @@ import { Task } from 'src/app/models/tasks.model';
 })
 export class BoardComponent {
   allTasksToDo$!: Observable<any>;
+  allTasksToDo!: any;
   allTasksInProgress$!: Observable<any>;
+  allTasksInProgress!: any;
   allTasksAwaitingFeedback$!: Observable<any>;
+  allTasksAwaitingFeedback!: any;
   allTasksDone$!: Observable<any>;
+  allTasksDone!: any;
   selectedTask: any;
+  currentCollectionNameToDo: string;
+  currentCollectionNameInProgress: string;
+  currentCollectionNameAwaitingFeedback: string;
+  currentCollectionNameDone: string;
 
   constructor(
     private dialog: MatDialog,
     private firestore: Firestore,
     public taskService: TaskService
-  ) {}
+  ) {
+    this.currentCollectionNameToDo = 'To Do';
+    this.currentCollectionNameInProgress = 'In Progress';
+    this.currentCollectionNameAwaitingFeedback = 'Awaiting Feedback';
+    this.currentCollectionNameDone = 'Done';
+  }
 
   ngOnInit() {
     this.taskService.getUid().then(() => {
@@ -52,7 +65,9 @@ export class BoardComponent {
     this.allTasksToDo$ = collectionData(
       collection(this.firestore, 'users', this.taskService.userId, 'tasksToDo')
     );
-    this.allTasksToDo$.subscribe();
+    this.allTasksToDo$.subscribe((data) => {
+      this.allTasksToDo = data;
+    });
   }
 
   getTasksInProgress() {
@@ -64,7 +79,9 @@ export class BoardComponent {
         'tasksInProgress'
       )
     );
-    this.allTasksInProgress$.subscribe();
+    this.allTasksInProgress$.subscribe((data) => {
+      this.allTasksInProgress = data;
+    });
   }
   getTasksAwaitingFeedback() {
     this.allTasksAwaitingFeedback$ = collectionData(
@@ -75,13 +92,15 @@ export class BoardComponent {
         'tasksAwaitingFeedback'
       )
     );
-    this.allTasksAwaitingFeedback$.subscribe();
+    this.allTasksAwaitingFeedback$.subscribe((data) => {
+      this.allTasksAwaitingFeedback = data;
+    });
   }
   getTasksDone() {
     this.allTasksDone$ = collectionData(
       collection(this.firestore, 'users', this.taskService.userId, 'tasksDone')
     );
-    this.allTasksDone$.subscribe();
+    this.allTasksDone$.subscribe((data) => (this.allTasksDone = data));
   }
 
   openTaskDetails(task: any, taskCategory: string) {
@@ -94,27 +113,37 @@ export class BoardComponent {
     console.log(this.selectedTask);
   }
 
-  onTaskDrop(event: CdkDragDrop<Task[]>, category: string) {
-    //   if (event.previousContainer === event.container) {
-    //     // Innerhalb des gleichen Containers verschoben
-    //     moveItemInArray(
-    //       event.container.data,
-    //       event.previousIndex,
-    //       event.currentIndex
-    //     );
-    //   } else {
-    //     // Zwischen Containern verschoben
-    //     transferArrayItem(
-    //       event.previousContainer.data,
-    //       event.container.data,
-    //       event.previousIndex,
-    //       event.currentIndex
-    //     );
-    //     // Aktualisiere die Kategorie der Aufgabe
-    //     const task = event.container.data[event.currentIndex];
-    //     task.category = category;
-    //     // Speichere die Aktualisierung im Firestore oder in der entsprechenden Collection
-    //     this.taskService.updateTaskCategoryInFirestore(task);
-    //   }
+  onTaskDrop(event: CdkDragDrop<Task[]>, taskCategory: string) {
+    if (event.previousContainer === event.container) {
+      moveItemInArray(
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex
+      );
+    } else {
+      const task = event.previousContainer.data[event.previousIndex];
+      const taskId = task.taskId;
+      const previousCollectionName =
+        event.previousContainer?.element.nativeElement.getAttribute(
+          'currentCollection'
+        );
+      console.log('Task categories are:', taskCategory, previousCollectionName);
+
+      if (previousCollectionName) {
+        transferArrayItem(
+          event.previousContainer.data,
+          event.container.data,
+          event.previousIndex,
+          event.currentIndex
+        );
+        this.taskService.updateTaskCategoryInFirestore(
+          taskCategory,
+          taskId,
+          previousCollectionName
+        );
+      } else {
+        console.error('Invalid currentCollectionName');
+      }
+    }
   }
 }

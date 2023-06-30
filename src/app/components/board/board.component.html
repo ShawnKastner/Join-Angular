@@ -13,6 +13,10 @@
     class="to-do width-250 cdkDropList"
     cdkDropList
     (cdkDropListDropped)="onTaskDrop($event, 'To Do')"
+    [cdkDropListConnectedTo]="[doneList, inProgressList, awaitingFeedbackList]"
+    #todoList="cdkDropList"
+    [cdkDropListData]="allTasksToDo"
+    [attr.currentCollection]="currentCollectionNameToDo "
   >
     <h2 class="space-between font-21">
       To do
@@ -21,10 +25,10 @@
         src="assets/img/plus-button-v1.png"
       />
     </h2>
-    <mat-card
+    <mat-card cdkDrag
       (click)="openTaskDetails(task, 'To Do')"
       class="mb-12"
-      *ngFor="let task of allTasksToDo$ | async"
+      *ngFor="let task of allTasksToDo"
     >
       <mat-card-header>
         <mat-card-subtitle
@@ -49,6 +53,10 @@
     class="in-progress width-250"
     cdkDropList
     (cdkDropListDropped)="onTaskDrop($event, 'In Progress')"
+    [cdkDropListConnectedTo]="[doneList, awaitingFeedbackList, todoList]"
+    #inProgressList="cdkDropList"
+    [cdkDropListData]="allTasksInProgress"
+    [attr.currentCollection]="currentCollectionNameInProgress "
   >
     <h2 class="space-between font-21">
       In progress
@@ -57,10 +65,10 @@
         src="assets/img/plus-button-v1.png"
       />
     </h2>
-    <mat-card
+    <mat-card cdkDrag
       (click)="openTaskDetails(task, 'In Progress')"
       class="mb-12"
-      *ngFor="let task of allTasksInProgress$ | async"
+      *ngFor="let task of allTasksInProgress"
     >
       <mat-card-header>
         <mat-card-subtitle
@@ -85,6 +93,10 @@
     class="awaiting-feedback width-250"
     cdkDropList
     (cdkDropListDropped)="onTaskDrop($event, 'Awaiting Feedback')"
+    [cdkDropListConnectedTo]="[doneList, inProgressList, todoList]"
+    #awaitingFeedbackList="cdkDropList"
+    [cdkDropListData]="allTasksAwaitingFeedback"
+    [attr.currentCollection]="currentCollectionNameAwaitingFeedback "
   >
     <h2 class="space-between font-21">
       Awaiting Feedback
@@ -93,10 +105,10 @@
         src="assets/img/plus-button-v1.png"
       />
     </h2>
-    <mat-card
+    <mat-card cdkDrag
       (click)="openTaskDetails(task, 'Awaiting Feedback')"
       class="mb-12"
-      *ngFor="let task of allTasksAwaitingFeedback$ | async"
+      *ngFor="let task of allTasksAwaitingFeedback"
     >
       <mat-card-header>
         <mat-card-subtitle
@@ -121,6 +133,10 @@
     class="done width-250"
     cdkDropList
     (cdkDropListDropped)="onTaskDrop($event, 'Done')"
+    #doneList="cdkDropList"
+    [cdkDropListData]="allTasksDone"
+    [cdkDropListConnectedTo]="[todoList, awaitingFeedbackList, inProgressList]"
+    [attr.currentCollection]="currentCollectionNameDone "
   >
     <h2 class="space-between font-21">
       Done
@@ -129,10 +145,10 @@
         src="assets/img/plus-button-v1.png"
       />
     </h2>
-    <mat-card
+    <mat-card cdkDrag 
       (click)="openTaskDetails(task, 'Done')"
       class="mb-12"
-      *ngFor="let task of allTasksDone$ | async"
+      *ngFor="let task of allTasksDone"
     >
       <mat-card-header>
         <mat-card-subtitle

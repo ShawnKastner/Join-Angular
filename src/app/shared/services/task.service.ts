@@ -9,8 +9,10 @@ import {
   docData,
   getDoc,
   getDocs,
+  query,
   setDoc,
   updateDoc,
+  where,
 } from '@angular/fire/firestore';
 import { Task } from 'src/app/models/tasks.model';
 import { AuthService } from './auth.service';
@@ -96,23 +98,52 @@ export class TaskService {
     }
   }
 
-  updateTaskCategoryInFirestore(task: Task) {
-    const collectionRef = collection(
+  async updateTaskCategoryInFirestore(
+    taskCategory: string,
+    taskId: string,
+    currentCollectionName: string
+  ) {
+    const newCollectionName = this.getCategoryCollectionName(taskCategory);
+    const currentCollection = this.getCategoryCollectionName(
+      currentCollectionName
+    );
+    console.log('Current collection name is:', currentCollectionName);
+
+    if (currentCollection === newCollectionName) {
+      // Keine Änderung erforderlich, da der Task bereits in der gewünschten Kategorie ist
+      return;
+    }
+
+    const oldCollectionRef = collection(
       this.firestore,
       'users',
       this.userId,
-      this.getCategoryCollectionName(task.category) // Funktion, um den Namen der Kategorie-basierten Collection zu erhalten
+      currentCollection
     );
 
-    const taskDocRef = doc(collectionRef, task.taskId);
+    const newCollectionRef = collection(
+      this.firestore,
+      'users',
+      this.userId,
+      newCollectionName
+    );
 
-    updateDoc(taskDocRef, { category: task.category })
-      .then(() => {
-        console.log('Task category updated successfully');
-      })
-      .catch((error) => {
-        console.error('Failed to update task category:', error);
-      });
+    const taskDocRef = doc(oldCollectionRef, taskId);
+    const taskDocSnapshot = await getDoc(taskDocRef);
+
+    if (taskDocSnapshot.exists()) {
+      const taskData = taskDocSnapshot.data();
+      if (taskData) {
+        const newTaskDocRef = doc(newCollectionRef, taskId);
+
+        await setDoc(newTaskDocRef, taskData); // Task in der neuen Kategorie erstellen
+        await deleteDoc(taskDocRef); // Ursprünglichen Task löschen
+
+        console.log('Task successfully moved to', newCollectionName);
+      }
+    } else {
+      console.error('Task not found in', currentCollectionName);
+    }
   }
 
   startAddingSubtask() {
