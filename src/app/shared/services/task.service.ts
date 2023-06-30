@@ -6,17 +6,14 @@ import {
   collectionData,
   deleteDoc,
   doc,
-  docData,
   getDoc,
   getDocs,
-  query,
   setDoc,
   updateDoc,
-  where,
 } from '@angular/fire/firestore';
 import { Task } from 'src/app/models/tasks.model';
 import { AuthService } from './auth.service';
-import { Observable, map } from 'rxjs';
+import { Observable } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 @Injectable({
@@ -38,6 +35,14 @@ export class TaskService {
   subtasks$!: Observable<any[]>;
   subtasks: any[] = [];
   checkedSubtasks: { [taskId: string]: { [subtask: string]: number } } = {};
+  allTasksToDo$!: Observable<any>;
+  allTasksToDo!: any;
+  allTasksInProgress$!: Observable<any>;
+  allTasksInProgress!: any;
+  allTasksAwaitingFeedback$!: Observable<any>;
+  allTasksAwaitingFeedback!: any;
+  allTasksDone$!: Observable<any>;
+  allTasksDone!: any;
 
   constructor(
     private firestore: Firestore,
@@ -48,10 +53,17 @@ export class TaskService {
     this.loadCheckedSubtasks();
   }
 
+  /**
+   * Get user ID
+   */
   async getUid() {
     this.userId = await this.authService.getCurrentUserUid();
   }
 
+  /** Function to add a Task
+   *
+   * @param taskCategory Task category to add a task in the correct collection
+   */
   addTask(taskCategory: string) {
     const collectionRef = collection(
       this.firestore,
@@ -83,6 +95,11 @@ export class TaskService {
       });
   }
 
+  /**Get the task collection name
+   *
+   * @param taskCategory The task category for add a task
+   * @returns
+   */
   getCategoryCollectionName(taskCategory: string): string {
     // Funktion, um den Namen der Kategorie-basierten Collection basierend auf der übergebenen Kategorie zu erhalten
     if (taskCategory === 'In Progress') {
@@ -98,6 +115,13 @@ export class TaskService {
     }
   }
 
+  /** Moved tasks in another collection for drag and drop
+   *
+   * @param taskCategory this is the collection where to move
+   * @param taskId the task id from task which you want to move
+   * @param currentCollectionName this is the current collection
+   * @returns
+   */
   async updateTaskCategoryInFirestore(
     taskCategory: string,
     taskId: string,
@@ -107,13 +131,10 @@ export class TaskService {
     const currentCollection = this.getCategoryCollectionName(
       currentCollectionName
     );
-    console.log('Current collection name is:', currentCollectionName);
-
     if (currentCollection === newCollectionName) {
       // Keine Änderung erforderlich, da der Task bereits in der gewünschten Kategorie ist
       return;
     }
-
     const oldCollectionRef = collection(
       this.firestore,
       'users',
@@ -127,22 +148,16 @@ export class TaskService {
       this.userId,
       newCollectionName
     );
-
     const taskDocRef = doc(oldCollectionRef, taskId);
     const taskDocSnapshot = await getDoc(taskDocRef);
-
     if (taskDocSnapshot.exists()) {
       const taskData = taskDocSnapshot.data();
       if (taskData) {
         const newTaskDocRef = doc(newCollectionRef, taskId);
-
-        await setDoc(newTaskDocRef, taskData); // Task in der neuen Kategorie erstellen
-        await deleteDoc(taskDocRef); // Ursprünglichen Task löschen
-
+        await setDoc(newTaskDocRef, taskData);
+        await deleteDoc(taskDocRef);
         console.log('Task successfully moved to', newCollectionName);
       }
-    } else {
-      console.error('Task not found in', currentCollectionName);
     }
   }
 
@@ -160,6 +175,9 @@ export class TaskService {
     this.subtask = '';
   }
 
+  /**
+   * This function add a subtask to the subtasks collection
+   */
   addSubtask() {
     const subTaskCollection = collection(
       this.firestore,
@@ -174,6 +192,10 @@ export class TaskService {
     });
   }
 
+  /**
+   *
+   * @returns the selected subtasks from checkbox
+   */
   getSelectedSubtasks(): string[] {
     return Object.keys(this.selectedSubtasks).filter(
       (key) => this.selectedSubtasks[key]
@@ -191,6 +213,9 @@ export class TaskService {
     this.selectedSubtasks = {};
   }
 
+  /**
+   * Function to delete all subtasks from the subtasks collection
+   */
   async deleteAllSubtasks() {
     const subTaskCollectionRef = collection(
       this.firestore,
@@ -206,6 +231,9 @@ export class TaskService {
     });
   }
 
+  /**
+   * get all subtasks from the subtasks collection
+   */
   getSubtasksFromFirestore() {
     this.subtasks$ = collectionData(
       collection(this.firestore, 'users', this.userId, 'subtasks')
@@ -216,6 +244,9 @@ export class TaskService {
     });
   }
 
+  /**
+   * get categories from the categories collection
+   */
   getCategoriesFromFirestore() {
     this.categories$ = collectionData(
       collection(this.firestore, 'users', this.userId, 'categories')
@@ -226,6 +257,11 @@ export class TaskService {
     });
   }
 
+  /** Get color from the category
+   *
+   * @param category get the current category
+   * @returns the right color from the category
+   */
   getCategoryColor(category: string): string {
     const selectedCategory = this.categories.find(
       (item) => item.name === category
@@ -233,6 +269,11 @@ export class TaskService {
     return selectedCategory ? selectedCategory.color : '';
   }
 
+  /**
+   *
+   * @param category category name
+   * @returns the selected category name
+   */
   getCategoryName(category: string): string {
     const selectedCategory = this.categories.find(
       (item) => item.name === category
@@ -240,6 +281,11 @@ export class TaskService {
     return selectedCategory ? selectedCategory.name : '';
   }
 
+  /**
+   *
+   * @param taskId get the current task id
+   * @param taskCategory get the current task category
+   */
   async updateCheckedSubtasksInFirestore(taskId: string, taskCategory: string) {
     const taskRef = doc(
       this.firestore,
@@ -256,6 +302,13 @@ export class TaskService {
     });
   }
 
+  /** function to check which subtasks who checked and saved in local storage
+   *
+   * @param subtask get subtasks
+   * @param isChecked get subtasks who checked
+   * @param taskId get current task id
+   * @param taskCategory get current task category
+   */
   checkedSubtask(
     subtask: string,
     isChecked: boolean,
@@ -275,6 +328,9 @@ export class TaskService {
     );
   }
 
+  /**
+   * load checked subtasks from local storage
+   */
   loadCheckedSubtasks() {
     const savedCheckedSubtasks = localStorage.getItem('checkedSubtasks');
     if (savedCheckedSubtasks) {
@@ -282,6 +338,11 @@ export class TaskService {
     }
   }
 
+  /**
+   *
+   * @param taskId get current task id
+   * @returns how many subtasks who checked
+   */
   getTotalSubtaskCount(taskId: string): number {
     const checkedSubtasks = this.checkedSubtasks[taskId];
     if (checkedSubtasks) {
@@ -294,6 +355,11 @@ export class TaskService {
     }
   }
 
+  /**delete selected task from the task collection
+   *
+   * @param taskId current task id
+   * @param taskCategory current task category
+   */
   async deleteTask(taskId: string, taskCategory: string) {
     const taskRef = doc(
       this.firestore,
@@ -305,6 +371,13 @@ export class TaskService {
     await deleteDoc(taskRef);
   }
 
+  /** edit task in the task collection
+   *
+   * @param taskId current task id
+   * @param task current task
+   * @param taskCategory current task category
+   * @returns edited task
+   */
   editTask(taskId: string, task: Task, taskCategory: string): Promise<void> {
     const taskDocRef = doc(
       this.firestore,
@@ -321,5 +394,39 @@ export class TaskService {
       prio: task.prio,
       contacts: task.contacts,
     });
+  }
+
+  // Get all tasks from task collections
+
+  getTasksToDo() {
+    this.allTasksToDo$ = collectionData(
+      collection(this.firestore, 'users', this.userId, 'tasksToDo')
+    );
+    this.allTasksToDo$.subscribe((data) => {
+      this.allTasksToDo = data;
+    });
+  }
+
+  getTasksInProgress() {
+    this.allTasksInProgress$ = collectionData(
+      collection(this.firestore, 'users', this.userId, 'tasksInProgress')
+    );
+    this.allTasksInProgress$.subscribe((data) => {
+      this.allTasksInProgress = data;
+    });
+  }
+  getTasksAwaitingFeedback() {
+    this.allTasksAwaitingFeedback$ = collectionData(
+      collection(this.firestore, 'users', this.userId, 'tasksAwaitingFeedback')
+    );
+    this.allTasksAwaitingFeedback$.subscribe((data) => {
+      this.allTasksAwaitingFeedback = data;
+    });
+  }
+  getTasksDone() {
+    this.allTasksDone$ = collectionData(
+      collection(this.firestore, 'users', this.userId, 'tasksDone')
+    );
+    this.allTasksDone$.subscribe((data) => (this.allTasksDone = data));
   }
 }

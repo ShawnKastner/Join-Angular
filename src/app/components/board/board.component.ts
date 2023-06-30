@@ -1,9 +1,6 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { AddTaskDialogComponent } from './add-task-dialog/add-task-dialog.component';
-import { Observable } from 'rxjs';
-import { Firestore, collection, collectionData } from '@angular/fire/firestore';
-import { AuthService } from 'src/app/shared/services/auth.service';
 import { TaskService } from 'src/app/shared/services/task.service';
 import { TaskDetailsDialogComponent } from './task-details-dialog/task-details-dialog.component';
 import {
@@ -19,14 +16,6 @@ import { Task } from 'src/app/models/tasks.model';
   styleUrls: ['./board.component.scss'],
 })
 export class BoardComponent {
-  allTasksToDo$!: Observable<any>;
-  allTasksToDo!: any;
-  allTasksInProgress$!: Observable<any>;
-  allTasksInProgress!: any;
-  allTasksAwaitingFeedback$!: Observable<any>;
-  allTasksAwaitingFeedback!: any;
-  allTasksDone$!: Observable<any>;
-  allTasksDone!: any;
   selectedTask: any;
   currentCollectionNameToDo: string;
   currentCollectionNameInProgress: string;
@@ -35,7 +24,6 @@ export class BoardComponent {
 
   constructor(
     private dialog: MatDialog,
-    private firestore: Firestore,
     public taskService: TaskService
   ) {
     this.currentCollectionNameToDo = 'To Do';
@@ -46,10 +34,10 @@ export class BoardComponent {
 
   ngOnInit() {
     this.taskService.getUid().then(() => {
-      this.getTasksToDo();
-      this.getTasksInProgress();
-      this.getTasksAwaitingFeedback();
-      this.getTasksDone();
+      this.taskService.getTasksToDo();
+      this.taskService.getTasksInProgress();
+      this.taskService.getTasksAwaitingFeedback();
+      this.taskService.getTasksDone();
     });
   }
 
@@ -59,48 +47,6 @@ export class BoardComponent {
       height: '914px',
       data: { taskCategory: taskCategory },
     });
-  }
-
-  getTasksToDo() {
-    this.allTasksToDo$ = collectionData(
-      collection(this.firestore, 'users', this.taskService.userId, 'tasksToDo')
-    );
-    this.allTasksToDo$.subscribe((data) => {
-      this.allTasksToDo = data;
-    });
-  }
-
-  getTasksInProgress() {
-    this.allTasksInProgress$ = collectionData(
-      collection(
-        this.firestore,
-        'users',
-        this.taskService.userId,
-        'tasksInProgress'
-      )
-    );
-    this.allTasksInProgress$.subscribe((data) => {
-      this.allTasksInProgress = data;
-    });
-  }
-  getTasksAwaitingFeedback() {
-    this.allTasksAwaitingFeedback$ = collectionData(
-      collection(
-        this.firestore,
-        'users',
-        this.taskService.userId,
-        'tasksAwaitingFeedback'
-      )
-    );
-    this.allTasksAwaitingFeedback$.subscribe((data) => {
-      this.allTasksAwaitingFeedback = data;
-    });
-  }
-  getTasksDone() {
-    this.allTasksDone$ = collectionData(
-      collection(this.firestore, 'users', this.taskService.userId, 'tasksDone')
-    );
-    this.allTasksDone$.subscribe((data) => (this.allTasksDone = data));
   }
 
   openTaskDetails(task: any, taskCategory: string) {
@@ -127,8 +73,6 @@ export class BoardComponent {
         event.previousContainer?.element.nativeElement.getAttribute(
           'currentCollection'
         );
-      console.log('Task categories are:', taskCategory, previousCollectionName);
-
       if (previousCollectionName) {
         transferArrayItem(
           event.previousContainer.data,

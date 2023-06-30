@@ -15,7 +15,7 @@
     (cdkDropListDropped)="onTaskDrop($event, 'To Do')"
     [cdkDropListConnectedTo]="[doneList, inProgressList, awaitingFeedbackList]"
     #todoList="cdkDropList"
-    [cdkDropListData]="allTasksToDo"
+    [cdkDropListData]="taskService.allTasksToDo"
     [attr.currentCollection]="currentCollectionNameToDo "
   >
     <h2 class="space-between font-21">
@@ -28,7 +28,7 @@
     <mat-card cdkDrag
       (click)="openTaskDetails(task, 'To Do')"
       class="mb-12"
-      *ngFor="let task of allTasksToDo"
+      *ngFor="let task of taskService.allTasksToDo"
     >
       <mat-card-header>
         <mat-card-subtitle
@@ -55,7 +55,7 @@
     (cdkDropListDropped)="onTaskDrop($event, 'In Progress')"
     [cdkDropListConnectedTo]="[doneList, awaitingFeedbackList, todoList]"
     #inProgressList="cdkDropList"
-    [cdkDropListData]="allTasksInProgress"
+    [cdkDropListData]="taskService.allTasksInProgress"
     [attr.currentCollection]="currentCollectionNameInProgress "
   >
     <h2 class="space-between font-21">
@@ -68,7 +68,7 @@
     <mat-card cdkDrag
       (click)="openTaskDetails(task, 'In Progress')"
       class="mb-12"
-      *ngFor="let task of allTasksInProgress"
+      *ngFor="let task of taskService.allTasksInProgress"
     >
       <mat-card-header>
         <mat-card-subtitle
@@ -95,7 +95,7 @@
     (cdkDropListDropped)="onTaskDrop($event, 'Awaiting Feedback')"
     [cdkDropListConnectedTo]="[doneList, inProgressList, todoList]"
     #awaitingFeedbackList="cdkDropList"
-    [cdkDropListData]="allTasksAwaitingFeedback"
+    [cdkDropListData]="taskService.allTasksAwaitingFeedback"
     [attr.currentCollection]="currentCollectionNameAwaitingFeedback "
   >
     <h2 class="space-between font-21">
@@ -108,7 +108,7 @@
     <mat-card cdkDrag
       (click)="openTaskDetails(task, 'Awaiting Feedback')"
       class="mb-12"
-      *ngFor="let task of allTasksAwaitingFeedback"
+      *ngFor="let task of taskService.allTasksAwaitingFeedback"
     >
       <mat-card-header>
         <mat-card-subtitle
@@ -134,7 +134,7 @@
     cdkDropList
     (cdkDropListDropped)="onTaskDrop($event, 'Done')"
     #doneList="cdkDropList"
-    [cdkDropListData]="allTasksDone"
+    [cdkDropListData]="taskService.allTasksDone"
     [cdkDropListConnectedTo]="[todoList, awaitingFeedbackList, inProgressList]"
     [attr.currentCollection]="currentCollectionNameDone "
   >
@@ -148,7 +148,7 @@
     <mat-card cdkDrag 
       (click)="openTaskDetails(task, 'Done')"
       class="mb-12"
-      *ngFor="let task of allTasksDone"
+      *ngFor="let task of taskService.allTasksDone"
     >
       <mat-card-header>
         <mat-card-subtitle
