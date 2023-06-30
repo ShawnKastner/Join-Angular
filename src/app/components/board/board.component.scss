@@ -52,6 +52,7 @@
 
   .description {
     color: #a8a8a8;
+    word-break: break-word;
   }
 
   img {
@@ -71,6 +72,7 @@
 mat-card {
   border-radius: 30px;
   min-height: 200px;
+  width: 250px;
   transition: ease-in-out 125ms;
 
   &:hover {

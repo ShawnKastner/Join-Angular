@@ -12,6 +12,7 @@ import { AuthService } from 'src/app/shared/services/auth.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { TaskAddedToBoardComponent } from './task-added-to-board/task-added-to-board.component';
 import { ContactService } from 'src/app/shared/services/contact.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-task',
@@ -29,7 +30,8 @@ export class AddTaskComponent implements OnInit {
     public taskService: TaskService,
     private authService: AuthService,
     private _snackBar: MatSnackBar,
-    public contactService: ContactService
+    public contactService: ContactService,
+    private router: Router
   ) {
     this.minDate = new Date();
   }
