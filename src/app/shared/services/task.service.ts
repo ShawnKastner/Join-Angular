@@ -36,13 +36,13 @@ export class TaskService {
   subtasks: any[] = [];
   checkedSubtasks: { [taskId: string]: { [subtask: string]: number } } = {};
   allTasksToDo$!: Observable<any>;
-  allTasksToDo!: any;
+  allTasksToDo: any[] = [];
   allTasksInProgress$!: Observable<any>;
-  allTasksInProgress!: any;
+  allTasksInProgress: any[] = [];
   allTasksAwaitingFeedback$!: Observable<any>;
-  allTasksAwaitingFeedback!: any;
+  allTasksAwaitingFeedback: any[] = [];
   allTasksDone$!: Observable<any>;
-  allTasksDone!: any;
+  allTasksDone: any[] = [];
 
   constructor(
     private firestore: Firestore,
@@ -87,7 +87,6 @@ export class TaskService {
     );
     setDoc(taskDocRef, { ...newTask, taskId: taskId })
       .then(() => {
-        console.log('Add task is successful');
         this.clearInput();
       })
       .catch((error) => {
@@ -227,7 +226,6 @@ export class TaskService {
 
     querySnapshot.forEach(async (doc) => {
       await deleteDoc(doc.ref);
-      console.log('Subtask deleted successfully');
     });
   }
 
@@ -240,7 +238,6 @@ export class TaskService {
     );
     this.subtasks$.subscribe((data) => {
       this.subtasks = data;
-      console.log(this.subtasks);
     });
   }
 
@@ -253,7 +250,7 @@ export class TaskService {
     );
     this.categories$.subscribe((data) => {
       this.categories = data;
-      console.log(this.categories);
+
     });
   }
 

@@ -97,7 +97,7 @@ export class ContactService {
       collection(this.firestore, 'users', this.userId, 'contacts')
     );
     this.contacts$.subscribe((data) => {
-      this.contacts = data; // Aktualisiere die contacts-Eigenschaft
+      this.contacts = data; 
     });
   }
 
