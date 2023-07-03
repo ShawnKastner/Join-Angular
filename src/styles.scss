@@ -172,3 +172,13 @@ h1 {
   --mdc-snackbar-container-color: #2a3647;
 
 }
+
+@media(max-width: 650px) {
+  .font-21 {
+    font-size: 1rem;
+  }
+
+  .font-16 {
+    font-size: 0.8rem;
+  }
+}

@@ -97,6 +97,11 @@
 }
 
 @media (max-width: 800px) {
+  mat-toolbar {
+    position: fixed;
+    top: 0;
+  }
+
   .mat-drawer-container {
     position: unset;
   }
@@ -145,6 +150,25 @@
     padding-left: unset;
     padding-top: unset;
     padding-right: unset;
-    padding: 32px;
+    padding: 16px;
+  }
+
+  .header {
+    height: 79px;
+
+    span,
+    .help {
+      display: none;
+    }
+
+    .mobile-header-logo {
+      display: block;
+      width: 32px;
+    }
+
+    .img-container {
+      position: absolute;
+      right: 0;
+    }
   }
 }
