@@ -15,6 +15,8 @@ export class SummaryComponent implements OnInit {
   urgentTasks!: number;
   dates: any;
   nextDate: string = '';
+  hour = new Date().getHours();
+  currentTime = '';
 
   constructor(
     public authService: AuthService,
@@ -30,6 +32,7 @@ export class SummaryComponent implements OnInit {
       this.taskService.getTasksDone();
       this.allTasksCount();
     });
+    this.getCurrentTime();
   }
 
   allTasksCount() {
@@ -104,5 +107,13 @@ export class SummaryComponent implements OnInit {
     } else {
       this.nextDate = '';
     }
+  }
+
+  getCurrentTime() {
+    this.currentTime =
+      'Good ' +
+      ((this.hour < 12 && 'Morning') ||
+        (this.hour < 18 && 'Afternoon') ||
+        'Evening');
   }
 }
