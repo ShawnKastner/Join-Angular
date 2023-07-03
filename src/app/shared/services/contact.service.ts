@@ -31,7 +31,6 @@ export class ContactService {
     private afs: AngularFirestore
   ) {
     this.getUid();
-    console.log('Contacts:', this.contacts);
   }
 
   async getUid() {
@@ -61,7 +60,6 @@ export class ContactService {
 
     setDoc(contactDocRef, { ...contact, contactId: contactId })
       .then(() => {
-        console.log('Contact added successfully');
         this.clearInput();
       })
       .catch((error) => {

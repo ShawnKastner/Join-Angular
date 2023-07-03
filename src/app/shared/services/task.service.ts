@@ -155,7 +155,7 @@ export class TaskService {
         const newTaskDocRef = doc(newCollectionRef, taskId);
         await setDoc(newTaskDocRef, taskData);
         await deleteDoc(taskDocRef);
-        console.log('Task successfully moved to', newCollectionName);
+        // console.log('Task successfully moved to', newCollectionName);
       }
     }
   }

@@ -57,7 +57,6 @@ export class BoardComponent {
       height: '824px',
       data: { task: this.selectedTask, taskCategory: taskCategory },
     });
-    console.log(this.selectedTask);
   }
 
   onTaskDrop(event: CdkDragDrop<Task[]>, taskCategory: string) {

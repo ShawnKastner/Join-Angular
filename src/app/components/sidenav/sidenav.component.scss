@@ -90,8 +90,61 @@
   position: absolute;
   bottom: 125px;
 
-  img{
+  img {
     margin-left: 54px;
     padding-right: 16px;
+  }
+}
+
+@media (max-width: 800px) {
+  .mat-drawer-container {
+    position: unset;
+  }
+
+  mat-drawer {
+    position: absolute;
+    bottom: 0;
+    height: 80px;
+    top: unset;
+    width: 100% !important;
+
+    .logo-sidenav {
+      display: none;
+    }
+  }
+
+  .menu-items {
+    display: flex;
+    align-items: center;
+    margin-top: unset;
+    margin-bottom: unset;
+    height: 100% !important;
+
+    li {
+      flex-direction: column;
+      justify-content: center;
+      margin-bottom: unset;
+      margin-top: unset;
+      gap: 10px;
+      height: 100%;
+    }
+
+    mat-icon {
+      margin-left: unset !important;
+      padding-right: unset !important;
+    }
+  }
+
+  ::ng-deep {
+    mat-drawer-content {
+      margin-left: unset !important;
+    }
+  }
+
+  .router-container {
+    padding-left: unset;
+    padding-top: unset;
+    padding-right: unset;
+    padding: 32px;
   }
 }
