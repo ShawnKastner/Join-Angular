@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, combineLatest } from 'rxjs';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { TaskService } from 'src/app/shared/services/task.service';
 
@@ -10,12 +10,10 @@ import { TaskService } from 'src/app/shared/services/task.service';
 })
 export class SummaryComponent implements OnInit {
   displayName!: any;
-  tasksInBoard!: number;
-  tasksToDo!: number;
-  tasksInProgress!: number;
-  tasksAwaitingFeedback!: number;
-  tasksDone!: number;
+  allTasks$!: Observable<any[]>;
+  totalTasksCount!: number;
   urgentTasks!: number;
+  dates: any;
   nextDate: string = '';
 
   constructor(
@@ -25,48 +23,51 @@ export class SummaryComponent implements OnInit {
 
   ngOnInit(): void {
     this.displayName = this.authService.getUserData()?.displayName;
-    this.updateTasksInBoardCount();
-    this.updateTasksToDoCount();
-    this.updateTasksInProgressCount();
-    this.updateTasksAwaitingFeedbackCount();
-    this.updateTasksDoneCount();
-    this.updateUrgentTasksCount();
+    this.taskService.getUid().then(() => {
+      this.taskService.getTasksToDo();
+      this.taskService.getTasksInProgress();
+      this.taskService.getTasksAwaitingFeedback();
+      this.taskService.getTasksDone();
+      this.allTasksCount();
+    });
   }
 
-  updateTasksInBoardCount() {
-    this.tasksInBoard =
-      this.taskService.allTasksToDo.length +
-      this.taskService.allTasksInProgress.length +
-      this.taskService.allTasksAwaitingFeedback.length +
-      this.taskService.allTasksDone.length;
+  allTasksCount() {
+    this.allTasks$ = combineLatest([
+      this.taskService.allTasksToDo$,
+      this.taskService.allTasksInProgress$,
+      this.taskService.allTasksAwaitingFeedback$,
+      this.taskService.allTasksDone$,
+    ]);
+    this.allTasks$.subscribe(
+      ([tasksToDo, tasksInProgress, tasksAwaitingFeedback, tasksDone]) => {
+        this.totalTasksCount =
+          tasksToDo.length +
+          tasksInProgress.length +
+          tasksAwaitingFeedback.length +
+          tasksDone.length;
+        this.updateUrgentTasksCount(
+          tasksToDo,
+          tasksInProgress,
+          tasksAwaitingFeedback,
+          tasksDone
+        );
+      }
+    );
   }
 
-  updateTasksToDoCount() {
-    this.tasksToDo = this.taskService.allTasksToDo.length;
-  }
-
-  updateTasksInProgressCount() {
-    this.tasksInProgress = this.taskService.allTasksInProgress.length;
-  }
-
-  updateTasksAwaitingFeedbackCount() {
-    this.tasksAwaitingFeedback =
-      this.taskService.allTasksAwaitingFeedback.length;
-  }
-
-  updateTasksDoneCount() {
-    this.tasksDone = this.taskService.allTasksDone.length;
-  }
-  dates: any;
-
-  updateUrgentTasksCount() {
+  updateUrgentTasksCount(
+    tasksToDo: any[],
+    tasksInProgress: any[],
+    tasksAwaitingFeedback: any[],
+    tasksDone: any[]
+  ) {
     const allTasks = [
-      ...this.taskService.allTasksToDo,
-      ...this.taskService.allTasksInProgress,
-      ...this.taskService.allTasksAwaitingFeedback,
-      ...this.taskService.allTasksDone,
+      ...tasksToDo,
+      ...tasksInProgress,
+      ...tasksAwaitingFeedback,
+      ...tasksDone,
     ];
-
     const urgentTasks = allTasks.filter((task) => task.prio === 'urgent');
     this.urgentTasks = urgentTasks.length;
     this.dates = urgentTasks.map((task) => {
@@ -77,7 +78,6 @@ export class SummaryComponent implements OnInit {
         day: 'numeric',
         year: 'numeric',
       };
-
       return date.toLocaleDateString(undefined, options);
     });
     this.getClosestDate();
