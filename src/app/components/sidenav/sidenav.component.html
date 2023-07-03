@@ -9,6 +9,7 @@
       <li class="mt-12" [routerLink]="[{ outlets: { main: ['board'] } }]" routerLinkActive="active-link"><mat-icon>event_note</mat-icon>Board</li>
       <li class="mt-12" [routerLink]="[{ outlets: { main: ['addTask'] } }]" routerLinkActive="active-link"><mat-icon>add_task</mat-icon>Add Task</li>
       <li class="mt-12" [routerLink]="[{ outlets: { main: ['contacts'] } }]" routerLinkActive="active-link"><mat-icon>contacts</mat-icon>Contacts</li>
+      <li class="legal-notice" [routerLink]="[{ outlets: { main: ['legalNotice'] } }]" routerLinkActive="active-link"><img src="assets/img/legal_notice_icon.png"><span>Legal notice</span></li>
     </ul>
   </mat-drawer>
 
@@ -16,7 +17,7 @@
     <span>Kanban Project Management Tool</span>
   
     <div class="img-container">
-      <img src="assets/img/help.png">
+      <img [routerLink]="[{ outlets: { main: ['help'] } }]" src="assets/img/help.png">
       <img (click)="openLogoutDialog()" class="profile-picture" src="assets/img/blank-profile-img.png">
     </div>
   </mat-toolbar>

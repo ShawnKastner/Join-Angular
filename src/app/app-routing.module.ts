@@ -13,6 +13,8 @@ import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { BoardComponent } from './components/board/board.component';
 import { AddTaskComponent } from './components/add-task/add-task.component';
 import { ContactsComponent } from './components/contacts/contacts.component';
+import { LegalNoticeComponent } from './components/legal-notice/legal-notice.component';
+import { HelpComponent } from './components/help/help.component';
 
 const routes: Routes = [
   { path: '', component: SignInComponent },
@@ -27,6 +29,8 @@ const routes: Routes = [
       { path: 'board', component: BoardComponent, outlet: 'main' },
       { path: 'addTask', component: AddTaskComponent, outlet: 'main' },
       { path: 'contacts', component: ContactsComponent, outlet: 'main' },
+      { path: 'legalNotice', component: LegalNoticeComponent, outlet: 'main' },
+      { path: 'help', component: HelpComponent, outlet: 'main' },
     ],
   },
 ];

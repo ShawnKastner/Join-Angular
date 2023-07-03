@@ -31,7 +31,6 @@ export class AddTaskComponent implements OnInit {
     private authService: AuthService,
     private _snackBar: MatSnackBar,
     public contactService: ContactService,
-    private router: Router
   ) {
     this.minDate = new Date();
   }

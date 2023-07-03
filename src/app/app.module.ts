@@ -55,6 +55,8 @@ import { AddTaskDialogComponent } from './components/board/add-task-dialog/add-t
 import { TaskAddedToBoardComponent } from './components/add-task/task-added-to-board/task-added-to-board.component';
 import { TaskDetailsDialogComponent } from './components/board/task-details-dialog/task-details-dialog.component';
 import { EditTaskDialogComponent } from './components/board/task-details-dialog/edit-task-dialog/edit-task-dialog.component';
+import { LegalNoticeComponent } from './components/legal-notice/legal-notice.component';
+import { HelpComponent } from './components/help/help.component';
 
 @NgModule({
   declarations: [
@@ -75,6 +77,8 @@ import { EditTaskDialogComponent } from './components/board/task-details-dialog/
     TaskAddedToBoardComponent,
     TaskDetailsDialogComponent,
     EditTaskDialogComponent,
+    LegalNoticeComponent,
+    HelpComponent,
   ],
   imports: [
     BrowserModule,
