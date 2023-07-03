@@ -1,7 +1,7 @@
 <div class="board-header">
   <h1>Board</h1>
   <div class="search-and-btn align-center">
-    <input placeholder="Find Task" />
+    <input [(ngModel)]="searchValue" placeholder="Find Task" />
     <button (click)="openAddTaskDialog('To Do')" class="main-btn">
       Add task <img src="assets/img/plus.png" />
     </button>
@@ -16,7 +16,7 @@
     [cdkDropListConnectedTo]="[doneList, inProgressList, awaitingFeedbackList]"
     #todoList="cdkDropList"
     [cdkDropListData]="taskService.allTasksToDo"
-    [attr.currentCollection]="currentCollectionNameToDo "
+    [attr.currentCollection]="currentCollectionNameToDo"
   >
     <h2 class="space-between font-21">
       To do
@@ -25,7 +25,12 @@
         src="assets/img/plus-button-v1.png"
       />
     </h2>
-    <mat-card cdkDrag
+    <mat-card
+      [class.d-none]="
+        !task.title?.toLowerCase().includes(searchValue) &&
+        !task.description?.toLowerCase().includes(searchValue)
+      "
+      cdkDrag
       (click)="openTaskDetails(task, 'To Do')"
       class="mb-12"
       *ngFor="let task of taskService.allTasksToDo"
@@ -45,7 +50,9 @@
         <mat-progress-bar
           [value]="(task.checkedSubtasks / task.subtasks.length) * 100"
         ></mat-progress-bar
-        ><span>{{ task.checkedSubtasks || 0 }}/{{ task.subtasks.length }} Done</span>
+        ><span
+          >{{ task.checkedSubtasks || 0 }}/{{ task.subtasks.length }} Done</span
+        >
       </div>
     </mat-card>
   </div>
@@ -56,7 +63,7 @@
     [cdkDropListConnectedTo]="[doneList, awaitingFeedbackList, todoList]"
     #inProgressList="cdkDropList"
     [cdkDropListData]="taskService.allTasksInProgress"
-    [attr.currentCollection]="currentCollectionNameInProgress "
+    [attr.currentCollection]="currentCollectionNameInProgress"
   >
     <h2 class="space-between font-21">
       In progress
@@ -65,7 +72,12 @@
         src="assets/img/plus-button-v1.png"
       />
     </h2>
-    <mat-card cdkDrag
+    <mat-card
+      [class.d-none]="
+        !task.title?.toLowerCase().includes(searchValue) &&
+        !task.description?.toLowerCase().includes(searchValue)
+      "
+      cdkDrag
       (click)="openTaskDetails(task, 'In Progress')"
       class="mb-12"
       *ngFor="let task of taskService.allTasksInProgress"
@@ -85,7 +97,9 @@
         <mat-progress-bar
           [value]="(task.checkedSubtasks / task.subtasks.length) * 100"
         ></mat-progress-bar
-        ><span>{{ task.checkedSubtasks || 0 }}/{{ task.subtasks.length }} Done</span>
+        ><span
+          >{{ task.checkedSubtasks || 0 }}/{{ task.subtasks.length }} Done</span
+        >
       </div>
     </mat-card>
   </div>
@@ -96,7 +110,7 @@
     [cdkDropListConnectedTo]="[doneList, inProgressList, todoList]"
     #awaitingFeedbackList="cdkDropList"
     [cdkDropListData]="taskService.allTasksAwaitingFeedback"
-    [attr.currentCollection]="currentCollectionNameAwaitingFeedback "
+    [attr.currentCollection]="currentCollectionNameAwaitingFeedback"
   >
     <h2 class="space-between font-21">
       Awaiting Feedback
@@ -105,7 +119,12 @@
         src="assets/img/plus-button-v1.png"
       />
     </h2>
-    <mat-card cdkDrag
+    <mat-card
+      [class.d-none]="
+        !task.title?.toLowerCase().includes(searchValue) &&
+        !task.description?.toLowerCase().includes(searchValue)
+      "
+      cdkDrag
       (click)="openTaskDetails(task, 'Awaiting Feedback')"
       class="mb-12"
       *ngFor="let task of taskService.allTasksAwaitingFeedback"
@@ -125,7 +144,9 @@
         <mat-progress-bar
           [value]="(task.checkedSubtasks / task.subtasks.length) * 100"
         ></mat-progress-bar
-        ><span>{{ task.checkedSubtasks || 0 }}/{{ task.subtasks.length }} Done</span>
+        ><span
+          >{{ task.checkedSubtasks || 0 }}/{{ task.subtasks.length }} Done</span
+        >
       </div>
     </mat-card>
   </div>
@@ -136,7 +157,7 @@
     #doneList="cdkDropList"
     [cdkDropListData]="taskService.allTasksDone"
     [cdkDropListConnectedTo]="[todoList, awaitingFeedbackList, inProgressList]"
-    [attr.currentCollection]="currentCollectionNameDone "
+    [attr.currentCollection]="currentCollectionNameDone"
   >
     <h2 class="space-between font-21">
       Done
@@ -145,7 +166,12 @@
         src="assets/img/plus-button-v1.png"
       />
     </h2>
-    <mat-card cdkDrag 
+    <mat-card
+      [class.d-none]="
+        !task.title?.toLowerCase().includes(searchValue) &&
+        !task.description?.toLowerCase().includes(searchValue)
+      "
+      cdkDrag
       (click)="openTaskDetails(task, 'Done')"
       class="mb-12"
       *ngFor="let task of taskService.allTasksDone"
@@ -165,7 +191,9 @@
         <mat-progress-bar
           [value]="(task.checkedSubtasks / task.subtasks.length) * 100"
         ></mat-progress-bar
-        ><span>{{ task.checkedSubtasks || 0 }}/{{ task.subtasks.length }} Done</span>
+        ><span
+          >{{ task.checkedSubtasks || 0 }}/{{ task.subtasks.length }} Done</span
+        >
       </div>
     </mat-card>
   </div>

@@ -21,6 +21,7 @@ export class BoardComponent {
   currentCollectionNameInProgress: string;
   currentCollectionNameAwaitingFeedback: string;
   currentCollectionNameDone: string;
+  searchValue: string = '';
 
   constructor(
     private dialog: MatDialog,
