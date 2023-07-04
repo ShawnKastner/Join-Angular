@@ -132,3 +132,47 @@ textarea {
 ::-webkit-scrollbar-thumb {
   background: #888;
 }
+
+@media (max-width: 1300px) {
+  .add-task {
+    flex-direction: column;
+  }
+
+  .middle-line {
+    display: none;
+  }
+
+  .prio-btn-container {
+    mat-button-toggle-group {
+      justify-content: flex-start;
+    }
+  }
+  .btn-container {
+    position: absolute;
+    top: 100px;
+    right: 20px;
+
+    .clear-btn {
+      display: none;
+    }
+  }
+}
+
+@media (max-width: 1000px) {
+  .add-task-container {
+    margin-top: 100px;
+  }
+
+  .btn-container {
+    position: fixed;
+    top: 12px;
+    right: 10px;
+    z-index: 1000;
+  }
+}
+
+@media (max-width: 500px) {
+  mat-form-field {
+    width: 100%;
+  }
+}
