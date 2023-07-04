@@ -128,7 +128,13 @@ mat-card {
   }
 }
 
-@media (max-width: 800px) {
+@media (max-width: 1300px) {
+  .greeting-container {
+    display: none !important;
+  }
+}
+
+@media (max-width: 1000px) {
   .summary-container {
     margin-top: 85px;
     justify-content: center;
@@ -141,10 +147,6 @@ mat-card {
     .blue-line {
       display: none;
     }
-  }
-
-  .greeting-container {
-    display: none !important;
   }
 }
 
