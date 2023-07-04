@@ -1,5 +1,6 @@
 .board-header {
   display: flex;
+  align-items: center;
   justify-content: space-between;
 
   input {
@@ -39,6 +40,8 @@
   display: flex;
   justify-content: space-between;
   margin-top: 101.5px;
+  flex-wrap: wrap;
+  margin-bottom: 70px;
 
   h2 {
     font-weight: 700;
@@ -97,4 +100,52 @@ mat-progress-bar {
 
 .d-none {
   display: none;
+}
+
+@media (max-width: 1000px) {
+  .board-header {
+    margin-top: 110px;
+  }
+}
+
+@media (max-width: 750px) {
+  .board-header {
+    input {
+      position: absolute;
+      left: 25px;
+      top: 205px;
+    }
+
+    button {
+      display: none;
+    }
+
+    .responsive-add-task-btn {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 35px;
+      background-color: #2a3647;
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      color: #ffff;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+
+  .width-250 {
+    width: 100%;
+  }
+
+  mat-card {
+    width: 100%;
+  }
+
+  mat-progress-bar {
+    width: 251px;
+  }
 }

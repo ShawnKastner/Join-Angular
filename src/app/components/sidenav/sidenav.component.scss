@@ -100,6 +100,7 @@
   mat-toolbar {
     position: fixed;
     top: 0;
+    z-index: 999;
   }
 
   .mat-drawer-container {
@@ -107,7 +108,7 @@
   }
 
   mat-drawer {
-    position: absolute;
+    position: fixed;
     bottom: 0;
     height: 80px;
     top: unset;
@@ -150,7 +151,7 @@
     padding-left: unset;
     padding-top: unset;
     padding-right: unset;
-    padding: 16px;
+    padding: 25px;
   }
 
   .header {
