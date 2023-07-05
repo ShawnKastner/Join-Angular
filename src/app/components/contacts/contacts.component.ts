@@ -14,7 +14,7 @@ import { ContactService } from 'src/app/shared/services/contact.service';
   styleUrls: ['./contacts.component.scss'],
 })
 export class ContactsComponent implements OnInit {
-  selectedContact: any;
+
 
   constructor(
     private dialog: MatDialog,
@@ -36,22 +36,21 @@ export class ContactsComponent implements OnInit {
   }
 
   showContactDetails(contact: any) {
-    this.selectedContact = contact;
+    this.contactService.selectedContact = contact;
   }
 
   openEditContact() {
-    if (this.selectedContact) {
+    if (this.contactService.selectedContact) {
       const dialogRef = this.dialog.open(EditContactDialogComponent, {
         width: '1212px',
         height: '594px',
-        data: { contact: this.selectedContact },
+        data: { contact: this.contactService.selectedContact },
       });
       dialogRef
         .afterClosed()
         .subscribe((updatedContact: Contact | undefined) => {
           if (updatedContact) {
-            console.log('Updated contact:', updatedContact);
-            this.selectedContact = updatedContact;
+            this.contactService.selectedContact = updatedContact;
           }
         });
     }

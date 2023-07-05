@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import {
   Firestore,
-  addDoc,
   collection,
   collectionData,
+  deleteDoc,
   doc,
   setDoc,
   updateDoc,
@@ -24,6 +24,7 @@ export class ContactService {
   userId!: any;
   contacts$!: Observable<any[]>;
   contacts: any[] = [];
+  selectedContact: any;
 
   constructor(
     private firestore: Firestore,
@@ -87,6 +88,20 @@ export class ContactService {
       email: contact.email,
       phone: contact.phone,
       firstLetter: contact.firstLetter,
+    });
+  }
+
+  deleteContact(contactId: string): Promise<void> {
+    const contactDocRef = doc(
+      this.firestore,
+      'users',
+      this.userId,
+      'contacts',
+      contactId
+    );
+
+    return deleteDoc(contactDocRef).then(() => {
+      this.selectedContact = null;
     });
   }
 

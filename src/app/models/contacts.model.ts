@@ -10,7 +10,7 @@ export class Contact {
     this.email = email;
     this.phone = phone;
     this.firstLetter = firstLetter.toUpperCase();
-    this.color = color;
+    this.color = this.getRandomColor();
   }
 
   private getRandomColor(): string {

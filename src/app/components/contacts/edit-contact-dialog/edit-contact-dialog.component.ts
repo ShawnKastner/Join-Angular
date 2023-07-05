@@ -27,7 +27,10 @@ export class EditContactDialogComponent {
     this.dialogRef.close(this.contact);
   }
 
-  deleteContact() {}
+  deleteContact() {
+    this.contactService.deleteContact(this.data.contact.contactId);
+    this.closeDialog();
+  }
 
   editContact() {
     this.contactService.editContact(this.data.contact.contactId, this.contact);
