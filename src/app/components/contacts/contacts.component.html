@@ -1,8 +1,18 @@
-<mat-list>
-  <ng-container
-    *ngFor="let letter of contactService.getAlphabetLettersWithContacts(); let i = index"
+<mat-list [class.hide-list]="selectedContact">
+  <button
+    (click)="openAddContactDialog()"
+    class="main-btn font-21 add-c-btn responsive-add-btn"
+    mat-raised-button
   >
-    <div class="pr-48 pl-48">
+    New contact <mat-icon>person_add</mat-icon>
+  </button>
+  <ng-container
+    *ngFor="
+      let letter of contactService.getAlphabetLettersWithContacts();
+      let i = index
+    "
+  >
+    <div class="pr-48 pl-48 mt-55">
       <div mat-subheader class="font-21">{{ letter.charAt(0) }}</div>
       <mat-divider></mat-divider>
       <mat-list-item
@@ -23,7 +33,11 @@
   </ng-container>
 </mat-list>
 
-<div class="contact-content align-center">
+<div
+  [class.show-contact-content]="selectedContact"
+  class="contact-content align-center"
+>
+  <span class="d-none kanban-title-mobile">Kanban Project Management Tool</span>
   <h1>Contacts</h1>
   <div class="blue-line"></div>
   <span>Better with a team</span>
@@ -36,23 +50,36 @@
       >
         {{ selectedContact.firstLetter }}
       </div>
-      <h2>{{ selectedContact.name }}</h2>
+      <div class="flex-column">
+        <h2>{{ selectedContact.name }}</h2>
+        <span class="d-none add-task-c-mobile"
+          ><mat-icon>add</mat-icon>Add Task</span
+        >
+      </div>
     </div>
     <div class="contact-information-text">
       <span>Contact Information</span>
-      <div (click)="openEditContact()" class="edit-contact"><mat-icon>edit</mat-icon><span>Edit Contact</span></div>
+      <div (click)="openEditContact()" class="edit-contact">
+        <mat-icon>edit</mat-icon><span>Edit Contact</span>
+      </div>
     </div>
 
-    <div class="flex-column gap-22">
+    <div class="flex-column gap-22 email-with-phone">
       <div class="flex-column gap-15">
-        <span class="font-16 font-weight-700">Email</span>
-        <span>{{ selectedContact.email }}</span>
+        <span class="font-weight-700">Email</span>
+        <a href="mailto:{{ selectedContact.email }}" class="user-email">{{
+          selectedContact.email
+        }}</a>
       </div>
       <div class="flex-column gap-15">
-        <span class="font-16 font-weight-700">Phone</span>
+        <span class="font-weight-700">Phone</span>
         <span>{{ selectedContact.phone }}</span>
       </div>
     </div>
+  </div>
+  <div class="d-none c-mobile-edit-delete-btn">
+    <button class="delete-mobile"><mat-icon>delete</mat-icon></button
+    ><button class="edit-mobile"><mat-icon>edit</mat-icon></button>
   </div>
 </div>
 

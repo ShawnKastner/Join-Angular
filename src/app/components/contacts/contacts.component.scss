@@ -41,8 +41,13 @@ mat-list-item {
   padding-left: 53px;
   gap: 30px;
 
-  span {
+  span,
+  a {
     font-size: 1.7rem;
+  }
+
+  a {
+    text-decoration: none;
   }
 }
 
@@ -112,10 +117,177 @@ mat-list-item {
   }
 }
 
+.user-email {
+  cursor: pointer;
+  color: #29abe2;
+}
+
 .gap-22 {
   gap: 22px;
 }
 
 .gap-15 {
   gap: 15px;
+}
+
+@media (max-width: 1400px) {
+  .contact-content {
+    display: none;
+    left: unset;
+  }
+
+  .show-contact-content {
+    display: flex !important;
+  }
+
+  mat-list {
+    width: 100%;
+    left: 0;
+  }
+
+  .contact-details {
+    width: 100%;
+    top: 0;
+    flex: 1;
+    margin-top: 100px;
+  }
+
+  .hide-list {
+    display: none;
+  }
+
+  .add-c-btn {
+    display: none;
+  }
+
+  .responsive-add-btn {
+    display: flex;
+    position: fixed;
+    top: 100px;
+  }
+
+  .mt-55 {
+    &:first-of-type {
+      margin-top: 55px;
+    }
+  }
+
+  .email-with-phone {
+    span,
+    a {
+      font-size: 1rem !important;
+    }
+  }
+}
+
+@media (max-width: 1000px) {
+  .contact-content {
+    margin-top: 100px;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+
+    span {
+      font-size: 1.3rem;
+    }
+  }
+
+  mat-list {
+    top: 69px;
+  }
+
+  .blue-line {
+    position: absolute;
+    top: 140px;
+    left: 95px;
+    transform: rotate(90deg);
+    height: 90px;
+  }
+
+  .contact-details {
+    margin-top: 240px;
+
+    .contact-details-header {
+      gap: 20px;
+
+      h2 {
+        font-size: 2.2rem;
+      }
+
+      .firstLetter {
+        width: 80px;
+        height: 80px;
+        font-size: 1.7rem;
+      }
+
+      .add-task-c-mobile {
+        display: flex;
+        align-items: center;
+        color: #29abe2;
+
+        &:hover {
+          cursor: pointer;
+        }
+      }
+    }
+  }
+
+  .kanban-title-mobile {
+    display: block !important;
+    font-size: 1rem;
+  }
+
+  .edit-contact {
+    display: none;
+  }
+
+  .c-mobile-edit-delete-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    position: fixed;
+    right: 55px;
+    bottom: 145px;
+    gap: 25px;
+
+    .delete-mobile {
+      width: 32px;
+      height: 32px;
+      border-radius: 10px;
+      padding: unset;
+      cursor: pointer;
+
+      mat-icon {
+        color: #2A3647;
+      }
+    }
+    .edit-mobile {
+      background-color: #2a3647;
+      border-radius: 10px;
+      width: 50px;
+      height: 50px;
+
+      cursor: pointer;
+
+      mat-icon {
+        color: white;
+      }
+    }
+  }
+}
+
+@media (max-width: 450px) {
+  .contact-content {
+    padding-left: unset;
+  }
+
+  .c-mobile-edit-delete-btn {
+    right: 25px;
+    bottom: 110px;
+    gap: 10px;
+  }
+
+  .blue-line {
+    left: 45px;
+  }
 }
