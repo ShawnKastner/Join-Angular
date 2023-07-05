@@ -39,6 +39,10 @@ export class ContactsComponent implements OnInit {
     this.contactService.selectedContact = contact;
   }
 
+  deleteContact() {
+    this.contactService.deleteContact(this.contactService.selectedContact.contactId);
+  }
+
   openEditContact() {
     if (this.contactService.selectedContact) {
       const dialogRef = this.dialog.open(EditContactDialogComponent, {
@@ -54,5 +58,9 @@ export class ContactsComponent implements OnInit {
           }
         });
     }
+  }
+
+  backToContactList() {
+    this.contactService.selectedContact = null;
   }
 }

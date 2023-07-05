@@ -37,12 +37,16 @@
   [class.show-contact-content]="contactService.selectedContact"
   class="contact-content align-center"
 >
+  <mat-icon (click)="backToContactList()" class="mobile-back-arrow">arrow_back</mat-icon>
   <span class="d-none kanban-title-mobile">Kanban Project Management Tool</span>
   <h1>Contacts</h1>
   <div class="blue-line"></div>
   <span>Better with a team</span>
 
-  <div *ngIf="contactService.selectedContact" class="contact-details slide-in-dialog">
+  <div
+    *ngIf="contactService.selectedContact"
+    class="contact-details slide-in-dialog"
+  >
     <div class="contact-details-header align-center">
       <div
         class="firstLetter justify-align-center"
@@ -67,9 +71,11 @@
     <div class="flex-column gap-22 email-with-phone">
       <div class="flex-column gap-15">
         <span class="font-weight-700">Email</span>
-        <a href="mailto:{{ contactService.selectedContact.email }}" class="user-email">{{
-          contactService.selectedContact.email
-        }}</a>
+        <a
+          href="mailto:{{ contactService.selectedContact.email }}"
+          class="user-email"
+          >{{ contactService.selectedContact.email }}</a
+        >
       </div>
       <div class="flex-column gap-15">
         <span class="font-weight-700">Phone</span>
@@ -78,8 +84,11 @@
     </div>
   </div>
   <div class="d-none c-mobile-edit-delete-btn">
-    <button class="delete-mobile"><mat-icon>delete</mat-icon></button
-    ><button class="edit-mobile"><mat-icon>edit</mat-icon></button>
+    <button (click)="deleteContact()" class="delete-mobile">
+      <mat-icon>delete</mat-icon></button
+    ><button (click)="openEditContact()" class="edit-mobile">
+      <mat-icon>edit</mat-icon>
+    </button>
   </div>
 </div>
 
