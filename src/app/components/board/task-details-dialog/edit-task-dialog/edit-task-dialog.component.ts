@@ -32,6 +32,7 @@ export class EditTaskDialogComponent implements OnInit {
     private dialogRef: MatDialogRef<EditTaskDialogComponent>
   ) {
     this.minDate = new Date();
+    this.task.dueDate = new Date(this.data.task.dueDate);
     this.taskCategory = data.taskCategory;
   }
 

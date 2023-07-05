@@ -126,6 +126,10 @@ textarea {
   border-radius: 30px;
 }
 
+.add-task-btn-mobile {
+  display: none;
+}
+
 @media (max-width: 1000px) {
   h1 {
     font-size: 2rem !important;
@@ -161,16 +165,20 @@ textarea {
 }
 
 @media (max-width: 650px) {
+  .add-task-btn-mobile {
+    display: block;
+    border-radius: 10px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+  }
+
   .add-task-container {
     padding: 45px;
   }
 
   .btn-container {
-    top: 1px;
-    right: 15px;
-    .add-task-btn {
-      height: 45px;
-    }
+    display: none;
   }
 
   .add-task {

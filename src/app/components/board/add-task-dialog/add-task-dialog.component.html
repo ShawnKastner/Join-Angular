@@ -1,6 +1,12 @@
 <div class="add-task-container">
   <h1>Add Task</h1>
-
+  <button
+  (click)="addTask()"
+    mat-raised-button
+    class="main-btn font-21 add-task-btn-mobile"
+  >
+    Create<mat-icon>add_task</mat-icon>
+  </button>
   <div class="add-task">
     <div class="flex-column">
       <mat-form-field>

@@ -65,6 +65,7 @@ export class ContactsComponent implements OnInit {
     this.dialog.open(AddTaskDialogComponent, {
       width: '1116px',
       height: '914px',
+      panelClass: 'dialog-media-height',
       data: { taskCategory: taskCategory },
     });
   }
