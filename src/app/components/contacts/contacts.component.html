@@ -56,7 +56,7 @@
       </div>
       <div class="flex-column">
         <h2>{{ contactService.selectedContact.name }}</h2>
-        <span class="d-none add-task-c-mobile"
+        <span (click)="openAddTaskDialog('To Do')" class="d-none add-task-c-mobile"
           ><mat-icon>add</mat-icon>Add Task</span
         >
       </div>

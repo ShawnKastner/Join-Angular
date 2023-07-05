@@ -173,6 +173,21 @@ h1 {
 
 }
 
+/* width */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
 @media(max-width: 650px) {
   .font-21 {
     font-size: 1rem;

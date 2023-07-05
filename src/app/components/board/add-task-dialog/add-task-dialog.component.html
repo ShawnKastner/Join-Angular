@@ -56,7 +56,7 @@
     <div class="right-side">
       <mat-form-field>
         <mat-label>Due date</mat-label>
-        <input
+        <input required
           [(ngModel)]="taskService.date"
           [min]="minDate"
           matInput
@@ -76,7 +76,7 @@
           name="prio"
           [(ngModel)]="taskService.selectedPriority"
         >
-          <mat-button-toggle
+          <mat-button-toggle 
             [ngClass]="{
               'urgent-color': taskService.selectedPriority === 'urgent'
             }"
@@ -84,7 +84,7 @@
             value="urgent"
             >Urgent<img src="assets/img/prio-urgent.png"
           /></mat-button-toggle>
-          <mat-button-toggle
+          <mat-button-toggle 
             [ngClass]="{
               'medium-color': taskService.selectedPriority === 'medium'
             }"

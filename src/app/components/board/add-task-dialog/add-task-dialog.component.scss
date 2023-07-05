@@ -122,21 +122,78 @@ textarea {
   right: 0;
 }
 
-/* width */
-::-webkit-scrollbar {
-  width: 6px;
-}
-
-/* Track */
-::-webkit-scrollbar-track {
-  background: #f1f1f1;
-}
-
-/* Handle */
-::-webkit-scrollbar-thumb {
-  background: #888;
-}
-
 ::ng-deep .mat-mdc-dialog-container .mdc-dialog__surface {
   border-radius: 30px;
+}
+
+@media (max-width: 1000px) {
+  h1 {
+    font-size: 2rem !important;
+  }
+
+  .add-task {
+    flex-direction: column;
+    margin-top: unset;
+  }
+
+  .middle-line {
+    display: none;
+  }
+
+  .prio-btn-container {
+    align-items: flex-start;
+    margin-bottom: 15px;
+  }
+
+  .btn-container {
+    position: absolute;
+    top: 20px;
+    right: 15px;
+
+    .clear-btn {
+      display: none;
+    }
+  }
+
+  mat-form-field {
+    margin-bottom: 15px;
+  }
+}
+
+@media (max-width: 650px) {
+  .add-task-container {
+    padding: 45px;
+  }
+
+  .btn-container {
+    top: 1px;
+    right: 15px;
+    .add-task-btn {
+      height: 45px;
+    }
+  }
+
+  .add-task {
+    width: 100%;
+  }
+
+  mat-form-field {
+    width: 100%;
+  }
+
+  .prio-btn-container {
+    .mat-button-toggle {
+      width: 65px;
+      font-size: 0.6rem !important;
+
+      img {
+        height: 8px;
+        width: 16px;
+      }
+    }
+
+    mat-button-toggle-group {
+      width: 100%;
+    }
+  }
 }

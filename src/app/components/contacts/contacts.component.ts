@@ -7,6 +7,7 @@ import { AuthService } from 'src/app/shared/services/auth.service';
 import { EditContactDialogComponent } from './edit-contact-dialog/edit-contact-dialog.component';
 import { Contact } from 'src/app/models/contacts.model';
 import { ContactService } from 'src/app/shared/services/contact.service';
+import { AddTaskDialogComponent } from '../board/add-task-dialog/add-task-dialog.component';
 
 @Component({
   selector: 'app-contacts',
@@ -14,8 +15,6 @@ import { ContactService } from 'src/app/shared/services/contact.service';
   styleUrls: ['./contacts.component.scss'],
 })
 export class ContactsComponent implements OnInit {
-
-
   constructor(
     private dialog: MatDialog,
     public contactService: ContactService
@@ -40,7 +39,9 @@ export class ContactsComponent implements OnInit {
   }
 
   deleteContact() {
-    this.contactService.deleteContact(this.contactService.selectedContact.contactId);
+    this.contactService.deleteContact(
+      this.contactService.selectedContact.contactId
+    );
   }
 
   openEditContact() {
@@ -58,6 +59,14 @@ export class ContactsComponent implements OnInit {
           }
         });
     }
+  }
+
+  openAddTaskDialog(taskCategory: string) {
+    this.dialog.open(AddTaskDialogComponent, {
+      width: '1116px',
+      height: '914px',
+      data: { taskCategory: taskCategory },
+    });
   }
 
   backToContactList() {
