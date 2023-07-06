@@ -1,85 +1,232 @@
 .add-contact-container {
+  display: flex;
+  justify-content: space-between;
+  height: 100%;
+
+  .headline-with-subtitle {
+    background-color: #2a3647;
+    color: #ffff;
+    padding: 66px 46px;
+    justify-content: center;
+
+    h1 {
+      font-size: 3.8rem;
+    }
+
+    span {
+      font-size: 1.7rem;
+    }
+
+    img {
+      width: 55.12px;
+      height: 66.48px;
+    }
+  }
+
+  .form-field {
     display: flex;
-    justify-content: space-between;
-    height: 100%;
-  
-    .headline-with-subtitle {
-      background-color: #2a3647;
-      color: #ffff;
-      padding: 66px 46px;
-      justify-content: center;
-  
-      h1 {
-        font-size: 3.8rem;
+    align-items: center;
+    padding-right: 53px;
+    gap: 84px;
+
+    .close-btn {
+      position: absolute;
+      top: 26px;
+      right: 55.4px;
+
+      &:hover {
+        cursor: pointer;
       }
-  
+    }
+
+    .input-icon {
+      position: absolute;
+      right: 0;
+      top: 15px;
+    }
+  }
+
+  .btn-container {
+    display: flex;
+    gap: 25px;
+
+    .cancel-btn {
+      width: 136px;
+      height: 55px;
+      border-radius: 10px;
+      transition: ease-in-out 125ms;
+
+      &:hover {
+        cursor: pointer;
+        border: 1px solid #29abe2;
+        transition: ease-in-out 125ms;
+      }
+    }
+    .create-btn {
+      background-color: #2a3647;
+      border: unset;
+      width: 218px;
+      height: 55px;
+      border-radius: 10px;
+      transition: ease-in-out 125ms;
+
+      &:hover {
+        cursor: pointer;
+        background-color: #29abe2 !important;
+        transition: ease-in-out 125ms;
+      }
+    }
+  }
+}
+
+::ng-deep .mat-mdc-dialog-container .mdc-dialog__surface {
+  border-radius: 30px;
+}
+
+@media (max-width: 1400px) {
+  .add-contact-container {
+    .headline-with-subtitle {
+      h1 {
+        font-size: 2.5rem !important;
+      }
+      span {
+        font-size: 1rem;
+      }
+    }
+  }
+
+  .blue-line {
+    width: 100px;
+  }
+}
+
+@media (max-width: 1240px) {
+  .add-contact-container {
+    overflow-x: hidden;
+
+    .headline-with-subtitle {
+      h1 {
+        font-size: 2.3rem !important;
+      }
+      span {
+        font-size: 0.9rem;
+      }
+    }
+
+    .blue-line {
+      width: 105px;
+    }
+
+    .form-field {
+      gap: 35px;
+
+      mat-form-field {
+        width: 300px;
+      }
+    }
+
+    .btn-container {
+      .cancel-btn {
+        display: none;
+      }
+    }
+  }
+}
+
+@media (max-width: 1000px) {
+  .add-contact-container {
+    flex-direction: column;
+    justify-content: flex-start;
+
+    .headline-with-subtitle {
+      align-items: center;
+      height: 30%;
+
+      h1 {
+        font-size: 3.8rem !important;
+      }
+
       span {
         font-size: 1.7rem;
       }
-  
+
       img {
-        width: 55.12px;
-        height: 66.48px;
+        display: none;
       }
     }
-  
+
     .form-field {
-      display: flex;
-      align-items: center;
-      padding-right: 53px;
-      gap: 84px;
-  
+      flex-direction: column;
+      position: relative;
+      bottom: 70px;
+      gap: 15px;
+      padding-left: 12px;
+      padding-right: 12px;
+
       .close-btn {
-        position: absolute;
-        top: 26px;
-        right: 55.4px;
-  
-        &:hover {
-          cursor: pointer;
-        }
-      }
-  
-      .input-icon {
-        position: absolute;
-        right: 0;
-        top: 15px;
+        display: none;
       }
     }
-  
+
     .btn-container {
-      display: flex;
-      gap: 25px;
-  
-      .cancel-btn {
-        width: 136px;
-        height: 55px;
-        border-radius: 10px;
-        transition: ease-in-out 125ms;
-  
-        &:hover {
-          cursor: pointer;
-          border: 1px solid #29abe2;
-          transition: ease-in-out 125ms;
-        }
+      justify-content: center;
+    }
+  }
+
+  .close-btn-mobile {
+    display: block !important;
+    cursor: pointer;
+    position: absolute;
+    top: 15px;
+    right: 20px;
+  }
+}
+
+@media (max-width: 650px) {
+  .add-contact-container {
+    .headline-with-subtitle {
+      h1 {
+        font-size: 2.9rem !important;
       }
-      .create-btn {
-        background-color: #2a3647;
-        border: unset;
-        width: 218px;
-        height: 55px;
-        border-radius: 10px;
-        transition: ease-in-out 125ms;
-  
-        &:hover {
-          cursor: pointer;
-          background-color: #29abe2 !important;
-          transition: ease-in-out 125ms;
-        }
+      span {
+        font-size: 1.3rem;
+      }
+    }
+
+    .form-field {
+      img {
+        height: 120px;
       }
     }
   }
-  
-  ::ng-deep .mat-mdc-dialog-container .mdc-dialog__surface {
-    border-radius: 30px;
+
+  .blue-line {
+    width: 90px;
   }
-  
+}
+
+@media (max-width: 430px) {
+  .add-contact-container {
+    .headline-with-subtitle {
+      h1 {
+        font-size: 2.1rem !important;
+      }
+      span {
+        font-size: 0.9rem;
+      }
+    }
+  }
+
+  .form-field {
+    margin-right: 12px;
+    padding: unset !important;
+  }
+
+  .blue-line {
+    width: 60px;
+  }
+
+  .width-100 {
+    width: 100%;
+  }
+}

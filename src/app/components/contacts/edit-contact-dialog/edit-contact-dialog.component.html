@@ -6,21 +6,21 @@
         <div class="blue-line"></div>
       </div>
     </div>
-    <div class="form-field">
+    <div class="form-field width-100">
       <mat-icon (click)="closeDialog()" class="close-btn">close</mat-icon>
       <div><img src="assets/img/add-contact.png" /></div>
       <div class="flex-column">
-        <mat-form-field>
+        <mat-form-field class="width-100">
           <mat-label>Name</mat-label>
           <input [(ngModel)]="contact.name" matInput placeholder="Enter your name" />
           <mat-icon class="input-icon">person</mat-icon>
         </mat-form-field>
-        <mat-form-field>
+        <mat-form-field class="width-100">
           <mat-label>Email</mat-label>
           <input [(ngModel)]="contact.email" matInput placeholder="Enter your email" />
           <mat-icon class="input-icon">mail</mat-icon>
         </mat-form-field>
-        <mat-form-field>
+        <mat-form-field class="width-100">
           <mat-label>Phone</mat-label>
           <input [(ngModel)]="contact.phone" matInput placeholder="Enter your phone number" />
           <mat-icon class="input-icon">call</mat-icon>

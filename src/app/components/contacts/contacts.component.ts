@@ -49,10 +49,15 @@ export class ContactsComponent implements OnInit {
   }
 
   openEditContact() {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.panelClass = [
+      'add-c-dialog-media',
+      'slide-in-dialog',
+      'add-c-dialog-height',
+    ];
     if (this.contactService.selectedContact) {
       const dialogRef = this.dialog.open(EditContactDialogComponent, {
-        width: '1212px',
-        height: '594px',
+        ...dialogConfig,
         data: { contact: this.contactService.selectedContact },
       });
       dialogRef

@@ -87,7 +87,7 @@
   border-radius: 30px;
 }
 
-@media(max-width: 1400px) {
+@media (max-width: 1400px) {
   .add-contact-container {
     .headline-with-subtitle {
       h1 {
@@ -218,6 +218,12 @@
       span {
         font-size: 0.9rem;
       }
+    }
+
+    .form-field {
+      margin-right: 6px;
+      margin-left: 6px;
+      padding: unset !important;
     }
   }
 
