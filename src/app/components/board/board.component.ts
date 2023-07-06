@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { AddTaskDialogComponent } from './add-task-dialog/add-task-dialog.component';
 import { TaskService } from 'src/app/shared/services/task.service';
 import { TaskDetailsDialogComponent } from './task-details-dialog/task-details-dialog.component';
@@ -23,10 +23,7 @@ export class BoardComponent {
   currentCollectionNameDone: string;
   searchValue: string = '';
 
-  constructor(
-    private dialog: MatDialog,
-    public taskService: TaskService
-  ) {
+  constructor(private dialog: MatDialog, public taskService: TaskService) {
     this.currentCollectionNameToDo = 'To Do';
     this.currentCollectionNameInProgress = 'In Progress';
     this.currentCollectionNameAwaitingFeedback = 'Awaiting Feedback';
@@ -43,10 +40,10 @@ export class BoardComponent {
   }
 
   openAddTaskDialog(taskCategory: string) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.panelClass= ['dialog-media-height', 'slide-in-dialog', 'add-task-dialog-width']
     this.dialog.open(AddTaskDialogComponent, {
-      width: '1116px',
-      height: '914px',
-      panelClass: 'dialog-media-height',
+      ...dialogConfig,
       data: { taskCategory: taskCategory },
     });
   }

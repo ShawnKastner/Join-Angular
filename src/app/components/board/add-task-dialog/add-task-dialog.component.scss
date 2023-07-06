@@ -188,7 +188,9 @@ textarea {
   mat-form-field {
     width: 100%;
   }
+}
 
+@media (max-width: 400px) {
   .prio-btn-container {
     .mat-button-toggle {
       width: 65px;
@@ -202,6 +204,7 @@ textarea {
 
     mat-button-toggle-group {
       width: 100%;
+      justify-content: flex-start;
     }
   }
 }

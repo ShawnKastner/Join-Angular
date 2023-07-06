@@ -168,9 +168,16 @@ h1 {
   }
 }
 
+.add-task-dialog-width {
+  width: 1116px !important;
+}
+
+.add-c-dialog-height {
+  height: 594px;
+}
+
 .blue-snackbar {
   --mdc-snackbar-container-color: #2a3647;
-
 }
 
 /* width */
@@ -188,7 +195,13 @@ h1 {
   background: #888;
 }
 
-@media(max-width: 650px) {
+@media (max-width: 1000px) {
+  .add-c-dialog-height {
+    height: 80% !important;
+  }
+}
+
+@media (max-width: 650px) {
   .font-21 {
     font-size: 1rem;
   }
@@ -198,6 +211,6 @@ h1 {
   }
 
   .dialog-media-height {
-      height: 80% !important;
+    height: 80% !important;
   }
 }

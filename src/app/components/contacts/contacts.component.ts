@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { AddContactDialogComponent } from './add-contact-dialog/add-contact-dialog.component';
 import { Observable } from 'rxjs';
 import { Firestore, collection, collectionData } from '@angular/fire/firestore';
@@ -27,10 +27,14 @@ export class ContactsComponent implements OnInit {
   }
 
   openAddContactDialog() {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.panelClass = [
+      'add-c-dialog-media',
+      'slide-in-dialog',
+      'add-c-dialog-height',
+    ];
     this.dialog.open(AddContactDialogComponent, {
-      width: '1212px',
-      height: '594px',
-      panelClass: 'slide-in-dialog',
+      ...dialogConfig,
     });
   }
 
@@ -62,10 +66,14 @@ export class ContactsComponent implements OnInit {
   }
 
   openAddTaskDialog(taskCategory: string) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.panelClass = [
+      'dialog-media-height',
+      'slide-in-dialog',
+      'add-task-dialog-width',
+    ];
     this.dialog.open(AddTaskDialogComponent, {
-      width: '1116px',
-      height: '914px',
-      panelClass: 'dialog-media-height',
+      ...dialogConfig,
       data: { taskCategory: taskCategory },
     });
   }
