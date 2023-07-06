@@ -1,12 +1,15 @@
-.help-container {
-  margin-top: 100px;
-}
-
-h2, h3 {
+h2,
+h3 {
   font-size: 1.7rem;
   font-weight: 700;
 }
 
 h3 {
-    margin: unset;
+  margin: unset;
+}
+
+@media (max-width: 1000px) {
+  .help-container {
+    margin-top: 100px;
+  }
 }
