@@ -1,7 +1,7 @@
 <div class="add-task-container">
   <h1>Add Task</h1>
   <button
-  (click)="addTask()"
+    (click)="addTask()"
     mat-raised-button
     class="main-btn font-21 add-task-btn-mobile"
   >
@@ -11,7 +11,15 @@
     <div class="flex-column">
       <mat-form-field>
         <mat-label>Enter a title</mat-label>
-        <input [(ngModel)]="taskService.title" required matInput />
+        <input
+          [(ngModel)]="taskService.title"
+          required
+          matInput
+          #titleInput="ngModel"
+        />
+        <mat-error *ngIf="titleInput.invalid && titleInput.touched">
+          Title is required.
+        </mat-error>
       </mat-form-field>
       <mat-form-field>
         <mat-label>Enter a Description</mat-label>
@@ -19,17 +27,23 @@
           [(ngModel)]="taskService.description"
           required
           matInput
+          #description="ngModel"
         ></textarea>
+        <mat-error *ngIf="description.invalid && description.touched">
+          Description is required.
+        </mat-error>
       </mat-form-field>
       <mat-form-field>
         <mat-label>Select task category</mat-label>
-        <mat-select [(ngModel)]="taskService.category" required>
+        <mat-select
+          [(ngModel)]="taskService.category"
+          required
+          #category="ngModel"
+        >
           <mat-select-trigger class="align-center">
             <mat-icon
               class="color-circle"
-              [style.color]="
-                taskService.getCategoryColor(taskService.category)
-              "
+              [style.color]="taskService.getCategoryColor(taskService.category)"
               >fiber_manual_record</mat-icon
             >
             {{ taskService.getCategoryName(taskService.category) }}
@@ -46,27 +60,39 @@
             >{{ category.name }}</mat-option
           >
         </mat-select>
+        <mat-error *ngIf="category.invalid && category.touched">
+          Category is required.
+        </mat-error>
       </mat-form-field>
       <mat-form-field>
         <mat-label>Select contacts to assign</mat-label>
-        <mat-select [(ngModel)]="taskService.selectedContact">
+        <mat-select
+          [(ngModel)]="taskService.selectedContact"
+          required
+          #contact="ngModel"
+        >
           <mat-option
             *ngFor="let contact of contactService.contacts$ | async"
             [value]="contact.name"
             >{{ contact.name }}</mat-option
           >
         </mat-select>
+        <mat-error *ngIf="contact.invalid && contact.touched">
+          Contact is required.
+        </mat-error>
       </mat-form-field>
     </div>
     <div class="middle-line"></div>
     <div class="right-side">
       <mat-form-field>
         <mat-label>Due date</mat-label>
-        <input required
+        <input
           [(ngModel)]="taskService.date"
           [min]="minDate"
           matInput
           [matDatepicker]="picker"
+          required
+          #date="ngModel"
         />
         <mat-hint>DD/MM/YYYY</mat-hint>
         <mat-datepicker-toggle
@@ -74,6 +100,9 @@
           [for]="picker"
         ></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
+        <mat-error *ngIf="date.invalid && date.touched">
+          Date is required.
+        </mat-error>
       </mat-form-field>
       <div class="prio-btn-container flex-column">
         <span class="font-21 mb-12">Prio</span>
@@ -81,8 +110,10 @@
           class="gap-10 justify-align-center"
           name="prio"
           [(ngModel)]="taskService.selectedPriority"
+          required
+          #prio="ngModel"
         >
-          <mat-button-toggle 
+          <mat-button-toggle
             [ngClass]="{
               'urgent-color': taskService.selectedPriority === 'urgent'
             }"
@@ -90,7 +121,7 @@
             value="urgent"
             >Urgent<img src="assets/img/prio-urgent.png"
           /></mat-button-toggle>
-          <mat-button-toggle 
+          <mat-button-toggle
             [ngClass]="{
               'medium-color': taskService.selectedPriority === 'medium'
             }"
@@ -121,10 +152,7 @@
             </button>
           </ng-container>
           <ng-template #addButton>
-            <button
-              mat-icon-button
-              (click)="taskService.startAddingSubtask()"
-            >
+            <button mat-icon-button (click)="taskService.startAddingSubtask()">
               <mat-icon>add</mat-icon>
             </button>
           </ng-template>
@@ -149,9 +177,17 @@
   </div>
   <div class="btn-container">
     <button
-    (click)="addTask()"
+      (click)="addTask()"
       mat-raised-button
       class="main-btn add-task-btn font-21"
+      [disabled]="
+        !titleInput.valid ||
+        !description.valid ||
+        !category.valid ||
+        !contact.valid ||
+        !date.valid ||
+        !prio.valid
+      "
     >
       Create Task<mat-icon>add_task</mat-icon>
     </button>
