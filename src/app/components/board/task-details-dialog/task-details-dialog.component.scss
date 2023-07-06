@@ -129,3 +129,11 @@
     cursor: pointer;
   }
 }
+
+@media (max-width: 400px) {
+  .tasks-detail-container {
+    span {
+      font-size: 1rem;
+    }
+  }
+}

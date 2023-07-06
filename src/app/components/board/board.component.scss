@@ -149,3 +149,11 @@ mat-progress-bar {
     width: 251px;
   }
 }
+
+@media(max-width: 430px) {
+  .board-header {
+    input {
+      left: 12px;
+    }
+  }
+}
