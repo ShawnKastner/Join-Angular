@@ -3,6 +3,7 @@ import { Timestamp } from '@angular/fire/firestore';
 import {
   MAT_DIALOG_DATA,
   MatDialog,
+  MatDialogConfig,
   MatDialogRef,
 } from '@angular/material/dialog';
 import { Task } from 'src/app/models/tasks.model';

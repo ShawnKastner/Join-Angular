@@ -97,3 +97,42 @@ textarea {
 ::ng-deep .mat-mdc-dialog-container .mdc-dialog__surface {
   border-radius: 30px;
 }
+
+@media (max-width: 680px) {
+  mat-form-field {
+    width: 100%;
+  }
+
+  .prio-btn-container {
+    .mat-button-toggle {
+      width: 100%;
+      font-size: 0.6rem !important;
+
+      img {
+        height: 8px;
+        width: 16px;
+      }
+    }
+
+    mat-button-toggle-group {
+      width: 100%;
+      justify-content: flex-start;
+    }
+  }
+}
+
+@media (max-width: 400px) {
+  .edit-task-container {
+    padding: 12px;
+    margin-top: 50px;
+  }
+
+  .close-btn {
+    top: 15px;
+    right: 15px;
+  }
+
+  .edit-btn {
+    right: 20px;
+  }
+}
