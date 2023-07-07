@@ -199,6 +199,11 @@ h1 {
   .add-c-dialog-height {
     height: 80% !important;
   }
+
+  .kanban-text-mobile {
+    display: block !important;
+    font-size: 1rem !important;
+  }
 }
 
 @media (max-width: 650px) {

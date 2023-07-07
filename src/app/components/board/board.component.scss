@@ -104,7 +104,12 @@ mat-progress-bar {
 
 @media (max-width: 1000px) {
   .board-header {
-    margin-top: 110px;
+    margin-top: 125px;
+  }
+
+  .kanban-text-mobile {
+    position: absolute;
+    top: 90px;
   }
 }
 
