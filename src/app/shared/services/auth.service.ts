@@ -7,11 +7,16 @@ import {
   AngularFirestoreDocument,
 } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
   userData: any; // Save logged in user data
+  uid!: string;
+  photoURL!: string;
+  userData$!: Observable<any>
+
   constructor(
     public afs: AngularFirestore, // Inject Firestore service
     public afAuth: AngularFireAuth, // Inject Firebase auth service
@@ -32,6 +37,7 @@ export class AuthService {
         this.userData = null;
       }
     });
+    this.getPhotoURL();
   }
 
   getUserData(): User | null {
@@ -142,4 +148,26 @@ export class AuthService {
       this.router.navigate(['']);
     });
   }
+
+  //get user photoURL from Firestore
+  getPhotoURL() {
+  	this.afAuth.user.subscribe((user) => {
+			if (user) {
+				const userDoc: AngularFirestoreDocument<any> = this.afs
+					.collection('users')
+					.doc(user.uid);
+				this.userData$ = userDoc.valueChanges();
+
+				this.userData$.subscribe((userData) => {
+					if (userData) {
+						this.uid = user.uid;
+						this.photoURL = userData['photoURL'];
+					} else {
+						console.log('User data not found in Firestore');
+					}
+				});
+			}
+		});
+	}
+
 }

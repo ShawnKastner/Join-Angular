@@ -18,7 +18,7 @@
     <img class="mobile-header-logo d-none" src="assets/img/join-logo.png" />
     <div class="img-container">
       <img class="help" [routerLink]="[{ outlets: { main: ['help'] } }]" src="assets/img/help.png">
-      <img (click)="openLogoutDialog()" class="profile-picture" src="assets/img/blank-profile-img.png">
+      <img (click)="openLogoutDialog()" class="profile-picture" [src]="authService.photoURL || 'assets/img/blank-profile-img.png'">
     </div>
   </mat-toolbar>
 

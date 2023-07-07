@@ -5,6 +5,13 @@
   color: #cdcdcd;
   border-radius: 20px 0px 20px 20px;
 
+  mat-icon {
+    cursor: pointer;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+  }
+
   span {
     &:hover {
       cursor: pointer;

@@ -33,6 +33,7 @@ import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { provideAuth, getAuth } from '@angular/fire/auth';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import { getStorage, provideStorage } from '@angular/fire/storage';
 import { environment } from '../environments/environment';
 
 //Services
@@ -88,6 +89,7 @@ import { HelpComponent } from './components/help/help.component';
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideFirestore(() => getFirestore()),
     provideAuth(() => getAuth()),
+    provideStorage(() => getStorage()),
     AngularFireAuthModule,
     AngularFirestoreModule,
     AngularFireStorageModule,

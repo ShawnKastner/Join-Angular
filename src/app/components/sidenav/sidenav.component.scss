@@ -76,7 +76,9 @@
 
     .profile-picture {
       width: 49px;
+      height: 49px;
       border-radius: 100%;
+      object-fit: cover;
     }
   }
 }
