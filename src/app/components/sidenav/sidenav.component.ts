@@ -21,7 +21,7 @@ export class SidenavComponent {
       dialogConfig.position = { top: '89px', right: '0px' };
     }
     this.dialog.open(LogoutDialogComponent, {
-      width: '130px',
+      width: '150px',
       ...dialogConfig,
       position: dialogConfig.position,
     });

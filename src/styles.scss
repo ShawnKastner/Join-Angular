@@ -206,6 +206,21 @@ h1 {
   }
 }
 
+@media (max-width: 700px) {
+  .blue-line {
+    width: 88px;
+  }
+
+  .logo-container {
+    top: 25px;
+    left: 25px;
+    
+    img {
+      width: 64px;
+    }
+  }
+}
+
 @media (max-width: 650px) {
   .font-21 {
     font-size: 1rem;

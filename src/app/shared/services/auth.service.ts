@@ -112,7 +112,7 @@ export class AuthService {
     return this.afAuth
       .sendPasswordResetEmail(passwordResetEmail)
       .then(() => {
-        window.alert('Password reset email sent, check your inbox.');
+        this.router.navigate(['/']);
       })
       .catch((error) => {
         window.alert(error);
@@ -135,7 +135,7 @@ export class AuthService {
       uid: user.uid,
       email: user.email,
       displayName: user.displayName,
-      photoURL: user.photoURL,
+      photoURL: this.photoURL,
     };
     return userRef.set(userData, {
       merge: true,
@@ -169,5 +169,4 @@ export class AuthService {
 			}
 		});
 	}
-
 }

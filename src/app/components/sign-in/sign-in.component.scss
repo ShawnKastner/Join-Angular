@@ -1,4 +1,4 @@
-.remember-container{
+.remember-container {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -22,15 +22,60 @@
 }
 
 .sign-up-container {
-    display: flex;
+  display: flex;
+  align-items: center;
+  gap: 51px;
+  position: absolute;
+  right: 114px;
+  top: 67px;
+
+  button {
+    height: 51px;
+    width: auto;
+  }
+}
+
+@media (max-width: 700px) {
+  mat-card-header {
+    h1 {
+      font-size: 2.9rem !important;
+    }
+  }
+
+  mat-card {
+    width: 372px;
+    height: 573px;
+  }
+
+  mat-card-content {
     align-items: center;
-    gap: 51px;
-    position: absolute;
-    right: 114px;
-    top: 67px;
+    margin-top: 24px;
+  }
+
+  mat-form-field {
+    width: 327px;
+  }
+
+  .remember-container {
+    width: 100%;
+    flex-direction: column-reverse;
+    gap: 31px;
+    align-items: flex-start;
+  }
+
+  .btn-container {
+    flex-direction: column;
+    gap: 21px;
 
     button {
-        height: 51px;
-        width: auto;
+      font-size: 1rem;
     }
+  }
+
+  .sign-up-container {
+    top: unset;
+    bottom: 32px;
+    right: 80px;
+    gap: 35px;
+  }
 }
