@@ -70,6 +70,7 @@ mat-form-field {
   top: 40px;
   left: 37px;
   cursor: pointer;
+  z-index: 1;
 }
 
 .main-btn {
@@ -232,5 +233,11 @@ h1 {
 
   .dialog-media-height {
     height: 80% !important;
+  }
+}
+
+@media (max-width: 375px) and (max-height: 667px) { 
+  body {
+    overflow-y: auto;
   }
 }

@@ -28,7 +28,7 @@ mat-card-actions {
   mat-form-field {
     width: 327px;
   }
-  
+
   .btn-container {
     flex-direction: column;
     gap: 21px;
@@ -36,5 +36,11 @@ mat-card-actions {
     button {
       font-size: 1rem;
     }
+  }
+}
+
+@media (max-width: 375px) and (max-height: 667px) {
+  .logo-container {
+    position: unset;
   }
 }
