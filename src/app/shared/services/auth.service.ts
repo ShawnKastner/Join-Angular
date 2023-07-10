@@ -1,6 +1,5 @@
 import { Injectable, NgZone } from '@angular/core';
 import { User } from '../services/user';
-import * as auth from 'firebase/auth';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import {
   AngularFirestore,
@@ -15,7 +14,7 @@ export class AuthService {
   userData: any; // Save logged in user data
   uid!: string;
   photoURL!: string;
-  userData$!: Observable<any>
+  userData$!: Observable<any>;
 
   constructor(
     public afs: AngularFirestore, // Inject Firestore service
@@ -57,20 +56,20 @@ export class AuthService {
   }
 
   guestLogin() {
-		return this.afAuth
-			.signInAnonymously()
-			.then((result) => {
-				this.SetUserData(result.user);
-				this.afAuth.onAuthStateChanged((user) => {
-					if (user) {
+    return this.afAuth
+      .signInAnonymously()
+      .then((result) => {
+        this.SetUserData(result.user);
+        this.afAuth.onAuthStateChanged((user) => {
+          if (user) {
             this.router.navigateByUrl('/sidenav/(main:summary)');
-					}
-				});
-			})
-			.catch((error) => {
-				window.alert(error.message);
-			});
-	}
+          }
+        });
+      })
+      .catch((error) => {
+        window.alert(error.message);
+      });
+  }
 
   // Sign in with email/password
   SignIn(email: string, password: string) {
@@ -135,7 +134,6 @@ export class AuthService {
       uid: user.uid,
       email: user.email,
       displayName: user.displayName,
-      photoURL: this.photoURL,
     };
     return userRef.set(userData, {
       merge: true,
@@ -151,22 +149,21 @@ export class AuthService {
 
   //get user photoURL from Firestore
   getPhotoURL() {
-  	this.afAuth.user.subscribe((user) => {
-			if (user) {
-				const userDoc: AngularFirestoreDocument<any> = this.afs
-					.collection('users')
-					.doc(user.uid);
-				this.userData$ = userDoc.valueChanges();
-
-				this.userData$.subscribe((userData) => {
-					if (userData) {
-						this.uid = user.uid;
-						this.photoURL = userData['photoURL'];
-					} else {
-						console.log('User data not found in Firestore');
-					}
-				});
-			}
-		});
-	}
+    this.afAuth.user.subscribe((user) => {
+      if (user) {
+        const userDoc: AngularFirestoreDocument<any> = this.afs
+          .collection('users')
+          .doc(user.uid);
+        this.userData$ = userDoc.valueChanges();
+        this.userData$.subscribe((userData) => {
+          if (userData) {
+            this.uid = user.uid;
+            this.photoURL = userData['photoURL'];
+          } else {
+            console.log('User data not found in Firestore');
+          }
+        });
+      }
+    });
+  }
 }

@@ -1,6 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import { AuthService } from 'src/app/shared/services/auth.service';
@@ -22,7 +21,6 @@ export class SignInComponent implements OnInit {
   constructor(
     public authService: AuthService,
     private afAuth: AngularFireAuth,
-    private firestore: AngularFirestore
   ) {
     afAuth.setPersistence(firebase.auth.Auth.Persistence.LOCAL);
   }
