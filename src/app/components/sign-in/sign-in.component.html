@@ -33,7 +33,7 @@
     </mat-form-field>
     <div class="remember-container">
       <section>
-        <mat-checkbox [(ngModel)]="rememberMe">Remember me</mat-checkbox>
+        <mat-checkbox [(ngModel)]="rememberMe" (ngModelChange)="toggleRememberMe()">Remember me</mat-checkbox>
       </section>
       <a [routerLink]="'forgotPassword'" href="#">Forgot my password</a>
     </div>
