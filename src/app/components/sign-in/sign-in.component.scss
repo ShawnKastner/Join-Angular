@@ -35,6 +35,53 @@
   }
 }
 
+.background-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #f6f7f8;
+  animation: slideBackground 1.6s ease-in-out;
+  opacity: 0;
+}
+
+@keyframes slideBackground {
+  0% {
+    width: 100vw;
+    height: 100vh;
+    background-color: #f6f7f8;
+    opacity: 100%;
+    z-index: 10;
+  }
+  50% {
+    opacity: 100%;
+  }
+  100% {
+    width: 0;
+    height: 0;
+    background-color: transparent;
+    opacity: 0;
+    z-index: -1;
+  }
+}
+
+.logo-container {
+  animation: slideLogo 1s ease-in-out;
+}
+
+@keyframes slideLogo {
+  0% {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  100% {
+    top: 80px;
+    left: 77px;
+  }
+}
+
 @media (max-width: 700px) {
   mat-card-header {
     h1 {
@@ -77,6 +124,50 @@
     bottom: 32px;
     right: 80px;
     gap: 35px;
+  }
+}
+
+@media (max-width: 700px) {
+  @keyframes slideLogoMobile {
+    0% {
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+    20% {
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    100% {
+      top: 25px;
+      left: 25px;
+      transform: translate(-50%, -50%);
+    }
+  }
+
+  .background-container {
+    animation: slideBackgroundMobile 1.6s ease-in-out;
+  }
+
+  @keyframes slideBackgroundMobile {
+    0% {
+      width: 100vw;
+      height: 100vh;
+      background-color: #2a3647;
+      opacity: 100%;
+      z-index: 10;
+    }
+    50% {
+      opacity: 100%;
+    }
+    100% {
+      width: 0;
+      height: 0;
+      background-color: transparent;
+      opacity: 0;
+      z-index: -1;
+    }
   }
 }
 
