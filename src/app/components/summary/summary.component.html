@@ -1,7 +1,13 @@
+<div class="greeting-container-mobile d-none">
+  <h2>{{ currentTime }},</h2>
+  <span>{{ displayName || "Guest" }}</span>
+</div>
 <div class="align-center summary-container">
   <div>
     <div class="summary-header">
-      <span class="d-none kanban-text-mobile">Kanban Project Management Tool</span>
+      <span class="d-none kanban-text-mobile"
+        >Kanban Project Management Tool</span
+      >
       <h1>Summary</h1>
       <div class="blue-line"></div>
       <span>Everythin in a nutshell!</span>
@@ -9,19 +15,23 @@
 
     <div class="first-row-cards">
       <mat-card>
-        <mat-card-title>{{ totalTasksCount  }}</mat-card-title>
+        <mat-card-title>{{ totalTasksCount }}</mat-card-title>
         <mat-card-content
           ><span class="font-21">Tasks in<br />Board</span></mat-card-content
         >
       </mat-card>
       <mat-card>
-        <mat-card-title>{{ (taskService.allTasksInProgress$ | async)?.length }}</mat-card-title>
+        <mat-card-title>{{
+          (taskService.allTasksInProgress$ | async)?.length
+        }}</mat-card-title>
         <mat-card-content
           ><span class="font-21">Tasks In<br />Progress</span></mat-card-content
         >
       </mat-card>
       <mat-card>
-        <mat-card-title>{{ (taskService.allTasksAwaitingFeedback$ | async)?.length }}</mat-card-title>
+        <mat-card-title>{{
+          (taskService.allTasksAwaitingFeedback$ | async)?.length
+        }}</mat-card-title>
         <mat-card-content
           ><span class="font-21">Awaiting<br />Feedback</span></mat-card-content
         >
@@ -30,7 +40,9 @@
 
     <div class="middle-row-card">
       <mat-card>
-        <mat-card-title> <img src="assets/img/urgent.png" />{{ urgentTasks }}</mat-card-title>
+        <mat-card-title>
+          <img src="assets/img/urgent.png" />{{ urgentTasks }}</mat-card-title
+        >
 
         <div class="grey-line"></div>
         <div class="position-content">
@@ -45,7 +57,9 @@
         <div class="justify-align-center gap-18">
           <img src="assets/img/to-do.png" />
           <div class="text-center flex-column gap-18">
-            <mat-card-title>{{ (taskService.allTasksToDo$ | async)?.length }}</mat-card-title>
+            <mat-card-title>{{
+              (taskService.allTasksToDo$ | async)?.length
+            }}</mat-card-title>
             <span class="font-21">To-do</span>
           </div>
         </div>
@@ -54,7 +68,9 @@
         <div class="justify-align-center gap-18">
           <img src="assets/img/done.png" />
           <div class="text-center flex-column gap-18">
-            <mat-card-title>{{ (taskService.allTasksDone$ | async)?.length }}</mat-card-title>
+            <mat-card-title>{{
+              (taskService.allTasksDone$ | async)?.length
+            }}</mat-card-title>
             <span class="font-21">Done</span>
           </div>
         </div>
@@ -64,6 +80,6 @@
 
   <div class="greeting-container flex-column gap-18">
     <h2>{{ currentTime }},</h2>
-    <span>{{ displayName || 'Guest' }}</span>
+    <span>{{ displayName || "Guest" }}</span>
   </div>
 </div>
