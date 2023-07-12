@@ -22,14 +22,14 @@
         </mat-form-field>
         <mat-form-field class="width-100">
           <mat-label>Phone</mat-label>
-          <input type="number" [(ngModel)]="contact.phone" matInput placeholder="Enter your phone number" />
+          <input pattern="[0-9]" type="tel" [(ngModel)]="contact.phone" matInput placeholder="Enter your phone number" oninput="this.value = this.value.replace(/[^0-9]/g, '');"/>
           <mat-icon class="input-icon">call</mat-icon>
         </mat-form-field>
         <div class="btn-container">
           <button (click)="deleteContact()" class="cancel-btn font-21 justify-align-center">
             Delete
           </button>
-          <button (click)="deleteContact()" class="main-btn create-btn font-21 font-weight-700 justify-align-center">
+          <button (click)="editContact()" class="main-btn create-btn font-21 font-weight-700 justify-align-center">
             Save
           </button>
         </div>
