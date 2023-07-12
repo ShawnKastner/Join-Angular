@@ -7,6 +7,9 @@ import {
 } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { collection, doc, setDoc } from 'firebase/firestore';
+import { Contact } from 'src/app/models/contacts.model';
+import { Firestore } from '@angular/fire/firestore';
 @Injectable({
   providedIn: 'root',
 })
@@ -14,13 +17,15 @@ export class AuthService {
   userData: any; // Save logged in user data
   uid!: string;
   photoURL!: string;
+  displayName!: string;
   userData$!: Observable<any>;
 
   constructor(
     public afs: AngularFirestore, // Inject Firestore service
     public afAuth: AngularFireAuth, // Inject Firebase auth service
     public router: Router,
-    public ngZone: NgZone // NgZone service to remove outside scope warning
+    public ngZone: NgZone, // NgZone service to remove outside scope warning
+    private firestore: Firestore,
   ) {
     /* Saving user data in localstorage when 
     logged in and setting up null when logged out */
@@ -98,11 +103,39 @@ export class AuthService {
           result.user.updateProfile({ displayName: displayName }).then(() => {
             this.SetUserData(result.user);
             this.router.navigate(['/']);
+            // Add your own contact
+            const contact = new Contact(
+              displayName,
+              email,
+              '',
+              displayName[0],
+              'red'
+            );
+            if (result.user) {
+              this.addOwnContact(contact, result)
+            }
           });
         }
       })
       .catch((error) => {
         window.alert(error.message);
+      });
+  }
+
+  addOwnContact(contact: any, result: any) {
+    const contactCollection = collection(
+      this.firestore,
+      'users',
+      result.user.uid,
+      'contacts'
+    );
+    const contactId = this.afs.createId();
+    const contactDocRef = doc(contactCollection, contactId);
+    setDoc(contactDocRef, { ...contact, contactId: contactId })
+      .then(() => {
+      })
+      .catch((error) => {
+        console.log(error);
       });
   }
 
@@ -159,9 +192,8 @@ export class AuthService {
           if (userData) {
             this.uid = user.uid;
             this.photoURL = userData['photoURL'];
-          } else {
-            console.log('User data not found in Firestore');
-          }
+            this.displayName = userData['displayName'];
+          } 
         });
       }
     });

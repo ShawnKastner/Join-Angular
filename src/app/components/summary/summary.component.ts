@@ -9,7 +9,6 @@ import { TaskService } from 'src/app/shared/services/task.service';
   styleUrls: ['./summary.component.scss'],
 })
 export class SummaryComponent implements OnInit {
-  displayName!: any;
   allTasks$!: Observable<any[]>;
   totalTasksCount!: number;
   urgentTasks!: number;
@@ -24,7 +23,6 @@ export class SummaryComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.displayName = this.authService.getUserData()?.displayName;
     this.taskService.getUid().then(() => {
       this.taskService.getTasksToDo();
       this.taskService.getTasksInProgress();

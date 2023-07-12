@@ -1,6 +1,6 @@
 <div class="greeting-container-mobile d-none">
   <h2>{{ currentTime }},</h2>
-  <span>{{ displayName || "Guest" }}</span>
+  <span>{{ authService.displayName || "Guest" }}</span>
 </div>
 <div class="align-center summary-container">
   <div>
@@ -80,6 +80,6 @@
 
   <div class="greeting-container flex-column gap-18">
     <h2>{{ currentTime }},</h2>
-    <span>{{ displayName || "Guest" }}</span>
+    <span>{{ authService.displayName || "Guest" }}</span>
   </div>
 </div>
