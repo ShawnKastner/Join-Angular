@@ -35,12 +35,12 @@ export class LogoutDialogComponent implements OnInit {
 
   openHelp() {
     this.dialogRef.close();
-    this.router.navigateByUrl('/sidenav/(main:help)');
+    this.router.navigateByUrl('/sidenav/help');
   }
 
   openLegalNotice() {
     this.dialogRef.close();
-    this.router.navigateByUrl('/sidenav/(main:legalNotice)');
+    this.router.navigateByUrl('/sidenav/legalNotice');
   }
 
   uploadProfileImg(event: Event, uid: string) {

@@ -5,11 +5,11 @@
     </div>
 
     <ul class="menu-items font-16">
-      <li class="mb-12" [routerLink]="[{ outlets: { main: ['summary'] } }]" routerLinkActive="active-link"><mat-icon>dashboard</mat-icon>Summary</li>
-      <li class="mt-12" [routerLink]="[{ outlets: { main: ['board'] } }]" routerLinkActive="active-link"><mat-icon>event_note</mat-icon>Board</li>
-      <li class="mt-12" [routerLink]="[{ outlets: { main: ['addTask'] } }]" routerLinkActive="active-link"><mat-icon>add_task</mat-icon>Add Task</li>
-      <li class="mt-12" [routerLink]="[{ outlets: { main: ['contacts'] } }]" routerLinkActive="active-link"><mat-icon>contacts</mat-icon>Contacts</li>
-      <li class="legal-notice" [routerLink]="[{ outlets: { main: ['legalNotice'] } }]" routerLinkActive="active-link"><img src="assets/img/legal_notice_icon.png"><span>Legal notice</span></li>
+      <li class="mb-12" [routerLink]="['summary']" routerLinkActive="active-link"><mat-icon>dashboard</mat-icon>Summary</li>
+      <li class="mt-12" [routerLink]="['board']" routerLinkActive="active-link"><mat-icon>event_note</mat-icon>Board</li>
+      <li class="mt-12" [routerLink]="['addTask']" routerLinkActive="active-link"><mat-icon>add_task</mat-icon>Add Task</li>
+      <li class="mt-12" [routerLink]="['contacts']" routerLinkActive="active-link"><mat-icon>contacts</mat-icon>Contacts</li>
+      <li class="legal-notice" [routerLink]="['legalNotice']" routerLinkActive="active-link"><img src="assets/img/legal_notice_icon.png"><span>Legal notice</span></li>
     </ul>
   </mat-drawer>
 
@@ -17,13 +17,13 @@
     <span>Kanban Project Management Tool</span>
     <img class="mobile-header-logo d-none" src="assets/img/join-logo.png" />
     <div class="img-container">
-      <img class="help" [routerLink]="[{ outlets: { main: ['help'] } }]" src="assets/img/help.png">
+      <img class="help" [routerLink]="['help']" src="assets/img/help.png">
       <img (click)="openLogoutDialog()" class="profile-picture" [src]="authService.photoURL || 'assets/img/blank-profile-img.png'">
     </div>
   </mat-toolbar>
 
   <div class="router-container">
-    <router-outlet name="main"></router-outlet>
+    <router-outlet ></router-outlet>
   </div>
 </mat-drawer-container>
 

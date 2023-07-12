@@ -25,12 +25,12 @@ const routes: Routes = [
     component: SidenavComponent,
     canActivate: [AuthGuard],
     children: [
-      { path: 'summary', component: SummaryComponent, outlet: 'main' },
-      { path: 'board', component: BoardComponent, outlet: 'main' },
-      { path: 'addTask', component: AddTaskComponent, outlet: 'main' },
-      { path: 'contacts', component: ContactsComponent, outlet: 'main' },
-      { path: 'legalNotice', component: LegalNoticeComponent, outlet: 'main' },
-      { path: 'help', component: HelpComponent, outlet: 'main' },
+      { path: 'summary', component: SummaryComponent },
+      { path: 'board', component: BoardComponent, },
+      { path: 'addTask', component: AddTaskComponent, },
+      { path: 'contacts', component: ContactsComponent,  },
+      { path: 'legalNotice', component: LegalNoticeComponent,  },
+      { path: 'help', component: HelpComponent,  },
     ],
   },
 ];

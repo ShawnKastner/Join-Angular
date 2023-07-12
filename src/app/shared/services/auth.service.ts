@@ -84,7 +84,7 @@ export class AuthService {
         this.SetUserData(result.user);
         this.afAuth.authState.subscribe((user) => {
           if (user) {
-            this.router.navigateByUrl('/sidenav/(main:summary)');
+            this.router.navigateByUrl('/sidenav/summary');
           }
         });
       })
