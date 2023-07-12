@@ -47,7 +47,8 @@
         <div class="grey-line"></div>
         <div class="position-content">
           <span class="font-21 font-weight-700">{{ nextDate }}</span
-          ><br /><span class="font-16">Upcoming Deadline</span>
+          ><br /><span class="font-16" *ngIf="nextDate">Upcoming Deadline</span>
+          <span *ngIf="!nextDate">No upcoming Deadline</span>
         </div>
       </mat-card>
     </div>

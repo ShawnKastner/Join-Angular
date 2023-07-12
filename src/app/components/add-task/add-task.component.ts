@@ -49,7 +49,7 @@ export class AddTaskComponent implements OnInit {
 
   openAddCategoryDialog() {
     this.dialog.open(NewCategoryDialogComponent, {
-      width: '250px',
+      width: '300px',
     });
   }
 
