@@ -46,15 +46,22 @@ export class ContactService {
       'contacts'
     );
     const nameParts = this.name.split(' ');
-    const firstNameLetter = nameParts[0].charAt(0);
-    const lastNameLetter = nameParts[1].charAt(0);
+    let firstNameLetter;
+    let lastNameLetter;
+    if (nameParts.length === 2) {
+      firstNameLetter = nameParts[0].charAt(0);
+      lastNameLetter = nameParts[1].charAt(0);
+    } else {
+      firstNameLetter = nameParts[0].charAt(0);
+      lastNameLetter = '';
+    }
     const contactId = this.afs.createId();
     const contactDocRef = doc(contactCollection, contactId);
 
     const contact = new Contact(
       this.name,
       this.email,
-      this.phone,
+      this.phone || '',
       `${firstNameLetter}${lastNameLetter}`,
       this.color
     );
@@ -110,7 +117,7 @@ export class ContactService {
       collection(this.firestore, 'users', this.userId, 'contacts')
     );
     this.contacts$.subscribe((data) => {
-      this.contacts = data; 
+      this.contacts = data;
     });
   }
 

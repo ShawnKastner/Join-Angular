@@ -14,24 +14,26 @@
     <div class="flex-column width-100">
       <mat-form-field class="width-100">
         <mat-label>Name</mat-label>
-        <input [(ngModel)]="contactService.name" matInput placeholder="Enter your name" />
+        <input #name="ngModel" required type="text" [(ngModel)]="contactService.name" matInput placeholder="Enter a name" />
         <mat-icon class="input-icon">person</mat-icon>
+        <mat-error *ngIf="name.invalid">{{getErrorMessageName()}}</mat-error>
       </mat-form-field>
       <mat-form-field class="width-100">
         <mat-label>Email</mat-label>
-        <input [(ngModel)]="contactService.email" matInput placeholder="Enter your email" />
+        <input #email="ngModel" required type="email" [(ngModel)]="contactService.email" matInput placeholder="Enter a email" />
         <mat-icon class="input-icon">mail</mat-icon>
+        <mat-error *ngIf="email.invalid">{{getErrorMessageEmail()}}</mat-error>
       </mat-form-field>
       <mat-form-field class="width-100">
         <mat-label>Phone</mat-label>
-        <input [(ngModel)]="contactService.phone" matInput placeholder="Enter your phone number" />
+        <input type="number" [(ngModel)]="contactService.phone" matInput placeholder="Enter a phone number" />
         <mat-icon class="input-icon">call</mat-icon>
       </mat-form-field>
       <div class="btn-container">
         <button (click)="closeDialog()" class="cancel-btn font-21 justify-align-center">
           Cancel <mat-icon>close</mat-icon>
         </button>
-        <button (click)="addContact()" class="main-btn create-btn font-21 font-weight-700 justify-align-center">
+        <button mat-raised-button [disabled]="!email.valid || !name.valid" (click)="addContact()" class="main-btn create-btn font-21 font-weight-700 justify-align-center">
           Create contact <mat-icon>done</mat-icon>
         </button>
       </div>
