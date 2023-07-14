@@ -92,7 +92,7 @@ input::-webkit-inner-spin-button {
 }
 
 /* Firefox */
-input[type=number] {
+input[type="number"] {
   -moz-appearance: textfield;
 }
 
@@ -241,5 +241,43 @@ input[type=number] {
 
   .width-100 {
     width: 100%;
+  }
+}
+
+@media (max-width: 375px) and (max-height: 667px) {
+  .add-contact-container {
+    .headline-with-subtitle {
+      margin-bottom: 25px;
+    }
+  }
+
+  .gap-18 {
+    gap: unset !important;
+  }
+
+  .form-field {
+    mat-form-field {
+      width: 285px !important;
+    }
+  }
+}
+
+@media (max-width: 320px) and (max-height: 480px) {
+  .add-contact-container {
+    .headline-with-subtitle {
+      h1 {
+        font-size: 1.8rem !important;
+      }
+    }
+
+    .blue-line {
+      width: 90px;
+    }
+  }
+
+  .form-field {
+    mat-form-field {
+      width: 240px !important;
+    }
   }
 }
