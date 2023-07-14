@@ -252,7 +252,7 @@ mat-card {
   0% {
     opacity: 1;
     z-index: 999;
-  } 
+  }
   100% {
     opacity: 0;
     z-index: -1;
@@ -311,6 +311,83 @@ mat-card {
     mat-card {
       width: 177.5px;
       height: 110px;
+    }
+  }
+}
+
+@media (max-width: 320px) and (max-height: 480px) {
+  .greeting-container-mobile {
+    text-align: center;
+  }
+
+  .first-row-cards {
+    margin-top: 30px;
+
+    mat-card {
+      height: 90px;
+      width: 90px;
+
+      mat-card-title {
+        font-size: 2rem;
+      }
+
+      mat-card-content {
+        span {
+          font-size: 0.8rem;
+        }
+      }
+    }
+  }
+
+  .middle-row-card {
+    margin-top: 15px;
+
+    mat-card {
+      width: 300px;
+      height: 90px;
+
+      mat-card-title {
+        font-size: 2rem;
+      }
+
+      mat-card-content {
+        span {
+          font-size: 0.8rem;
+        }
+      }
+
+      img {
+        width: 30px;
+      }
+    }
+
+    .grey-line {
+      height: 50px;
+      right: 172px;
+    }
+  }
+
+  .last-row-cards {
+    margin-top: 15px;
+    margin-bottom: 85px;
+
+    mat-card {
+      width: 143px;
+      height: 90px;
+
+      mat-card-title {
+        font-size: 2rem;
+      }
+
+      mat-card-content {
+        span {
+          font-size: 0.8rem;
+        }
+      }
+
+      img {
+        width: 30px;
+      }
     }
   }
 }
