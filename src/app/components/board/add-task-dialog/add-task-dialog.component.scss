@@ -208,3 +208,26 @@ textarea {
     }
   }
 }
+
+@media (max-width: 375px) and (max-height: 667px) {
+  .add-task-container {
+    padding: 20px;
+  }
+  .prio-btn-container {
+    .mat-button-toggle {
+      width: 100%;
+    }
+  }
+}
+
+@media (max-width: 320px) and (max-height: 480px) {
+  .add-task-container {
+    margin-top: 35px;
+  }
+
+  .prio-btn-container {
+    .mat-button-toggle {
+      width: 65px;
+    }
+  }
+}

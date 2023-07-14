@@ -136,3 +136,23 @@ textarea {
     right: 20px;
   }
 }
+
+@media (max-width: 376px) and (max-height: 667px) {
+  .mb-34 {
+    margin-bottom: unset;
+  }
+
+  .edit-btn {
+    bottom: 40px;
+  }
+}
+
+@media (max-width: 320px) and (max-height: 480px) {
+  .edit-task-container {
+    margin-bottom: 65px;
+  }
+
+  .edit-btn {
+    bottom: -135px;
+  }
+}
