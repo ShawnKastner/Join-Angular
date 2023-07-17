@@ -67,7 +67,7 @@ export class AuthService {
         this.SetUserData(result.user);
         this.afAuth.onAuthStateChanged((user) => {
           if (user) {
-            this.router.navigateByUrl('/sidenav/(main:summary)');
+            this.router.navigateByUrl('/sidenav/summary');
           }
         });
       })
