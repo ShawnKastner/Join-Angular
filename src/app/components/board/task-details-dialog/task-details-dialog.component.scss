@@ -136,17 +136,17 @@
       font-size: 1rem;
     }
   }
+
+  .delete-edit-btn {
+    bottom: 40px;
+    right: 40px;
+  }
 }
 
 @media (max-width: 376px) and (max-height: 667px) {
   .tasks-detail-container {
     padding: 25px;
     margin-bottom: 65px;
-  }
-
-  .delete-edit-btn {
-    bottom: 40px;
-    right: 40px;
   }
 }
 

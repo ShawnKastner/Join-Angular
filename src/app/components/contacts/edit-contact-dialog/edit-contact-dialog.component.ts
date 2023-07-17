@@ -14,7 +14,7 @@ export class EditContactDialogComponent {
     this.data.contact.email,
     this.data.contact.phone,
     this.data.contact.firstLetter,
-    this.data.contact.color,
+    this.data.contact.color
   );
 
   constructor(
