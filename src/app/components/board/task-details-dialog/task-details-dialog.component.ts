@@ -48,6 +48,18 @@ export class TaskDetailsDialogComponent implements OnInit {
     this.formattedDate();
   }
 
+  /**
+   * The `formattedDate()` method is used to format the due date of the task. It takes the due date timestamp from the
+   * `data.task` object and converts it to a JavaScript `Date` object. Then, it extracts the day, month, and year from the
+   * `Date` object and formats them as a string in the format "dd-mm-yyyy". Finally, it updates the `dueDate` property of the
+   * `task` object with the formatted date.
+   * 
+   * @method
+   * @name formattedDate
+   * @kind method
+   * @memberof TaskDetailsDialogComponent
+   * @returns {void}
+   */
   formattedDate() {
     const dueDateTimestamp: Timestamp = this.data.task.dueDate;
     const dueDate = dueDateTimestamp.toDate();
@@ -71,6 +83,18 @@ export class TaskDetailsDialogComponent implements OnInit {
     this.dialogRef.close();
   }
 
+  /**
+   * The `openEditTaskDialog()` method is used to open the `EditTaskDialogComponent` dialog. It uses the `MatDialog` service
+   * to open the dialog and passes the necessary data to the dialog using the `data` property of the `MatDialogConfig`
+   * object. The `task` and `taskCategory` properties of the current component's `task` object are passed as data to the
+   * dialog. After opening the dialog, the current dialog is closed using the `dialogRef.close()` method.
+   * 
+   * @method
+   * @name openEditTaskDialog
+   * @kind method
+   * @memberof TaskDetailsDialogComponent
+   * @returns {void}
+   */
   openEditTaskDialog() {
     this.dialog.open(EditTaskDialogComponent, {
       width: '623px',

@@ -29,6 +29,15 @@ export class SignInComponent implements OnInit {
     this.checkRememberedCredentials();
   }
 
+  /**
+   * The `toggleRememberMe()` method is responsible for toggling the "Remember Me" functionality in the sign-in component.
+   * 
+   * @method
+   * @name toggleRememberMe
+   * @kind method
+   * @memberof SignInComponent
+   * @returns {void}
+   */
   toggleRememberMe() {
     if (this.rememberMe) {
       const userEmail = this.userEmailElement.nativeElement.value;
@@ -58,6 +67,19 @@ export class SignInComponent implements OnInit {
     }
   }
 
+  /**
+   * The `checkRememberedCredentials()` method is responsible for checking if there are any remembered credentials stored in
+   * the local storage. It retrieves the remembered email and encoded password from the local storage. If there are
+   * remembered credentials, it sets the `rememberMe` property to `true`, populates the email input field with the remembered
+   * email, and decodes the password and populates the password input field with it. This allows the user to see their
+   * remembered email and password when they visit the sign-in page again.
+   * 
+   * @method
+   * @name checkRememberedCredentials
+   * @kind method
+   * @memberof SignInComponent
+   * @returns {void}
+   */
   checkRememberedCredentials() {
     const rememberedEmail = localStorage.getItem('rememberedEmail');
     const encodedPassword = localStorage.getItem('rememberedPassword');

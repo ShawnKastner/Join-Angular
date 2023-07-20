@@ -38,6 +38,18 @@ export class NewCategoryDialogComponent {
     this.dialogRef.close();
   }
 
+  /**
+   * The `addCategory()` method is responsible for adding a new category to the Firestore database. It creates a new document
+   * in the "categories" collection under the user's document. The document contains the name of the category
+   * (`this.newCategory`) and the selected color (`this.selectedColor`). If the addition is successful, it logs a message to
+   * the console and closes the dialog. If there is an error, it logs the error message to the console.
+   * 
+   * @method
+   * @name addCategory
+   * @kind method
+   * @memberof NewCategoryDialogComponent
+   * @returns {void}
+   */
   addCategory() {
     const categoryCollection = collection(this.firestore,'users', this.userId, 'categories');
     addDoc(categoryCollection, {

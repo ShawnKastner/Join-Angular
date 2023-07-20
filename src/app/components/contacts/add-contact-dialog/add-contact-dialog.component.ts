@@ -32,6 +32,16 @@ export class AddContactDialogComponent {
     this.closeDialog();
   }
 
+  /**
+   * The `getErrorMessageEmail()` method is a helper method that returns an error message based on the validation status of
+   * the email form control.
+   * 
+   * @method
+   * @name getErrorMessageEmail
+   * @kind method
+   * @memberof AddContactDialogComponent
+   * @returns {"" | "You must enter a email" | "Not a valid email"}
+   */
   getErrorMessageEmail() {
     if (this.email.hasError('required')) {
       return 'You must enter a email';
@@ -40,6 +50,16 @@ export class AddContactDialogComponent {
     return this.email.hasError('email') ? 'Not a valid email' : '';
   }
 
+  /**
+   * The `getErrorMessageName()` method is a helper method that returns an error message based on the validation status of
+   * the name form control.
+   * 
+   * @method
+   * @name getErrorMessageName
+   * @kind method
+   * @memberof AddContactDialogComponent
+   * @returns {"" | "You must enter a name" | "Not a valid name"}
+   */
   getErrorMessageName() {
     if (this.name.hasError('required')) {
       return 'You must enter a name';

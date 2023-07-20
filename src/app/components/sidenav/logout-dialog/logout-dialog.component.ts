@@ -43,6 +43,18 @@ export class LogoutDialogComponent implements OnInit {
     this.router.navigateByUrl('/sidenav/legalNotice');
   }
 
+  /**
+   * The `uploadProfileImg` method is responsible for uploading a user's profile image to Firebase Storage and updating the
+   * user's `photoURL` in Firestore.
+   * 
+   * @method
+   * @name uploadProfileImg
+   * @kind method
+   * @memberof LogoutDialogComponent
+   * @param {Event} event
+   * @param {string} uid
+   * @returns {void}
+   */
   uploadProfileImg(event: Event, uid: string) {
     const element = event.target as HTMLInputElement;
     const file = element.files ? element.files[0] : null;

@@ -53,16 +53,22 @@ export class TaskService {
     this.loadCheckedSubtasks();
   }
 
-  /**
-   * Get user ID
-   */
+
   async getUid() {
     this.userId = await this.authService.getCurrentUserUid();
   }
 
-  /** Function to add a Task
-   *
-   * @param taskCategory Task category to add a task in the correct collection
+  /**
+   * The `addTask(taskCategory: string)` method is used to add a new task to the Firestore database. It takes a
+   * `taskCategory` parameter, which represents the category of the task (e.g., "To Do", "In Progress", "Awaiting Feedback",
+   * "Done").
+   * 
+   * @method
+   * @name addTask
+   * @kind method
+   * @memberof TaskService
+   * @param {string} taskCategory
+   * @returns {void}
    */
   addTask(taskCategory: string) {
     const collectionRef = collection(
@@ -94,10 +100,17 @@ export class TaskService {
       });
   }
 
-  /**Get the task collection name
-   *
-   * @param taskCategory The task category for add a task
-   * @returns
+  /**
+   * The `getCategoryCollectionName(taskCategory: string): string` function is used to determine the name of the Firestore
+   * collection based on the task category. It takes a `taskCategory` parameter, which represents the category of the task
+   * (e.g., "To Do", "In Progress", "Awaiting Feedback", "Done").
+   * 
+   * @method
+   * @name getCategoryCollectionName
+   * @kind method
+   * @memberof TaskService
+   * @param {string} taskCategory
+   * @returns {string}
    */
   getCategoryCollectionName(taskCategory: string): string {
     // Funktion, um den Namen der Kategorie-basierten Collection basierend auf der übergebenen Kategorie zu erhalten
@@ -114,12 +127,18 @@ export class TaskService {
     }
   }
 
-  /** Moved tasks in another collection for drag and drop
-   *
-   * @param taskCategory this is the collection where to move
-   * @param taskId the task id from task which you want to move
-   * @param currentCollectionName this is the current collection
-   * @returns
+  /**
+   * The above code is defining an asynchronous function called "updateTaskCategoryInFirestore".
+   * 
+   * @async
+   * @method
+   * @name updateTaskCategoryInFirestore
+   * @kind method
+   * @memberof TaskService
+   * @param {string} taskCategory
+   * @param {string} taskId
+   * @param {string} currentCollectionName
+   * @returns {Promise<void>}
    */
   async updateTaskCategoryInFirestore(
     taskCategory: string,
@@ -175,7 +194,13 @@ export class TaskService {
   }
 
   /**
-   * This function add a subtask to the subtasks collection
+   * This function add a subtask to the firebase database
+   * 
+   * @method
+   * @name addSubtask
+   * @kind method
+   * @memberof TaskService
+   * @returns {void}
    */
   addSubtask() {
     const subTaskCollection = collection(
@@ -230,7 +255,14 @@ export class TaskService {
   }
 
   /**
-   * get all subtasks from the subtasks collection
+   * The above code is defining a function called "getSubtasksFromFirestore" which is likely used to retrieve subtasks from a
+   * Firestore database. However, the code provided is incomplete and the actual implementation of the function is missing.
+   * 
+   * @method
+   * @name getSubtasksFromFirestore
+   * @kind method
+   * @memberof TaskService
+   * @returns {void}
    */
   getSubtasksFromFirestore() {
     this.subtasks$ = collectionData(

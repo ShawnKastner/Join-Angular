@@ -49,6 +49,17 @@ export class AddTaskDialogComponent {
     });
   }
 
+  /**
+   * The `addTask()` method is responsible for adding a new task to the task list. It calls the `addTask()` method from the
+   * `taskService` to add the task to the Firestore database. After adding the task, it opens a snackbar notification by
+   * calling the `openSnackBar()` method and then closes the dialog box by calling `dialogRef.close()`.
+   * 
+   * @method
+   * @name addTask
+   * @kind method
+   * @memberof AddTaskDialogComponent
+   * @returns {void}
+   */
   addTask() {
     const taskCategory = this.taskCategory;
     this.taskService.addTask(taskCategory);
@@ -56,6 +67,17 @@ export class AddTaskDialogComponent {
     this.dialogRef.close();
   }
 
+  /**
+   * The `openSnackBar()` method is responsible for opening a snackbar notification. It uses the `_snackBar` service from
+   * Angular Material to display a snackbar component (`TaskAddedToBoardComponent`) with a specified duration and panel
+   * class.
+   * 
+   * @method
+   * @name openSnackBar
+   * @kind method
+   * @memberof AddTaskDialogComponent
+   * @returns {void}
+   */
   openSnackBar() {
     this._snackBar.openFromComponent(TaskAddedToBoardComponent, {
       duration: this.durationInSeconds * 1000,

@@ -48,6 +48,19 @@ export class BoardComponent {
     });
   }
 
+  /**
+   * The `openTaskDetails` method is responsible for opening a dialog box to display the details of a specific task. It takes
+   * two parameters: `task`, which represents the task object to be displayed, and `taskCategory`, which represents the
+   * category of the task.
+   * 
+   * @method
+   * @name openTaskDetails
+   * @kind method
+   * @memberof BoardComponent
+   * @param {any} task
+   * @param {string} taskCategory
+   * @returns {void}
+   */
   openTaskDetails(task: any, taskCategory: string) {
     this.selectedTask = task;
     this.dialog.open(TaskDetailsDialogComponent, {
@@ -57,6 +70,18 @@ export class BoardComponent {
     });
   }
 
+  /**
+   * The `onTaskDrop` method is responsible for handling the drop event when a task is moved from one container to another
+   * using the `CdkDragDrop` feature from Angular CDK.
+   * 
+   * @method
+   * @name onTaskDrop
+   * @kind method
+   * @memberof BoardComponent
+   * @param {CdkDragDrop<Task[]>} event
+   * @param {string} taskCategory
+   * @returns {void}
+   */
   onTaskDrop(event: CdkDragDrop<Task[]>, taskCategory: string) {
     if (event.previousContainer === event.container) {
       moveItemInArray(
