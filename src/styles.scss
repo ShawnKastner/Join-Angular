@@ -231,8 +231,18 @@ h1 {
     font-size: 0.8rem;
   }
 
-  .dialog-media-height {
-    height: 80% !important;
+  .dialog-media-height,
+  .mat-dialog-container {
+    height: 100% !important;
+    width: 100% !important;
+    max-width: none !important;
+    overflow: auto !important; /* Scrollleisten anzeigen, wenn Inhalt überläuft */
+    -webkit-overflow-scrolling: touch !important; /* Reibungsloses Scrollen für Webkit-basierte Browser */
+    scrollbar-width: none !important; /* Ausblenden der Scrollleisten (Firefox) */
+    -ms-overflow-style: none !important;
+    ::-webkit-scrollbar {
+      display: none !important;
+    }
   }
 }
 

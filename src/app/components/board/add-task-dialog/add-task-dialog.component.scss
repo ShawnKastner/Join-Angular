@@ -126,7 +126,7 @@ textarea {
   border-radius: 30px;
 }
 
-.add-task-btn-mobile {
+.add-task-btn-mobile, .close-btn-mobile {
   display: none;
 }
 
@@ -169,8 +169,16 @@ textarea {
     display: block;
     border-radius: 10px;
     position: absolute;
+    top: 47px;
+    right: 10px;
+  }
+
+  .close-btn-mobile {
+    display: block;
+    position: absolute !important;
     top: 10px;
     right: 10px;
+    cursor: pointer;
   }
 
   .add-task-container {

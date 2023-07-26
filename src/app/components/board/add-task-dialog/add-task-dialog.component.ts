@@ -23,7 +23,7 @@ export class AddTaskDialogComponent {
     public contactService: ContactService,
     private authService: AuthService,
     private dialog: MatDialog,
-    private dialogRef: MatDialogRef<AddTaskDialogComponent>,
+    public dialogRef: MatDialogRef<AddTaskDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: { taskCategory: string },
     private _snackBar: MatSnackBar,
   ) {
