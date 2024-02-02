@@ -14,7 +14,7 @@ import { TaskAddedToBoardComponent } from '../../add-task/task-added-to-board/ta
 })
 export class AddTaskDialogComponent {
   minDate!: Date;
-  userId!: any;
+  userId!: String | null;
   taskCategory!: string;
   durationInSeconds = 3;
 

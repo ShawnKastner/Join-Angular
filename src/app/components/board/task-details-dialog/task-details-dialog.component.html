@@ -17,7 +17,17 @@
   <div class="priority align-center">
     <span class="font-weight-700">Priority:</span>
     <div [ngClass]="task.prio" class="prio justify-align-center">
-      <span>{{ task.prio }}</span>
+      <span>{{ task.prio }}</span
+      ><img
+        [src]="
+          task.prio === 'low'
+            ? 'assets/img/prio-low-white.png'
+            : task.prio === 'medium'
+            ? 'assets/img/prio-medium-white.png'
+            : 'assets/img/prio-urgent-white.png'
+        "
+        alt="Priority Image"
+      />
     </div>
   </div>
   <div class="flex-column" *ngIf="task.subtasks && task.subtasks.length > 0">
@@ -28,7 +38,12 @@
           <mat-checkbox
             [(ngModel)]="taskService.checkedSubtasks[subtask]"
             (change)="
-              taskService.checkedSubtask(subtask, $event.checked, task.taskId, taskCategory)
+              taskService.checkedSubtask(
+                subtask,
+                $event.checked,
+                task.taskId,
+                taskCategory
+              )
             "
             [style.text-decoration]="
               taskService.checkedSubtasks[subtask] ? 'line-through' : 'none'
