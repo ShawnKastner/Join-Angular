@@ -113,15 +113,28 @@
             }"
             class="font-21 justify-align-center"
             value="urgent"
-            >Urgent<img src="assets/img/prio-urgent.png"
-          /></mat-button-toggle>
+            >Urgent<img
+              [src]="
+                taskService.selectedPriority === 'urgent'
+                  ? 'assets/img/prio-urgent-white.png'
+                  : 'assets/img/prio-urgent.png'
+              "
+              alt="Priority Image"
+            />
+          </mat-button-toggle>
           <mat-button-toggle
             [ngClass]="{
               'medium-color': taskService.selectedPriority === 'medium'
             }"
             class="font-21 justify-align-center"
             value="medium"
-            >Medium<img src="assets/img/prio-medium.png"
+            >Medium<img
+              [src]="
+                taskService.selectedPriority === 'medium'
+                  ? 'assets/img/prio-medium-white.png'
+                  : 'assets/img/prio-medium.png'
+              "
+              alt="Priority Image"
           /></mat-button-toggle>
           <mat-button-toggle
             [ngClass]="{
@@ -129,7 +142,13 @@
             }"
             class="font-21 justify-align-center"
             value="low"
-            >Low<img src="assets/img/prio-low.png"
+            >Low<img
+              [src]="
+                taskService.selectedPriority === 'low'
+                  ? 'assets/img/prio-low-white.png'
+                  : 'assets/img/prio-low.png'
+              "
+              alt="Priority Image"
           /></mat-button-toggle>
         </mat-button-toggle-group>
       </div>
