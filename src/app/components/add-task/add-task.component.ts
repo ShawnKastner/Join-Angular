@@ -1,18 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  Firestore,
-  collection,
-  collectionData,
-} from '@angular/fire/firestore';
 import { MatDialog } from '@angular/material/dialog';
 import { NewCategoryDialogComponent } from './new-category-dialog/new-category-dialog.component';
-import { Observable } from 'rxjs';
 import { TaskService } from 'src/app/shared/services/task.service';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { TaskAddedToBoardComponent } from './task-added-to-board/task-added-to-board.component';
 import { ContactService } from 'src/app/shared/services/contact.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-task',
@@ -22,7 +15,7 @@ import { Router } from '@angular/router';
 export class AddTaskComponent implements OnInit {
   minDate!: Date;
 
-  userId!: any;
+  userId!: String | null;
   durationInSeconds = 3;
 
   constructor(

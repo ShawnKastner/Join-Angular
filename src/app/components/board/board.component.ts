@@ -16,7 +16,7 @@ import { Task } from 'src/app/models/tasks.model';
   styleUrls: ['./board.component.scss'],
 })
 export class BoardComponent {
-  selectedTask: any;
+  selectedTask!: Task;
   currentCollectionNameToDo: string;
   currentCollectionNameInProgress: string;
   currentCollectionNameAwaitingFeedback: string;
@@ -41,7 +41,11 @@ export class BoardComponent {
 
   openAddTaskDialog(taskCategory: string) {
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.panelClass= ['dialog-media-height', 'slide-in-dialog', 'add-task-dialog-width']
+    dialogConfig.panelClass = [
+      'dialog-media-height',
+      'slide-in-dialog',
+      'add-task-dialog-width',
+    ];
     this.dialog.open(AddTaskDialogComponent, {
       ...dialogConfig,
       data: { taskCategory: taskCategory },
@@ -52,16 +56,16 @@ export class BoardComponent {
    * The `openTaskDetails` method is responsible for opening a dialog box to display the details of a specific task. It takes
    * two parameters: `task`, which represents the task object to be displayed, and `taskCategory`, which represents the
    * category of the task.
-   * 
+   *
    * @method
    * @name openTaskDetails
    * @kind method
    * @memberof BoardComponent
-   * @param {any} task
+   * @param {Task} task
    * @param {string} taskCategory
    * @returns {void}
    */
-  openTaskDetails(task: any, taskCategory: string) {
+  openTaskDetails(task: Task, taskCategory: string) {
     this.selectedTask = task;
     this.dialog.open(TaskDetailsDialogComponent, {
       width: '623px',
@@ -73,7 +77,7 @@ export class BoardComponent {
   /**
    * The `onTaskDrop` method is responsible for handling the drop event when a task is moved from one container to another
    * using the `CdkDragDrop` feature from Angular CDK.
-   * 
+   *
    * @method
    * @name onTaskDrop
    * @kind method

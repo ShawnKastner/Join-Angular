@@ -37,7 +37,13 @@
           }"
           class="font-21 justify-align-center"
           value="urgent"
-          >Urgent<img src="assets/img/prio-urgent.png"
+          >Urgent
+          <img
+            [src]="
+              task.prio === 'urgent'
+                ? 'assets/img/prio-urgent-white.png'
+                : 'assets/img/prio-urgent.png'
+            "
         /></mat-button-toggle>
         <mat-button-toggle
           [ngClass]="{
@@ -45,7 +51,13 @@
           }"
           class="font-21 justify-align-center"
           value="medium"
-          >Medium<img src="assets/img/prio-medium.png"
+          >Medium
+          <img
+            [src]="
+              task.prio === 'medium'
+                ? 'assets/img/prio-medium-white.png'
+                : 'assets/img/prio-medium.png'
+            "
         /></mat-button-toggle>
         <mat-button-toggle
           [ngClass]="{
@@ -53,7 +65,13 @@
           }"
           class="font-21 justify-align-center"
           value="low"
-          >Low<img src="assets/img/prio-low.png"
+          >Low
+          <img
+            [src]="
+              task.prio === 'low'
+                ? 'assets/img/prio-low-white.png'
+                : 'assets/img/prio-low.png'
+            "
         /></mat-button-toggle>
       </mat-button-toggle-group>
     </div>

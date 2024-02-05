@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { Firestore } from '@angular/fire/firestore';
+import { Firestore, doc } from '@angular/fire/firestore';
 import { MatDialogRef } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { addDoc, collection } from 'firebase/firestore';
 import { AuthService } from 'src/app/shared/services/auth.service';
 
@@ -21,12 +22,13 @@ export class NewCategoryDialogComponent {
   ];
   selectedColor: string | null = null;
 
-  userId!: any;
+  userId!: string | null;
 
   constructor(
     private firestore: Firestore,
-    public dialogRef: MatDialogRef<NewCategoryDialogComponent>,
-    private authService: AuthService
+    private snackBar: MatSnackBar,
+    private authService: AuthService,
+    public dialogRef: MatDialogRef<NewCategoryDialogComponent>
   ) {
     this.getUid();
   }
@@ -43,26 +45,34 @@ export class NewCategoryDialogComponent {
    * in the "categories" collection under the user's document. The document contains the name of the category
    * (`this.newCategory`) and the selected color (`this.selectedColor`). If the addition is successful, it logs a message to
    * the console and closes the dialog. If there is an error, it logs the error message to the console.
-   * 
+   *
    * @method
    * @name addCategory
    * @kind method
    * @memberof NewCategoryDialogComponent
    * @returns {void}
    */
-  addCategory() {
-    const categoryCollection = collection(this.firestore,'users', this.userId, 'categories');
-    addDoc(categoryCollection, {
-      name: this.newCategory,
-      color: this.selectedColor,
-    })
-      .then(() => {
-        console.log('New category added:', this.newCategory);
-        this.dialogRef.close();
-      })
-      .catch((error) => {
-        console.log('Error adding new category:', error);
+  async addCategory() {
+    if (!this.userId) {
+      this.snackBar.open('User ID is null or undefined.', 'Schließen', {
+        duration: 3000,
       });
+      return;
+    }
+
+    const userDocRef = doc(this.firestore, 'users', this.userId);
+    const categoryCollectionRef = collection(userDocRef, 'categories');
+
+    try {
+      await addDoc(categoryCollectionRef, {
+        name: this.newCategory,
+        color: this.selectedColor,
+      });
+      console.log('New category added:', this.newCategory);
+      this.dialogRef.close();
+    } catch (error) {
+      console.error('Error adding new category:', error);
+    }
   }
 
   selectColor(color: string) {
