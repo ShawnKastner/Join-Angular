@@ -48,3 +48,6 @@ environments/environment.ts
 .firebase
 *-debug.log
 .runtimeconfig.json
+
+capacitor.config.ts
+/ios
