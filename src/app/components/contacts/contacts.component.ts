@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { AddContactDialogComponent } from './add-contact-dialog/add-contact-dialog.component';
-import { Observable } from 'rxjs';
-import { Firestore, collection, collectionData } from '@angular/fire/firestore';
-import { AuthService } from 'src/app/shared/services/auth.service';
 import { EditContactDialogComponent } from './edit-contact-dialog/edit-contact-dialog.component';
 import { Contact } from 'src/app/models/contacts.model';
 import { ContactService } from 'src/app/shared/services/contact.service';
@@ -38,7 +35,7 @@ export class ContactsComponent implements OnInit {
     });
   }
 
-  showContactDetails(contact: any) {
+  showContactDetails(contact: Contact) {
     this.contactService.selectedContact = contact;
   }
 

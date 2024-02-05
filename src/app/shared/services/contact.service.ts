@@ -23,7 +23,7 @@ export class ContactService {
   color!: string;
   userId!: any;
   contacts$!: Observable<any[]>;
-  contacts: any[] = [];
+  contacts: Contact[] = [];
   selectedContact: any;
 
   constructor(
