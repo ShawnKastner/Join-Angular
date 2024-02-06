@@ -8,7 +8,7 @@ import {
   setDoc,
   updateDoc,
 } from '@angular/fire/firestore';
-import { Contact } from 'src/app/models/contacts.model';
+import { Contact } from 'src/app/_core/models/contacts.model';
 import { AuthService } from './auth.service';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Observable } from 'rxjs';

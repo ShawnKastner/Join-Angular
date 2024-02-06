@@ -1,6 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { Contact } from 'src/app/models/contacts.model';
+import { Contact } from 'src/app/_core/models/contacts.model';
 import { ContactService } from 'src/app/shared/services/contact.service';
 
 @Component({

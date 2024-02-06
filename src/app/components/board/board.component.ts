@@ -8,7 +8,7 @@ import {
   moveItemInArray,
   transferArrayItem,
 } from '@angular/cdk/drag-drop';
-import { Task } from 'src/app/models/tasks.model';
+import { Task } from 'src/app/_core/models/tasks.model';
 
 @Component({
   selector: 'app-board',

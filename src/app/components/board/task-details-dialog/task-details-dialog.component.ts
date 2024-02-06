@@ -6,7 +6,7 @@ import {
   MatDialogConfig,
   MatDialogRef,
 } from '@angular/material/dialog';
-import { Task } from 'src/app/models/tasks.model';
+import { Task } from 'src/app/_core/models/tasks.model';
 import { ContactService } from 'src/app/shared/services/contact.service';
 import { TaskService } from 'src/app/shared/services/task.service';
 import { EditTaskDialogComponent } from './edit-task-dialog/edit-task-dialog.component';

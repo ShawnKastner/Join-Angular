@@ -11,10 +11,11 @@ import {
   setDoc,
   updateDoc,
 } from '@angular/fire/firestore';
-import { Task } from 'src/app/models/tasks.model';
+import { Task } from 'src/app/_core/models/tasks.model';
 import { AuthService } from './auth.service';
 import { Observable } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { CategoriesData } from 'src/app/_core/interfaces/category.interface'
 
 @Injectable({
   providedIn: 'root',
@@ -31,7 +32,7 @@ export class TaskService {
   isAddingSubtask = false;
   userId!: any;
   categories$!: Observable<any[]>;
-  categories: any[] = [];
+  categories: CategoriesData[] = [];
   subtasks$!: Observable<any[]>;
   subtasks: any[] = [];
   checkedSubtasks: { [taskId: string]: { [subtask: string]: number } } = {};
@@ -174,7 +175,6 @@ export class TaskService {
         const newTaskDocRef = doc(newCollectionRef, taskId);
         await setDoc(newTaskDocRef, taskData);
         await deleteDoc(taskDocRef);
-        // console.log('Task successfully moved to', newCollectionName);
       }
     }
   }

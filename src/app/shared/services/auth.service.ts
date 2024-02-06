@@ -8,7 +8,7 @@ import {
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { collection, doc, setDoc } from 'firebase/firestore';
-import { Contact } from 'src/app/models/contacts.model';
+import { Contact } from 'src/app/_core/models/contacts.model';
 import { Firestore } from '@angular/fire/firestore';
 @Injectable({
   providedIn: 'root',

@@ -68,7 +68,6 @@ export class NewCategoryDialogComponent {
         name: this.newCategory,
         color: this.selectedColor,
       });
-      console.log('New category added:', this.newCategory);
       this.dialogRef.close();
     } catch (error) {
       console.error('Error adding new category:', error);
