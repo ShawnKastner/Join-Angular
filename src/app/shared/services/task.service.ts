@@ -15,12 +15,25 @@ import { Task } from 'src/app/_core/models/tasks.model';
 import { AuthService } from './auth.service';
 import { Observable } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { CategoriesData } from 'src/app/_core/interfaces/category.interface'
+import { CategoriesData } from 'src/app/_core/interfaces/category.interface';
+import { FormBuilder } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TaskService {
+/*   form = this.fb.group({
+    title: [''],
+    description: [''],
+    category: [''],
+    selectedContact: [''],
+    date: [new Date],
+    selectedPriority: [''],
+    subtask: [''],
+    selectedSubtasks: [''],
+    isAddingSubtask: [false],
+    checkedSubtasks: [''],
+  }); */
   title!: string;
   description!: string;
   category!: string;
@@ -46,6 +59,7 @@ export class TaskService {
   allTasksDone: any[] = [];
 
   constructor(
+    private fb: FormBuilder,
     private firestore: Firestore,
     private authService: AuthService,
     private afs: AngularFirestore
@@ -53,7 +67,6 @@ export class TaskService {
     this.getUid();
     this.loadCheckedSubtasks();
   }
-
 
   async getUid() {
     this.userId = await this.authService.getCurrentUserUid();
@@ -63,7 +76,7 @@ export class TaskService {
    * The `addTask(taskCategory: string)` method is used to add a new task to the Firestore database. It takes a
    * `taskCategory` parameter, which represents the category of the task (e.g., "To Do", "In Progress", "Awaiting Feedback",
    * "Done").
-   * 
+   *
    * @method
    * @name addTask
    * @kind method
@@ -130,7 +143,7 @@ export class TaskService {
 
   /**
    * The above code is defining an asynchronous function called "updateTaskCategoryInFirestore".
-   * 
+   *
    * @async
    * @method
    * @name updateTaskCategoryInFirestore
@@ -195,7 +208,7 @@ export class TaskService {
 
   /**
    * This function add a subtask to the firebase database
-   * 
+   *
    * @method
    * @name addSubtask
    * @kind method
@@ -212,6 +225,7 @@ export class TaskService {
     addDoc(subTaskCollection, {
       subtask: this.subtask,
     }).then(() => {
+      this.selectedSubtasks[this.subtask] = true;
       this.subtask = '';
     });
   }
@@ -257,7 +271,7 @@ export class TaskService {
   /**
    * The above code is defining a function called "getSubtasksFromFirestore" which is likely used to retrieve subtasks from a
    * Firestore database. However, the code provided is incomplete and the actual implementation of the function is missing.
-   * 
+   *
    * @method
    * @name getSubtasksFromFirestore
    * @kind method
@@ -282,7 +296,6 @@ export class TaskService {
     );
     this.categories$.subscribe((data) => {
       this.categories = data;
-
     });
   }
 

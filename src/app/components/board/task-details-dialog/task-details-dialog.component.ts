@@ -99,6 +99,7 @@ export class TaskDetailsDialogComponent implements OnInit {
     this.dialog.open(EditTaskDialogComponent, {
       width: '623px',
       height: '824px',
+      panelClass: 'dialog-media-height',
       data: { task: this.task, taskCategory: this.taskCategory },
     });
     this.dialogRef.close();

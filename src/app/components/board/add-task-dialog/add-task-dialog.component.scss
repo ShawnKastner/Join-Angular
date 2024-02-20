@@ -165,18 +165,22 @@ textarea {
 }
 
 @media (max-width: 650px) {
+  .add-task-container {
+    margin-top: 24px;
+  }
+
   .add-task-btn-mobile {
     display: block;
     border-radius: 10px;
     position: absolute;
-    top: 47px;
+    top: 71px;
     right: 10px;
   }
 
   .close-btn-mobile {
     display: block;
     position: absolute !important;
-    top: 10px;
+    top: 28px;
     right: 10px;
     cursor: pointer;
   }
@@ -201,7 +205,6 @@ textarea {
 @media (max-width: 400px) {
   .prio-btn-container {
     .mat-button-toggle {
-      width: 65px;
       font-size: 0.6rem !important;
 
       img {

@@ -70,6 +70,7 @@ export class BoardComponent {
     this.dialog.open(TaskDetailsDialogComponent, {
       width: '623px',
       height: '824px',
+      panelClass: 'dialog-media-height',
       data: { task: this.selectedTask, taskCategory: taskCategory },
     });
   }
